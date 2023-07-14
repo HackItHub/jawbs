@@ -1,0 +1,6 @@
+[submodule "typescript-node-template-v1"]
+	path = typescript-node-template-v1
+	url = https://github.com/HackItHub/typescript-node-template-v1
+[submodule "react-template"]
+	path = react-template
+	url = https://github.com/HackItHub/react-template
