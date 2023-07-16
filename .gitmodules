@@ -4,3 +4,9 @@
 [submodule "react-template"]
 	path = react-template
 	url = https://github.com/HackItHub/react-template
+[submodule "flash-resume-client"]
+	path = flash-resume-client
+	url = https://github.com/HackItHub/flash-resume-client.git
+[submodule "flash-resume-server"]
+	path = flash-resume-server
+	url = https://github.com/HackItHub/flash-resume-server
