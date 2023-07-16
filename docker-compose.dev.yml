@@ -3,7 +3,7 @@ version: "3.8"
 services:
   client:
     build:
-      context: ./react-template
+      context: ./flash-resume-client
       target: development
     container_name: react-develop
     ports:
@@ -12,7 +12,7 @@ services:
     tty: true
   api:
     build:
-      context: ./typescript-node-template-v1
+      context: ./flash-resume-server
       target: development
     ports:
       - '${PORT}:3001'
