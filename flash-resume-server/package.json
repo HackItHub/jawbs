@@ -11,7 +11,7 @@
     "build": "rimraf ./dist && tsc",
     "dev": "nodemon index.ts",
     "start": "npm run build && node dist/index.js",
-    "prepare": "husky install"
+    "migrate": "npx prisma migrate dev --name init"
   },
   "repository": {
     "type": "git",
