@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   client:
@@ -22,6 +22,7 @@ services:
       PORT: ${PORT}
       DATABASE_URL: ${DATABASE_URL}
       NODE_ENV: development
+      CHOKIDAR_USEPOLLING: true
     volumes:
       - ./flash-resume-server:/usr/src/app
     depends_on:

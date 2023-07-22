@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 app.use(express.json());
 
 app.get("/", async (_, res) => {
-  res.status(200).json("Success!");
+  res.status(200).json("Success! Twice");
 });
 
 app.get("/get-users", async (_, res) => {
