@@ -10,8 +10,7 @@
     "lint": "eslint .",
     "build": "rimraf ./dist && tsc",
     "dev": "nodemon index.ts",
-    "start": "npm run build && node dist/index.js",
-    "prepare": "husky install"
+    "start": "npm run build && node dist/index.js"
   },
   "repository": {
     "type": "git",

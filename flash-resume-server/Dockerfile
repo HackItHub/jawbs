@@ -18,6 +18,7 @@ ENV NODE_ENV=development
 
 COPY . .
 
+RUN npm run generate
 RUN npm run build
 
 EXPOSE 3001

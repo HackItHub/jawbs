@@ -8,11 +8,15 @@ const prisma = new PrismaClient();
 app.use(express.json());
 
 app.get("/", async (_, res) => {
+  res.status(200).json("Success!");
+});
+
+app.get("/get-users", async (_, res) => {
   try {
     const allUsers = await prisma.user.findMany();
     res.status(200).json(allUsers);
   } catch (err) {
-    res.status(404).json({ message: err + "hello"});
+    res.status(404).json({ message: err + "hello" });
   } finally {
     await prisma.$disconnect();
   }
