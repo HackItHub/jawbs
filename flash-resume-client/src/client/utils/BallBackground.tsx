@@ -33,7 +33,7 @@ const BallBackground: React.FC = () => {
     //  eslint-disable-next-line no-console
     console.log(anim, balls);
   }
-  console.log("some test");
+  console.log("some test it works");
 
   return <>Hello</>;
 };
