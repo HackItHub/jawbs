@@ -2,3 +2,5 @@ webpack.config.js
 dist/client/client_bundle.js
 .eslintrc.js
 ./node_modules
+jest.setup.ts
+jest.config.js
