@@ -4,7 +4,7 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = [
   {
-    entry: "./src/client/index.tsx",
+    entry: ["./src/client/index.tsx"],
     mode: "development",
     target: "web",
     output: {
@@ -14,6 +14,10 @@ module.exports = [
     devServer: {
       port: 3000,
       host: "0.0.0.0",
+      hot: true,
+    },
+    watchOptions: {
+      poll: true,
     },
     resolve: {
       extensions: [".js", ".ts", ".tsx", ".jsx"],

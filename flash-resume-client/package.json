@@ -9,8 +9,7 @@
     "start": "webpack server --open",
     "dev": "npm-run-all -s build start",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "prepare": "husky install"
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "react": "^18.2.0",
