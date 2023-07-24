@@ -32,7 +32,7 @@ module.exports = {
         unnamedComponents: "arrow-function",
       },
     ],
-
+    "no-console": ["error"],
     quotes: [
       "error",
       "double",

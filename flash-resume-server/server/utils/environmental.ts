@@ -1,10 +1,3 @@
-import dotenv from "dotenv";
-import path from "path";
-import getDirName from "./get-dir-name.js";
-
-const dirname = getDirName(import.meta.url);
-dotenv.config({ path: path.join(dirname, "..", "..", ".env") });
-
 const {
   DB_HOST,
   DB_USER,

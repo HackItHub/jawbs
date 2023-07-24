@@ -26,6 +26,7 @@ module.exports = {
         avoidEscape: true,
       },
     ],
+    "no-console": ["error"],
     "@typescript-eslint/quotes": [
       "error",
       "double",

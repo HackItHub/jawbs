@@ -2,7 +2,8 @@
   "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
     "lib": ["esnext"],
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "./"
   },
   "ts-node": {
     "esm": true

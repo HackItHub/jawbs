@@ -5,15 +5,23 @@ services:
     build:
       context: ./flash-resume-client
       target: development
-    container_name: react-develop
+    container_name: flash-resume-client-dev
     ports:
-      - '3000:8080'
+      - '3000:3000'
     stdin_open: true
     tty: true
+    volumes:
+      - ./flash-resume-client:/usr/src/app
+      - exclude:/flash-resume-client/node_modules
+    environment:
+      - WATCHPACK_POLLING=true
+      - NODE_ENV=development
+    restart: always
   api:
     build:
       context: ./flash-resume-server
       target: development
+    container_name: flash-resume-server-dev
     ports:
       - '${PORT}:3001'
       - '${DEBUG}:9229'
@@ -23,10 +31,16 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       NODE_ENV: development
       CHOKIDAR_USEPOLLING: true
+      WATCHPACK_POLLING: true
     volumes:
       - ./flash-resume-server:/usr/src/app
+      - exclude:/flash-resume-server/node_modules
+    links:
+      - postgres
     depends_on:
       - postgres
+    stdin_open: true
+    tty: true
     restart: always
   postgres:
     image: postgres:15
@@ -41,3 +55,4 @@ services:
       - postgres:/var/lib/postgresql/data
 volumes:
   postgres: ~
+  exclude:

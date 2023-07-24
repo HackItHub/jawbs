@@ -21,15 +21,11 @@ COPY . .
 RUN npm run generate
 RUN npm run build
 
-EXPOSE 3001
-
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]
 
 FROM node:18 as production
 
-ARG NODE_ENV=production
-
-ENV NODE_ENV=${NODE_ENV}
+ENV NODE_ENV=production
 
 WORKDIR /usr/src/app
 
@@ -40,7 +36,5 @@ RUN npm pkg delete scripts.prepare
 RUN npm ci --only=production
 
 COPY --from=development /usr/src/app/dist ./dist
-
-EXPOSE 3001
 
 CMD ["node", "dist/index.js"]
