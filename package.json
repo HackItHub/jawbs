@@ -11,7 +11,9 @@
     "lint:client": "cd flash-resume-client && eslint .",
     "setup": "npm-run-all -s setup:client setup:server",
     "setup:client": "cd flash-resume-client && npm i",
-    "setup:server": "cd flash-resume-server && npm i"
+    "setup:server": "cd flash-resume-server && npm i",
+    "docker:dev": "docker compose -f docker-compose.dev.yml up",
+    "docker:dev:build": "docker compose -f docker-compose.dev.yml up --build"
   },
   "keywords": [],
   "author": "",
