@@ -22,7 +22,8 @@
     "jsx": "react",
     "allowJs": true,
     "checkJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "rootDir": "./"
   },
   "include": ["src/**/**/*"],
   "exclude": ["node_modules"]

@@ -1,8 +1,3 @@
-import path from "path";
-import getDirName from "./get-dir-name.js";
-
-const dirname = getDirName(import.meta.url);
-
 const {
   DB_HOST,
   DB_USER,
