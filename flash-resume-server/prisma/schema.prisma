@@ -35,13 +35,26 @@ model Address {
 }
 
 model Job {
-  id               Int      @id @default(autoincrement())
+  id               Int          @id @default(autoincrement())
   name             String?
   responsabilities String[]
   startYear        String?
   endYear          String?
   startMonth       String?
   endMonth         String?
-  user             User     @relation(fields: [userId], references: [id])
-  userId  Int     @unique
+  user             User         @relation(fields: [userId], references: [id])
+  userId           Int          @unique
+  WorkAddress      WorkAddress?
+}
+
+model WorkAddress {
+  id      Int     @id @default(autoincrement())
+  country String?
+  state   String?
+  city    String?
+  line    String?
+  line2   String?
+  zipcode Int?
+  job     Job     @relation(fields: [jobId], references: [id])
+  jobId   Int     @unique
 }
