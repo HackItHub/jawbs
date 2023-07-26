@@ -12,7 +12,7 @@ services:
     tty: true
     volumes:
       - ./flash-resume-client:/usr/src/app
-      - exclude:/flash-resume-client/node_modules
+      - /usr/src/app/node_modules
     environment:
       - WATCHPACK_POLLING=true
       - NODE_ENV=development
@@ -34,7 +34,7 @@ services:
       WATCHPACK_POLLING: true
     volumes:
       - ./flash-resume-server:/usr/src/app
-      - exclude:/flash-resume-server/node_modules
+      - /usr/src/app/node_modules
     links:
       - postgres
     depends_on:
@@ -55,4 +55,3 @@ services:
       - postgres:/var/lib/postgresql/data
 volumes:
   postgres: ~
-  exclude:
