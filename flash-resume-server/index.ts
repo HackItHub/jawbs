@@ -7,6 +7,10 @@ const prisma = new PrismaClient();
 
 app.use(express.json());
 
+app.get("/", function (_, res) {
+  res.status(200).json("Hello World!");
+});
+
 app.get("/get-users", async (_, res) => {
   try {
     const allUsers = await prisma.user.findMany();
