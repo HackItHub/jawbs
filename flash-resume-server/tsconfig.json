@@ -1,9 +1,16 @@
 {
-  "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
-    "lib": ["esnext"],
     "outDir": "dist",
-    "rootDir": "./"
+    "rootDir": "./",
+    "lib": ["es2023"],
+    "module": "Node16",
+    "target": "es2022",
+
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node16"
   },
   "ts-node": {
     "esm": true
