@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "../assets/styles/ball-background.css";
 
 const COLORS = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
 const NUMBALLS = 50;
@@ -10,7 +9,8 @@ const BallBackground: React.FC = () => {
 
     for (let i = 0; i < NUMBALLS; i++) {
       const ball: HTMLDivElement = document.createElement("div");
-      ball.classList.add("ball");
+      ball.classList.add("absolute");
+      ball.classList.add("rounded-[50%]");
       ball.style.background = COLORS[Math.floor(Math.random() * COLORS.length)];
       ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
       ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
@@ -49,8 +49,8 @@ const BallBackground: React.FC = () => {
   }, []);
 
   return (
-    <div className='ball-background-container'>
-      <div className='ball-background' />
+    <div className='ball-background-container h-full w-full absolute left-0 top-0'>
+      <div className='ball-background relative w-full h-full' />
     </div>
   );
 };
