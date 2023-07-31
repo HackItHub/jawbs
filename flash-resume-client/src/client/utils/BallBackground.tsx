@@ -11,6 +11,7 @@ const BallBackground: React.FC = () => {
       const ball: HTMLDivElement = document.createElement("div");
       ball.classList.add("absolute");
       ball.classList.add("rounded-[50%]");
+      ball.classList.add("ball");
       ball.style.background = COLORS[Math.floor(Math.random() * COLORS.length)];
       ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
       ball.style.top = `${Math.floor(Math.random() * 100)}vh`;

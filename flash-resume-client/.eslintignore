@@ -4,3 +4,5 @@ dist/client/client_bundle.js
 ./node_modules
 tailwind.config.js
 postcss.config.js
+babel.config.js
+jest.config.js
