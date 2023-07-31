@@ -4,6 +4,6 @@ import BallBackground from "../BallBackground";
 
 it("renders ball background", () => {
   const component = renderer.create(<BallBackground />);
-  const tree = component.tgoJSON();
+  const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 });
