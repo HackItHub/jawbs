@@ -11,7 +11,6 @@ const BallBackground: React.FC = () => {
     for (let i = 0; i < NUMBALLS; i++) {
       const ball: HTMLDivElement = document.createElement("div");
       ball.classList.add("ball");
-      ball.classList.add("px-10");
       ball.style.background = COLORS[Math.floor(Math.random() * COLORS.length)];
       ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
       ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
@@ -50,7 +49,7 @@ const BallBackground: React.FC = () => {
   }, []);
 
   return (
-    <div className='ball-background-container px-0'>
+    <div className='ball-background-container'>
       <div className='ball-background' />
     </div>
   );

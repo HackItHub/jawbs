@@ -2,3 +2,5 @@ webpack.config.js
 dist/client/client_bundle.js
 .eslintrc.js
 ./node_modules
+tailwind.config.js
+postcss.config.js
