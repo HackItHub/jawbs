@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Copy node_modules from cache to app node_modules
+rsync -arv /usr/src/cache/node_modules/. /usr/src/app/node_modules/
+
 # Wait for PostgreSQL to be available
 while true; do
   if nc -z postgres 5432; then

@@ -2,6 +2,12 @@ FROM node:18 as development
 
 RUN apt-get update && apt-get install -y netcat-traditional
 
+WORKDIR /usr/src/cache
+
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install
+
 WORKDIR /usr/src/app
 
 COPY package*.json .
