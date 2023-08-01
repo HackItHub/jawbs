@@ -1,5 +1,7 @@
 FROM node:18 as development
 
+RUN apt-get update && apt-get install -y netcat-traditional
+
 WORKDIR /usr/src/app
 
 COPY package*.json .
@@ -10,18 +12,17 @@ RUN npm install
 
 COPY prisma/schema.prisma ./prisma/
 
-# Wait for PostgreSQL to be available
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
 ENV NODE_ENV=development
 
 COPY . .
 
-RUN npm run generate
+COPY /entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+
 RUN npm run build
 
-CMD ["npm", "run", "start"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 FROM node:18 as production
 

@@ -12,11 +12,13 @@ services:
     tty: true
     volumes:
       - ./flash-resume-client:/usr/src/app
-      - /flash-resume-client/node_modules
+      - /usr/src/app/node_modules
     environment:
       - WATCHPACK_POLLING=true
       - NODE_ENV=development
     restart: always
+    depends_on:
+      - postgres
   api:
     build:
       context: ./flash-resume-server
@@ -25,7 +27,6 @@ services:
     ports:
       - '${PORT}:3001'
       - '${DEBUG}:9229'
-    command: sh -c "npx prisma migrate dev --name init && npm run dev"
     environment:
       PORT: ${PORT}
       DATABASE_URL: ${DATABASE_URL}
@@ -34,7 +35,7 @@ services:
       WATCHPACK_POLLING: true
     volumes:
       - ./flash-resume-server:/usr/src/app
-      - /flash-resume-server/node_modules
+      - /usr/src/app/node_modules
     links:
       - postgres
     depends_on:

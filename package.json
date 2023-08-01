@@ -16,7 +16,11 @@
     "setup:client": "cd flash-resume-client && npm i",
     "setup:server": "cd flash-resume-server && npm i",
     "docker:dev": "docker compose -f docker-compose.dev.yml up",
-    "docker:dev:build": "docker compose -f docker-compose.dev.yml up --build"
+    "docker:dev:build": "docker compose -f docker-compose.dev.yml up --build",
+    "docker:prune:system": "docker system prune -a",
+    "docker:prune:volume": "docker volume rm $(docker volume ls -q)",
+    "docker:prune": "npm-run-all -s docker:prune:system docker:prune:volume",
+    "docker:rebuild": "npm-run-all -s docker:prune docker:dev:build"
   },
   "keywords": [],
   "author": "",
