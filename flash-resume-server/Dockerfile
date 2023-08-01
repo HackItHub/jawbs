@@ -4,8 +4,6 @@ RUN apt-get update && apt-get install -y netcat-traditional
 
 RUN apt-get update && apt-get install -y rsync
 
-RUN mkdir /usr/src/cache
-
 WORKDIR /usr/src/cache
 
 COPY package.json ./
