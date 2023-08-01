@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "build": "rimraf ./dist && tsc",
     "dev": "nodemon -r dotenv/config index.ts",
+    "dev:build": "npm-run-all -s build dev",
     "start": "npm run build && node dist/index.js",
     "migrate": "npx prisma migrate dev --name init"
   },

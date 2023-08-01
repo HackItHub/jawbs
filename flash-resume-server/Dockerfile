@@ -2,13 +2,19 @@ FROM node:18 as development
 
 RUN apt-get update && apt-get install -y netcat-traditional
 
-WORKDIR /usr/src/app
+RUN apt-get update && apt-get install -y rsync
 
-COPY package*.json .
+WORKDIR /usr/src/cache
 
-RUN npm pkg delete scripts.prepare
+COPY package.json ./
+
+COPY package-lock.json ./
 
 RUN npm install
+
+RUN mkdir /usr/src/app
+
+WORKDIR /usr/src/app
 
 COPY prisma/schema.prisma ./prisma/
 
@@ -19,8 +25,6 @@ COPY . .
 COPY /entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
-
-RUN npm run build
 
 ENTRYPOINT ["/entrypoint.sh"]
 
