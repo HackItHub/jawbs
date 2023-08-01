@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm-run-all -s lint:server lint:client",
     "prepare": "husky install",
+    "test:client": "cd flash-resume-client && npm run test",
     "lint:server": "cd flash-resume-server && eslint .",
     "lint:client": "cd flash-resume-client && eslint .",
     "dev:client": "cd flash-resume-client && npm run dev",
