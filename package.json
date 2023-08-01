@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm-run-all -s lint:server lint:client",
     "prepare": "husky install",
+    "test:client": "cd flash-resume-client && npm run test",
     "lint:server": "cd flash-resume-server && eslint .",
     "lint:client": "cd flash-resume-client && eslint .",
     "dev:client": "cd flash-resume-client && npm run dev",
@@ -19,7 +20,11 @@
     "docker:dev:build": "docker compose -f docker-compose.dev.yml up --build",
     "lint:fix:client": "cd flash-resume-client && eslint . --fix",
     "lint:fix:server": "cd flash-resume-server && eslint . --fix",
-    "lint:fix": "npm-run-all -s lint:fix:client lint:fix:server"
+    "lint:fix": "npm-run-all -s lint:fix:client lint:fix:server",
+    "docker:prune:system": "docker system prune -a",
+    "docker:prune:volume": "docker volume rm $(docker volume ls -q)",
+    "docker:prune": "npm-run-all -s docker:prune:system docker:prune:volume",
+    "docker:rebuild": "npm-run-all -s docker:prune docker:dev:build"
   },
   "keywords": [],
   "author": "",

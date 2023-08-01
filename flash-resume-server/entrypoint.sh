@@ -1,18 +1,23 @@
 #!/bin/bash
 
 # Wait for PostgreSQL to be available
-while ! nc -z postgres 5432; do
+while true; do
+  if nc -z postgres 5432; then
+    # PostgreSQL is available, break the loop
+    break
+  fi
   sleep 1
 done
 
 # Run the initial command only during the initial build
-if [ ! -f /app/initial_build_completed ]; then
+if [ ! -f /initial_build_completed ]; then
   # Run your initial command here
-  npx prisma migrate dev --name init
+  npm run generate
+  npm run migrate
 
   # Create a file to mark the initial build as completed
-  touch /app/initial_build_completed
+  touch /initial_build_completed
 fi
 
 # Start your application
-exec "$@"
+exec npm run dev
