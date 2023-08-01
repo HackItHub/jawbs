@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import SignUp from "./SignUp";
 import SignIn from "./SignIn";
-
-import TransparentContainer from "../layout/TransparentContainer";
+import SignUp from "./SignUp";
+import TransparentContainer from "./components/layout/TransparentContainer";
 
 const Authorization: React.FC = () => {
   const [isUser] = useState(false);
