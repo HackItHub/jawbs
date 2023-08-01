@@ -6,3 +6,4 @@ tailwind.config.js
 postcss.config.js
 babel.config.js
 jest.config.js
+__tests__**
