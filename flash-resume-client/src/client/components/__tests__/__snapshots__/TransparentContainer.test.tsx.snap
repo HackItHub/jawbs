@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders transparent container 1`] = `
+<div
+  className="bg-opacity-50 bg-white blur-lg drop-shadow-md"
+>
+  <div
+    className="px-8 py-10"
+  />
+</div>
+`;
