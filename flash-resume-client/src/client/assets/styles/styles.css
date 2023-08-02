@@ -5,3 +5,7 @@
 .root {
   position: relative;
 }
+
+.text-input {
+  @apply w-[80%] py-2 px-4 rounded-md border-solid border border-slate-600 shadow-sm;
+}

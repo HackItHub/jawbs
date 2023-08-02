@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import TransparentContainer from "../layout/TransparentContainer";
+import TransparentContainer from "../TransparentContainer";
 
 it("renders transparent container", () => {
   const component = renderer.create(<TransparentContainer />);
