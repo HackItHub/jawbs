@@ -22,9 +22,9 @@ const FormFieldText: React.FC<Props> = ({
     onChange(name, value);
   };
   return (
-    <div className='form-field'>
-      <label htmlFor={id}>
-        ${label}
+    <div className='mb-2'>
+      <label htmlFor={id} className='flex flex-col gap-1'>
+        {label}
         <input
           id={id}
           onChange={handleInput}
