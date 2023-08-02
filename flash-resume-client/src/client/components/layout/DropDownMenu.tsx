@@ -32,7 +32,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
 
   return (
     <div
-      className='relative inline-block text-left'
+      className='relative inline-block text-left mb-2'
       id={listName.toLowerCase()}
     >
       <div>
@@ -76,7 +76,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
                 }}
                 role='menuitem'
                 key={`${listName}-${item}`}
-                className='text-gray-700 block px-4 py-2 text-sm'
+                className='text-gray-700 block px-4 py-2 text-sm form-text'
                 tabIndex={index}
                 onClick={() => handleOptions(item)}
                 data-value={item}
