@@ -1,27 +1,32 @@
 FROM node:18 as development
 
-WORKDIR /usr/src/app
+RUN apt-get update && apt-get install -y netcat-traditional
 
-COPY package*.json .
+RUN apt-get update && apt-get install -y rsync
 
-RUN npm pkg delete scripts.prepare
+WORKDIR /usr/src/cache
+
+COPY package.json ./
+
+COPY package-lock.json ./
 
 RUN npm install
 
-COPY prisma/schema.prisma ./prisma/
+RUN mkdir /usr/src/app
 
-# Wait for PostgreSQL to be available
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+WORKDIR /usr/src/app
+
+COPY prisma/schema.prisma ./prisma/
 
 ENV NODE_ENV=development
 
 COPY . .
 
-RUN npm run generate
-RUN npm run build
+COPY /entrypoint.sh /entrypoint.sh
 
-CMD ["npm", "run", "start"]
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 FROM node:18 as production
 

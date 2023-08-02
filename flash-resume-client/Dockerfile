@@ -1,17 +1,21 @@
 FROM node:18 as development
 
-WORKDIR /usr/src/app
+RUN apt-get update && apt-get install -y rsync
 
-COPY package*.json .
+WORKDIR /usr/src/cache
 
-RUN npm pkg delete scripts.prepare
+COPY package.json ./
+
+COPY package-lock.json ./
 
 RUN npm install
 
-COPY . /usr/src/app
+WORKDIR /usr/src/app
 
-ENV NODE_ENV=development
+COPY . .
 
-ENV PORT=3000
+COPY /entrypoint.sh /entrypoint.sh
 
-CMD ["npm", "run", "dev"]
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]

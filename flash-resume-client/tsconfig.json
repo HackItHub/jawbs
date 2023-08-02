@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "esnext",
+    "moduleResolution": "node",
     "allowUnreachableCode": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -23,7 +24,10 @@
     "allowJs": true,
     "checkJs": true,
     "isolatedModules": true,
-    "rootDir": "./"
+    "rootDir": "./",
+    "paths": {
+      "react-dom/client": ["./node_modules/react/react-dom-client"]
+    }
   },
   "include": ["src/**/**/*"],
   "exclude": ["node_modules"]
