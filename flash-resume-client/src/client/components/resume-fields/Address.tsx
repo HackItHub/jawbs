@@ -54,7 +54,7 @@ const Address: React.FC = () => {
       />
       <FormFieldText
         id='address_line_2'
-        placeholder=''
+        placeholder='Bat Cave Way'
         label='Address Line 2'
         onChange={handleChange}
         required={false}
@@ -87,7 +87,7 @@ const Address: React.FC = () => {
         >
           Countries
           <DropDownMenu
-            placeholder='Unite States'
+            placeholder='United States'
             data={countryList}
             listName='Country'
             handleInput={handleChange}

@@ -2,10 +2,7 @@ import React from "react";
 
 const Loading: React.FC = () => {
   return (
-    <div
-      role='status'
-      className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]'
-    >
+    <div role='status' className='flex justify-center items-center py-4'>
       <svg
         aria-hidden='true'
         className='w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600'
