@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import FormFieldText from "../layout/FormFieldText";
+import DropDownMenu from "../layout/DropDownMenu";
 
 interface AddressForm {
   addressLine1: string;
@@ -32,8 +33,13 @@ const Address: React.FC = () => {
         .get("https://restcountries.com/v3.1/all?fields=name")
         .then((res) => {
           const { data } = res;
-          setCountryList(data);
-        });
+          const countryNames = [];
+          for (let i = 0; i < data.length; i++) {
+            countryNames.push(data[i].name.official);
+          }
+          return countryNames;
+        })
+        .then((countries) => setCountryList(countries));
     }
   };
 
@@ -69,17 +75,23 @@ const Address: React.FC = () => {
         required={false}
       />
       <div>
-        <label className='flex flex-col gap-1' htmlFor='country'>
+        <div
+          className='form-input-container'
+          onClick={handleCountryClick}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              handleCountryClick();
+            }
+          }}
+          role='presentation'
+        >
           Countries
-          <select id='country' onClick={handleCountryClick}>
-            <option value=''>-Select Country-</option>
-            {countryList.map((country: any) => (
-              <option key={country.name.official} value={country.name.official}>
-                {country.name.official}
-              </option>
-            ))}
-          </select>
-        </label>
+          <DropDownMenu
+            data={countryList}
+            listName='Country'
+            handleInput={handleChange}
+          />
+        </div>
       </div>
       <FormFieldText
         id='zipcode'

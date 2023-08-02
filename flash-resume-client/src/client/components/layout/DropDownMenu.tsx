@@ -28,7 +28,10 @@ const DropDownMenu: React.FC<ChildProps> = ({
   };
 
   return (
-    <div className='relative inline-block text-left'>
+    <div
+      className='relative inline-block text-left'
+      id={listName.toLowerCase()}
+    >
       <div>
         <button
           onClick={handleDropDownMenu}
@@ -38,7 +41,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
           aria-expanded={isOpen}
           aria-haspopup='true'
         >
-          ${listName}
+          {listName}
           <svg
             className='-mr-1 h-5 w-5 text-gray-400'
             viewBox='0 0 20 20'
@@ -64,17 +67,17 @@ const DropDownMenu: React.FC<ChildProps> = ({
           {data.map((item: any, index) => (
             <div
               onKeyDown={(e) => {
-                handleKeyDown(e, item.value);
+                handleKeyDown(e, item);
               }}
               role='menuitem'
-              key={`${listName}-${item.value}`}
+              key={`${listName}-${item}`}
               className='text-gray-700 block px-4 py-2 text-sm'
               tabIndex={index}
-              onClick={() => handleOptions(item.value)}
-              data-value={item.value}
-              id={`${listName}-${item.value}`}
+              onClick={() => handleOptions(item)}
+              data-value={item}
+              id={`${listName}-${item}`}
             >
-              {item.value}
+              {item}
             </div>
           ))}
         </div>

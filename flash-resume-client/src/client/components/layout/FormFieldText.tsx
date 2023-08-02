@@ -23,7 +23,7 @@ const FormFieldText: React.FC<Props> = ({
   };
   return (
     <div className='mb-2'>
-      <label htmlFor={id} className='flex flex-col gap-1'>
+      <label htmlFor={id} className='form-input-container'>
         {label}
         <input
           id={id}
