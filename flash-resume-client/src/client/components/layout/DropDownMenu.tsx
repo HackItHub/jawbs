@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Loading from "./Loading";
 
 interface ChildProps {
-  data: [];
+  data: string[];
   listName: string;
   handleInput: (name: string, value: string) => void;
   placeholder: string;
