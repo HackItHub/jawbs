@@ -87,6 +87,7 @@ const Address: React.FC = () => {
         >
           Countries
           <DropDownMenu
+            placeholder='Unite States'
             data={countryList}
             listName='Country'
             handleInput={handleChange}
