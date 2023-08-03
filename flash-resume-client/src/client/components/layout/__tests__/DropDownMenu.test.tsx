@@ -62,7 +62,6 @@ describe("dropdown", () => {
         placeholder='gotham'
       />,
     );
-
     const dropdownElement = screen.getByText("gotham");
 
     fireEvent.click(dropdownElement);
