@@ -1,8 +1,8 @@
 import React from "react";
 import "./assets/styles/styles.css";
 import "./assets/styles/scrollbar.css";
-import BallBackground from "./utils/BallBackground";
-import ResumeFields from "./pages/ResumeFields";
+import { BallBackground } from "./utils";
+import { ResumeFields } from "./pages";
 
 //  eslint-disable-next-line
 const App: React.FC = () => (

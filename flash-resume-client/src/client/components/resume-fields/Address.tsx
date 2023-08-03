@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import FormFieldText from "../layout/FormFieldText";
-import DropDownMenu from "../layout/DropDownMenu";
+import { DropDownMenu, FormFieldText } from "../layout";
 
 interface AddressForm {
   addressLine1: string;

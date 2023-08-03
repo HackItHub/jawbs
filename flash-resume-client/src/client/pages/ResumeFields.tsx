@@ -1,11 +1,12 @@
 import React from "react";
-import Address from "../components/resume-fields/Address";
-import TransparentContainer from "../components/layout/TransparentContainer";
+import { TransparentContainer } from "../components/layout";
+import { Address, Person } from "../components/resume-fields";
 
 const ResumeFields: React.FC = () => {
   return (
     <TransparentContainer>
       <Address />
+      <Person />
     </TransparentContainer>
   );
 };
