@@ -21,7 +21,7 @@ const Address: React.FC = () => {
     state: "",
     country: "",
   });
-  const [countryList, setCountryList] = useState<any>([]);
+  const [countryList, setCountryList] = useState<string[]>([]);
 
   const handleChange = (name: string, value: string) => {
     setAddressForm({ ...addressForm, [name]: value });
@@ -87,7 +87,7 @@ const Address: React.FC = () => {
         >
           Countries
           <DropDownMenu
-            placeholder='United States'
+            placeholder='-Somewhere in the DC Universe-'
             data={countryList}
             listName='Country'
             handleInput={handleChange}

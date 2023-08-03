@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import Loading from "./Loading";
 
 interface ChildProps {
@@ -15,12 +16,14 @@ const DropDownMenu: React.FC<ChildProps> = ({
   placeholder,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [option, setOption] = useState("");
 
   const handleDropDownMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const handleOptions = (value: string) => {
+    setOption(value);
     handleInput(listName, value);
   };
 
@@ -44,7 +47,11 @@ const DropDownMenu: React.FC<ChildProps> = ({
           aria-expanded={isOpen}
           aria-haspopup='true'
         >
-          {placeholder}
+          {option.length ? (
+            <div>{option}</div>
+          ) : (
+            <div className='text-[rgb(155,163,175)]'>{placeholder}</div>
+          )}
           <svg
             className='-mr-1 h-5 w-5 text-gray-400'
             viewBox='0 0 20 20'
@@ -66,27 +73,29 @@ const DropDownMenu: React.FC<ChildProps> = ({
         aria-labelledby='menu-button'
         tabIndex={-1}
       >
-        {isOpen && (
-          <div className='py-1' role='none'>
-            {isOpen && !data.length && <Loading />}
-            {data.map((item: any, index) => (
-              <div
-                onKeyDown={(e) => {
-                  handleKeyDown(e, item);
-                }}
-                role='menuitem'
-                key={`${listName}-${item}`}
-                className='text-gray-700 block px-4 py-2 text-sm form-text'
-                tabIndex={index}
-                onClick={() => handleOptions(item)}
-                data-value={item}
-                id={`${listName}-${item}`}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        )}
+        <OverlayScrollbarsComponent defer>
+          {isOpen && (
+            <div className='py-1 max-h-96 overflow-y-auto' role='none'>
+              {isOpen && !data.length && <Loading />}
+              {data.map((item, index) => (
+                <div
+                  onKeyDown={(e) => {
+                    handleKeyDown(e, item);
+                  }}
+                  role='menuitem'
+                  key={`${listName}-${item}`}
+                  className='text-gray-700 block px-4 py-2 text-sm form-text cursor-pointer'
+                  tabIndex={index}
+                  onClick={() => handleOptions(item)}
+                  data-value={item}
+                  id={`${listName}-${item}`}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          )}
+        </OverlayScrollbarsComponent>
       </div>
     </div>
   );
