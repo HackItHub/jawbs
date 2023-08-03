@@ -23,6 +23,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
   };
 
   const handleOptions = (value: string) => {
+    setIsOpen(!isOpen);
     setOption(value);
     handleInput(listName, value);
   };
