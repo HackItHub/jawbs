@@ -10,7 +10,7 @@ interface Personal {
 }
 
 const REQUIRED = true;
-const NO_REQUIRED = false;
+const NOT_REQUIRED = false;
 
 const Person: React.FC = () => {
   const [person, setPerson] = useState<Personal>({
@@ -25,7 +25,7 @@ const Person: React.FC = () => {
   };
 
   return (
-    <form>
+    <form action='submit'>
       <FormFieldText
         id='first_name'
         placeholder='Bruce'
@@ -38,7 +38,7 @@ const Person: React.FC = () => {
         placeholder='Thomas'
         label='Middle Name'
         onChange={handleChange}
-        required={NO_REQUIRED}
+        required={NOT_REQUIRED}
       />
       <FormFieldText
         id='last_name'
@@ -61,6 +61,15 @@ const Person: React.FC = () => {
         onChange={handleChange}
         required={REQUIRED}
       />
+      <div className='flex justify-end'>
+        <button
+          type='submit'
+          className='submit-button bg-blue py-2 px-4 border-none rounded-md shadow-md text-white'
+          aria-label='Submit Personal Information'
+        >
+          Submit
+        </button>
+      </div>
     </form>
   );
 };

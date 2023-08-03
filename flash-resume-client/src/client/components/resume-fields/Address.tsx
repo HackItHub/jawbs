@@ -43,7 +43,7 @@ const Address: React.FC = () => {
   };
 
   return (
-    <form>
+    <form action='submit'>
       <FormFieldText
         id='address_line_1'
         placeholder='1007 Mountain Drive'
@@ -100,6 +100,15 @@ const Address: React.FC = () => {
         onChange={handleChange}
         required={false}
       />
+      <div className='flex justify-end'>
+        <button
+          type='submit'
+          className='submit-button bg-blue py-2 px-4 border-none rounded-md shadow-md text-white'
+          aria-label='Submit Personal Information'
+        >
+          Submit
+        </button>
+      </div>
     </form>
   );
 };
