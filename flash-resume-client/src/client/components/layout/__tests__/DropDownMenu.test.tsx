@@ -48,8 +48,35 @@ describe("dropdown", () => {
 
     fireEvent.click(dropdownElement);
 
-    const menuElement = screen.getAllByRole("menuitem");
+    const menuElements = screen.getAllByRole("menuitem");
 
-    expect(menuElement.length).toBe(3);
+    expect(menuElements.length).toBe(3);
+  });
+
+  it("populates button with clicked on option and closes dropdown", () => {
+    render(
+      <DropDownMenu
+        data={["test 1", "test 2", "test 3"]}
+        listName='list name'
+        handleInput={() => {}}
+        placeholder='gotham'
+      />,
+    );
+
+    const dropdownElement = screen.getByText("gotham");
+
+    fireEvent.click(dropdownElement);
+
+    const menuElement = screen.getByText("test 1");
+
+    fireEvent.click(menuElement);
+
+    const dropdownElementFilled = screen.getByText("test 1");
+
+    expect(dropdownElementFilled).toBeInTheDocument();
+
+    const noDropdown = screen.queryByText("test 2");
+
+    expect(noDropdown).toBeNull();
   });
 });
