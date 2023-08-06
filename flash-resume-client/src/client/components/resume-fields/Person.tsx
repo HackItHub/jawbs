@@ -18,7 +18,8 @@ const Person: React.FC = () => {
     phoneNumber: "",
     email: "",
   });
-  const handleChange = (name: string, value: string) => {
+
+  const handleChange = (name: string, value: any) => {
     setPerson({ ...person, [name]: value });
   };
 

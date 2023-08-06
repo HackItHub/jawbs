@@ -305,7 +305,21 @@ const COUNTRIES = [
   "Zimbabwe",
 ];
 
-const REQUIRED = true;
-const NOT_REQUIRED = false;
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-export { STATES, COUNTRIES, REQUIRED, NOT_REQUIRED };
+const REQUIRED = true;
+
+export { STATES, COUNTRIES, REQUIRED, MONTHS };
