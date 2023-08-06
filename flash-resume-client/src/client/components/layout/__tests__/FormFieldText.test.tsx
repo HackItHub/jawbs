@@ -10,7 +10,6 @@ describe("Tests input", () => {
         placeholder='Address Line 1'
         label='address'
         onChange={() => {}}
-        required
       />,
     );
 
@@ -25,7 +24,6 @@ describe("Tests input", () => {
         placeholder='Address Line 1'
         label='address'
         onChange={() => {}}
-        required
       />,
     );
     const inputElement: HTMLInputElement =

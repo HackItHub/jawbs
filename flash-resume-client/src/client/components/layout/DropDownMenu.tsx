@@ -85,7 +85,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
                   }}
                   role='menuitem'
                   key={`${listName}-${item}`}
-                  className='text-gray-700 block px-4 py-2 text-sm form-text cursor-pointer'
+                  className='dropdown-list-item hover:border-blue hover:bg-blue hover:bg-opacity-30 transition-all border-1'
                   tabIndex={index}
                   onClick={() => handleOptions(item)}
                   data-value={item}

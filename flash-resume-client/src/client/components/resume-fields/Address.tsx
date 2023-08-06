@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { DropDownMenu, FormFieldText } from "../layout";
+import { COUNTRIES, STATES } from "../../utils/Constants";
 
 interface AddressForm {
   addressLine1: string;
   addressLine2: string;
   zipCode: string;
   city: string;
-  state: string;
+  state?: string;
   country: string;
 }
 
@@ -20,25 +20,12 @@ const Address: React.FC = () => {
     state: "",
     country: "",
   });
-  const [countryList, setCountryList] = useState<string[]>([]);
 
-  const handleChange = (name: string, value: string) => {
-    setAddressForm({ ...addressForm, [name]: value });
-  };
-
-  const handleCountryClick = () => {
-    if (countryList.length < 1) {
-      axios
-        .get("https://restcountries.com/v3.1/all?fields=name")
-        .then((res) => {
-          const { data } = res;
-          const countryNames = [];
-          for (let i = 0; i < data.length; i++) {
-            countryNames.push(data[i].name.official);
-          }
-          return countryNames;
-        })
-        .then((countries) => setCountryList(countries));
+  const handleChange = (name: string, value: any) => {
+    if (name === "state" && value === "Not Applicable") {
+      setAddressForm({ ...addressForm, state: "" });
+    } else {
+      setAddressForm({ ...addressForm, [name]: value });
     }
   };
 
@@ -49,45 +36,36 @@ const Address: React.FC = () => {
         placeholder='1007 Mountain Drive'
         label='Address Line 1'
         onChange={handleChange}
-        required={false}
       />
       <FormFieldText
         id='address_line_2'
         placeholder='Bat Cave Way'
         label='Address Line 2'
         onChange={handleChange}
-        required={false}
       />
-
       <FormFieldText
         id='city'
         placeholder='Gotham City'
         label='City'
         onChange={handleChange}
-        required={false}
-      />
-      <FormFieldText
-        id='state'
-        placeholder='New Jersey'
-        label='State'
-        onChange={handleChange}
-        required={false}
       />
       <div>
-        <div
-          className='form-input-container'
-          onClick={handleCountryClick}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              handleCountryClick();
-            }
-          }}
-          role='presentation'
-        >
-          Countries
+        <div className='form-input-container' role='presentation'>
+          State
           <DropDownMenu
-            placeholder='-Somewhere in the DC Universe-'
-            data={countryList}
+            placeholder='-Some state in the DC Universe-'
+            data={STATES}
+            listName='State'
+            handleInput={handleChange}
+          />
+        </div>
+      </div>
+      <div>
+        <div className='form-input-container' role='presentation'>
+          Country
+          <DropDownMenu
+            placeholder='-Some country in the DC Universe-'
+            data={COUNTRIES}
             listName='Country'
             handleInput={handleChange}
           />
@@ -98,12 +76,11 @@ const Address: React.FC = () => {
         placeholder='6002318'
         label='Zip Code'
         onChange={handleChange}
-        required={false}
       />
       <div className='flex justify-end'>
         <button
           type='submit'
-          className='submit-button bg-blue py-2 px-4 border-none rounded-md shadow-md text-white'
+          className='submit-button'
           aria-label='Submit Personal Information'
         >
           Submit
