@@ -35,13 +35,14 @@ const Education: React.FC = () => {
   return (
     <form action='submit'>
       <h3>Education</h3>
+
       <div>
         <div className='form-input-container' role='presentation'>
-          Colleges
+          Highest Level of Education
           <DropDownMenu
-            placeholder='-Somewhere in the DC Universe-'
+            placeholder='Education Level'
             data={EDUCATION_LEVEL}
-            listName='Country'
+            listName='Education'
             handleInput={handleChange}
           />
         </div>
