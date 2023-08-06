@@ -7,6 +7,7 @@ describe("Tests input", () => {
     render(
       <FormFieldText
         id='address_line_1'
+        dataId='address_line_1'
         placeholder='Address Line 1'
         label='address'
         onChange={() => {}}
@@ -21,6 +22,7 @@ describe("Tests input", () => {
     render(
       <FormFieldText
         id='address_line_1'
+        dataId='address_line_1'
         placeholder='Address Line 1'
         label='address'
         onChange={() => {}}

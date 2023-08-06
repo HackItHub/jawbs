@@ -14,6 +14,7 @@ module.exports = {
       yellow: "#FCBC0F",
       orange: "#F85F36",
       white: "#FFFFFF",
+      "text-placeholder": "#9BA3AF",
     },
     extend: {
       spacing: {

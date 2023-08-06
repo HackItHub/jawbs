@@ -11,6 +11,7 @@ describe("dropdown", () => {
         listName='list name'
         handleInput={() => {}}
         placeholder='gotham'
+        dataId='listName'
       />,
     );
     const dropdownElement = screen.getByText("gotham");
@@ -26,6 +27,7 @@ describe("dropdown", () => {
         listName='list name'
         handleInput={() => {}}
         placeholder='gotham'
+        dataId='listName'
       />,
     );
     const dropdownElement = screen.getByText("gotham");
@@ -45,6 +47,7 @@ describe("dropdown", () => {
         handleInput={() => {}}
         placeholder='gotham'
         id='listName'
+        dataId='listName'
       />,
     );
     const dropdownElement = screen.getByText("gotham");
@@ -64,6 +67,7 @@ describe("dropdown", () => {
         handleInput={() => {}}
         placeholder='gotham'
         id='listName'
+        dataId='listName'
       />,
     );
     const dropdownElement = screen.getByText("gotham");

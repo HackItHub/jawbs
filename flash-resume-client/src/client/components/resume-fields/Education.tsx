@@ -1,30 +1,8 @@
 import React, { useState } from "react";
+import { IoMdAddCircle } from "react-icons/io";
 import { DropDownMenu, FormFieldText } from "../layout";
-import { MONTHS } from "../../utils/Constants";
-
-interface EducationEntries {
-  highestLevelOfEducation: string;
-  highschool?: string;
-  highschoolDiploma?: string;
-  college?: string;
-  collegeDiploma?: string;
-  graduateSchool?: string;
-  graduateDegree?: string;
-  tradeSchool?: string;
-  certificates?: string;
-  highSchoolStartYear?: number;
-  highSchoolEndYear?: string;
-  highSchoolStartMonth?: string;
-  highSchoolEndMonth?: string;
-  collegeStartYear?: number;
-  collegeEndYear?: string;
-  collegeStartMonth?: string;
-  collegeEndMonth?: string;
-  tradeSchoolStartYear?: number;
-  tradeSchoolEndYear?: string;
-  tradeSchoolStartMonth?: string;
-  tradeSchoolEndMonth?: string;
-}
+import { MONTHS, COUNTRIES, STATES } from "../../utils/Constants";
+import { School } from "../../utils/Interfaces";
 
 const currentYear = new Date().getFullYear();
 const range = (start: number, stop: number, step: number) =>
@@ -33,278 +11,193 @@ const range = (start: number, stop: number, step: number) =>
 const EDUCATION_LEVEL = [
   "No formal education",
   "Less than high school",
-  "High School",
+  "High school",
   "Some college",
   "Bachelor's degree",
   "Graduate or professional degree",
-  "Trade School or Other",
+  "Trade school or other",
 ];
 
 const Education: React.FC = () => {
-  const [education, setEducation] = useState<EducationEntries>({
-    highestLevelOfEducation: "",
-  });
+  const [education, setEducation] = useState<School[]>([
+    {
+      school: "",
+      diploma: "",
+      monthStart: "",
+      monthEnd: "",
+      yearStart: currentYear - 4,
+      yearEnd: currentYear,
+    },
+  ]);
+  const [educationLevel, setEducationLevel] = useState<string>("");
 
   const handleChange = (name: string, value: any) => {
     setEducation({ ...education, [name]: value });
   };
 
-  let component;
+  const handleEducationLevel = (__: any, value: string) => {
+    setEducationLevel(value);
+  };
 
-  switch (education.highestLevelOfEducation) {
-    case "High School":
-      component = (
-        <>
+  const handleRemoveEducation = (index: number) => {
+    const updatedEducation = [...education];
+    updatedEducation.splice(index, 1);
+    setEducation(updatedEducation);
+  };
+
+  const handleEducationEntryChange = (
+    name: string,
+    value: any,
+    index: number,
+  ) => {
+    const updatedEducation = [...education];
+    updatedEducation[index] = {
+      ...updatedEducation[index],
+      [name]: value,
+    };
+    setEducation(updatedEducation);
+  };
+
+  const handleAddEducation = () => {
+    setEducation([
+      ...education,
+      {
+        school: "",
+        diploma: "",
+        monthStart: "",
+        monthEnd: "",
+        yearStart: currentYear - 4,
+        yearEnd: currentYear,
+      },
+    ]);
+  };
+
+  const addEducation = (_, index: number) => {
+    return (
+      <div className='border-2 rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
+        <div className='rounded-md shadow-md '>
           <FormFieldText
-            id='highschoolName'
-            label='Highschool Name'
+            dataId='education'
+            id={`eduction_${index}`}
+            label='Name'
             placeholder='Princeton High'
-            onChange={handleChange}
+            onChange={(name, value) =>
+              handleEducationEntryChange(name, value, index)
+            }
           />
           <FormFieldText
-            id='highschoolDiploma'
-            label='High School Diploma'
-            placeholder='Highschool Diploma'
-            onChange={handleChange}
+            dataId='diploma'
+            id={`diploma_${index}`}
+            label='Diploma'
+            placeholder='Diploma'
+            onChange={(name, value) =>
+              handleEducationEntryChange(name, value, index)
+            }
           />
           <div className='flex w-full justify-between items-center gap-4'>
             <DropDownMenu
-              placeholder='Highschool Month Start '
+              placeholder='Start month'
               data={MONTHS}
-              listName='Highschool Month Start'
-              id='highschoolStartMonth'
-              handleInput={handleChange}
+              listName='Start month'
+              dataId='monthStart'
+              id={`monthStart_${index}`}
+              handleInput={(name, value) =>
+                handleEducationEntryChange(name, value, index)
+              }
             />
             <DropDownMenu
-              placeholder='Highschool End Month'
+              placeholder='End month'
               data={MONTHS}
-              listName='Highschool End Month'
-              id='highschoolMonthEnd'
-              handleInput={handleChange}
+              listName='End month'
+              dataId='monthEnd'
+              id={`monthEnd_${index}`}
+              handleInput={(name, value) =>
+                handleEducationEntryChange(name, value, index)
+              }
             />
           </div>
           <div className='flex w-full justify-between items-center gap-4'>
             <DropDownMenu
-              placeholder='Highschool Start Year'
+              placeholder='Start year'
               data={range(currentYear, currentYear - 60, -1)}
-              listName='Highschool Start Year'
-              id='highschoolStartYear'
-              handleInput={handleChange}
+              listName='Start year'
+              dataId='yearStart'
+              id={`yearStart_${index}`}
+              handleInput={(name, value) =>
+                handleEducationEntryChange(name, value, index)
+              }
             />
             <DropDownMenu
-              placeholder='Highschool End Year'
+              placeholder='End year'
               data={range(currentYear, currentYear - 58, -1)}
-              listName='Highschool End Year'
-              id='highschoolYearEnd'
-              handleInput={handleChange}
+              listName='End year'
+              dataId='yearEnd'
+              id={`yearEnd_${index}`}
+              handleInput={(name, value) =>
+                handleEducationEntryChange(name, value, index)
+              }
             />
           </div>
-        </>
-      );
-      break;
-    case "Some College":
-      component = (
-        <>
           <FormFieldText
-            id='highschoolName'
-            label='Highschool Name'
-            placeholder='Princeton High'
-            onChange={handleChange}
+            dataId='addressLine1'
+            id={`addressLine1_${index}`}
+            placeholder='1007 Mountain Drive'
+            label='Address Line 1'
+            onChange={(name, value) =>
+              handleEducationEntryChange(name, value, index)
+            }
           />
           <FormFieldText
-            id='highschoolDiploma'
-            label='High School Diploma'
-            placeholder='Highschool Diploma'
-            onChange={handleChange}
-          />
-          <div className='flex w-full justify-between items-center gap-4'>
-            <DropDownMenu
-              placeholder='Highschool Month Start '
-              data={MONTHS}
-              listName='Highschool Month Start'
-              id='highschoolStartMonth'
-              handleInput={handleChange}
-            />
-            <DropDownMenu
-              placeholder='Highschool End Month'
-              data={MONTHS}
-              listName='Highschool End Month'
-              id='highschoolMonthEnd'
-              handleInput={handleChange}
-            />
-          </div>
-          <div className='flex w-full justify-between items-center gap-4'>
-            <DropDownMenu
-              placeholder='Highschool Start Year'
-              data={range(currentYear, currentYear - 60, -1)}
-              listName='Highschool Start Year'
-              id='highschoolStartYear'
-              handleInput={handleChange}
-            />
-            <DropDownMenu
-              placeholder='Highschool End Year'
-              data={range(currentYear, currentYear - 58, -1)}
-              listName='Highschool End Year'
-              id='highschoolYearEnd'
-              handleInput={handleChange}
-            />
-          </div>
-        </>
-      );
-      break;
-    case "Bachelor's Degree":
-      component = (
-        <>
-          <FormFieldText
-            id='highschoolName'
-            label='Highschool Name'
-            placeholder='Princeton High'
-            onChange={handleChange}
+            dataId='addressLine2'
+            id={`addressLine2_${index}`}
+            placeholder='Bat Cave Way'
+            label='Address Line 2'
+            onChange={(name, value) =>
+              handleEducationEntryChange(name, value, index)
+            }
           />
           <FormFieldText
-            id='highschoolDiploma'
-            label='High School Diploma'
-            placeholder='Highschool Diploma'
-            onChange={handleChange}
+            id='city'
+            dataId={`city_${index}`}
+            placeholder='Gotham City'
+            label='City'
+            onChange={(name, value) =>
+              handleEducationEntryChange(name, value, index)
+            }
           />
-          <div className='flex w-full justify-between items-center gap-4'>
-            <DropDownMenu
-              placeholder='Highschool Month Start '
-              data={MONTHS}
-              listName='Highschool Month Start'
-              id='highschoolStartMonth'
-              handleInput={handleChange}
-            />
-            <DropDownMenu
-              placeholder='Highschool End Month'
-              data={MONTHS}
-              listName='Highschool End Month'
-              id='highschoolMonthEnd'
-              handleInput={handleChange}
-            />
-          </div>
-          <div className='flex w-full justify-between items-center gap-4'>
-            <DropDownMenu
-              placeholder='Highschool Start Year'
-              data={range(currentYear, currentYear - 60, -1)}
-              listName='Highschool Start Year'
-              id='highschoolStartYear'
-              handleInput={handleChange}
-            />
-            <DropDownMenu
-              placeholder='Highschool End Year'
-              data={range(currentYear, currentYear - 58, -1)}
-              listName='Highschool End Year'
-              id='highschoolYearEnd'
-              handleInput={handleChange}
-            />
-          </div>
-        </>
-      );
-      break;
-    case "Graduate or professional degree":
-      component = (
-        <>
-          <FormFieldText
-            id='highschoolName'
-            label='Highschool Name'
-            placeholder='Princeton High'
-            onChange={handleChange}
+          <DropDownMenu
+            placeholder='-Some state in the DC Universe-'
+            data={STATES}
+            id={`state_${index}`}
+            dataId='state'
+            listName='State'
+            handleInput={(name, value) =>
+              handleEducationEntryChange(name, value, index)
+            }
+          />
+          <DropDownMenu
+            placeholder='-Some country in the DC Universe-'
+            data={COUNTRIES}
+            listName='Country'
+            dataId='country'
+            id={`country_${index}`}
+            handleInput={(name, value) =>
+              handleEducationEntryChange(name, value, index)
+            }
           />
           <FormFieldText
-            id='highschoolDiploma'
-            label='High School Diploma'
-            placeholder='Highschool Diploma'
-            onChange={handleChange}
+            id={`zipcode_${index}`}
+            dataId='zipcode'
+            placeholder='6002318'
+            label='Zip Code'
+            onChange={(name, value) =>
+              handleEducationEntryChange(name, value, index)
+            }
           />
-          <div className='flex w-full justify-between items-center gap-4'>
-            <DropDownMenu
-              placeholder='Highschool Month Start '
-              data={MONTHS}
-              listName='Highschool Month Start'
-              id='highschoolStartMonth'
-              handleInput={handleChange}
-            />
-            <DropDownMenu
-              placeholder='Highschool End Month'
-              data={MONTHS}
-              listName='Highschool End Month'
-              id='highschoolMonthEnd'
-              handleInput={handleChange}
-            />
-          </div>
-          <div className='flex w-full justify-between items-center gap-4'>
-            <DropDownMenu
-              placeholder='Highschool Start Year'
-              data={range(currentYear, currentYear - 60, -1)}
-              listName='Highschool Start Year'
-              id='highschoolStartYear'
-              handleInput={handleChange}
-            />
-            <DropDownMenu
-              placeholder='Highschool End Year'
-              data={range(currentYear, currentYear - 58, -1)}
-              listName='Highschool End Year'
-              id='highschoolYearEnd'
-              handleInput={handleChange}
-            />
-          </div>
-        </>
-      );
-      break;
-    case "Trade School or Other":
-      component = (
-        <>
-          <FormFieldText
-            id='highschoolName'
-            label='Highschool Name'
-            placeholder='Princeton High'
-            onChange={handleChange}
-          />
-          <FormFieldText
-            id='highschoolDiploma'
-            label='High School Diploma'
-            placeholder='Highschool Diploma'
-            onChange={handleChange}
-          />
-          <div className='flex w-full justify-between items-center gap-4'>
-            <DropDownMenu
-              placeholder='Highschool Month Start '
-              data={MONTHS}
-              listName='Highschool Month Start'
-              id='highschoolStartMonth'
-              handleInput={handleChange}
-            />
-            <DropDownMenu
-              placeholder='Highschool End Month'
-              data={MONTHS}
-              listName='Highschool End Month'
-              id='highschoolMonthEnd'
-              handleInput={handleChange}
-            />
-          </div>
-          <div className='flex w-full justify-between items-center gap-4'>
-            <DropDownMenu
-              placeholder='Highschool Start Year'
-              data={range(currentYear, currentYear - 60, -1)}
-              listName='Highschool Start Year'
-              id='highschoolStartYear'
-              handleInput={handleChange}
-            />
-            <DropDownMenu
-              placeholder='Highschool End Year'
-              data={range(currentYear, currentYear - 58, -1)}
-              listName='Highschool End Year'
-              id='highschoolYearEnd'
-              handleInput={handleChange}
-            />
-          </div>
-        </>
-      );
-      break;
-    default:
-      component = false;
-  }
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -313,11 +206,29 @@ const Education: React.FC = () => {
         <DropDownMenu
           placeholder='Education Level'
           data={EDUCATION_LEVEL}
-          listName='Highest level of Education'
-          id='highestLevelOfEducation'
-          handleInput={handleChange}
+          listName='Highest level of education'
+          dataId='educationLevel'
+          id='educationLevel'
+          handleInput={handleEducationLevel}
         />
-        {component}
+        {education.map(addEducation)}
+        <div className='border-2 rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
+          <button
+            onClick={handleAddEducation}
+            type='button'
+            className='w-full py-4'
+          >
+            <div className='text-text-placeholder flex justify-center items-center gap-2'>
+              Add Education
+              <IoMdAddCircle />
+            </div>
+          </button>
+        </div>
+        <div className='flex justify-end items-center'>
+          <button type='submit' className='submit-button'>
+            Submit
+          </button>
+        </div>
       </form>
     </>
   );

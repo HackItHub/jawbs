@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import { DropDownMenu, FormFieldText } from "../layout";
 import { COUNTRIES, STATES } from "../../utils/Constants";
-
-interface AddressForm {
-  addressLine1: string;
-  addressLine2: string;
-  zipCode: string;
-  city: string;
-  state?: string;
-  country: string;
-}
+import { AddressForm } from "../../utils/Interfaces";
 
 const Address: React.FC = () => {
   const [addressForm, setAddressForm] = useState<AddressForm>({
@@ -33,18 +25,21 @@ const Address: React.FC = () => {
     <form action='submit'>
       <FormFieldText
         id='addressLine1'
+        dataId='addressLine1'
         placeholder='1007 Mountain Drive'
         label='Address Line 1'
         onChange={handleChange}
       />
       <FormFieldText
         id='addressLine2'
+        dataId='addressLine2'
         placeholder='Bat Cave Way'
         label='Address Line 2'
         onChange={handleChange}
       />
       <FormFieldText
         id='city'
+        dataId='city'
         placeholder='Gotham City'
         label='City'
         onChange={handleChange}
@@ -56,6 +51,7 @@ const Address: React.FC = () => {
             placeholder='-Some state in the DC Universe-'
             data={STATES}
             id='state'
+            dataId='state'
             listName='State'
             handleInput={handleChange}
           />
@@ -69,12 +65,14 @@ const Address: React.FC = () => {
             data={COUNTRIES}
             listName='Country'
             id='country'
+            dataId='country'
             handleInput={handleChange}
           />
         </div>
       </div>
       <FormFieldText
         id='zipcode'
+        dataId='zipcode'
         placeholder='6002318'
         label='Zip Code'
         onChange={handleChange}

@@ -7,6 +7,7 @@ interface Props {
   onChange: (name: string, value: string) => void;
   id: string;
   type?: string;
+  dataId: string;
 }
 
 const FormFieldText: React.FC<Props> = ({
@@ -16,17 +17,18 @@ const FormFieldText: React.FC<Props> = ({
   onChange,
   id,
   type,
+  dataId,
 }) => {
   const [input, setInput] = useState("");
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     setInput(value);
-    onChange(name, value);
+    onChange(dataId, value);
   };
   return (
     <div className='mb-2'>
       <label htmlFor={id} className='form-input-container'>
-        {label}
+        <div className='flex justify-start items-center'>{label}</div>
         <input
           id={id}
           onChange={handleInput}

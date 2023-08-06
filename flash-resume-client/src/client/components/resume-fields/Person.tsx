@@ -26,27 +26,31 @@ const Person: React.FC = () => {
   return (
     <form action='submit'>
       <FormFieldText
-        id='first_name'
+        id='firstName'
+        dataId='firstName'
         placeholder='Bruce'
         label='First Name'
         onChange={handleChange}
         isRequired={REQUIRED}
       />
       <FormFieldText
-        id='middle_name'
+        id='middleName'
+        dataId='middleName'
         placeholder='Thomas'
         label='Middle Name'
         onChange={handleChange}
       />
       <FormFieldText
-        id='last_name'
+        id='lastName'
+        dataId='lastName'
         placeholder='Wayne'
         label='Last Name'
         onChange={handleChange}
         isRequired={REQUIRED}
       />
       <FormFieldText
-        id='phone_number'
+        id='phoneNumber'
+        dataId='phoneNumber'
         placeholder='1-800-BATMAN'
         label='Phone Number'
         onChange={handleChange}
@@ -54,6 +58,7 @@ const Person: React.FC = () => {
       />
       <FormFieldText
         id='email'
+        dataId='email'
         placeholder='definitelynotbatman@waynecorp.org'
         label='Email'
         onChange={handleChange}

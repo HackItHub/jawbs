@@ -5,9 +5,10 @@ import Loading from "./Loading";
 interface ChildProps {
   data: string[] | number[];
   listName: string;
-  handleInput: (name: string, value: string) => void;
+  handleInput: (name: string, value: any) => void;
   placeholder: string;
   id: string;
+  dataId: string;
 }
 
 const DropDownMenu: React.FC<ChildProps> = ({
@@ -16,6 +17,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
   handleInput,
   placeholder,
   id,
+  dataId,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [option, setOption] = useState("");
@@ -27,7 +29,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
   const handleOptions = (value: any) => {
     setIsOpen(!isOpen);
     setOption(value);
-    handleInput(id, value);
+    handleInput(dataId, value);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent, value: any) => {
@@ -38,7 +40,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
 
   return (
     <div className='w-full'>
-      <div className='form-input-container' role='presentation'>
+      <div className='form-input-container items-start' role='presentation'>
         {listName}
       </div>
       <div
@@ -89,13 +91,13 @@ const DropDownMenu: React.FC<ChildProps> = ({
                     onKeyDown={(e) => {
                       handleKeyDown(e, item);
                     }}
+                    id={id}
                     role='menuitem'
                     key={`${listName}-${item}`}
                     className='dropdown-list-item hover:border-blue hover:bg-blue hover:bg-opacity-30 transition-all border-1 border-solid'
                     tabIndex={index}
                     onClick={() => handleOptions(item)}
                     data-value={item}
-                    id={id}
                   >
                     {item}
                   </div>

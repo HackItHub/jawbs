@@ -51,6 +51,5 @@ module.exports = {
     "react/react-in-jsx-scope": ["off"],
     "react/jsx-props-so-spreading": ["off"],
     "no-shadow": "off",
-    "@typescript-eslint/no-explicit-any": "off",
   },
 };
