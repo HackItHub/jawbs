@@ -32,13 +32,13 @@ const Address: React.FC = () => {
   return (
     <form action='submit'>
       <FormFieldText
-        id='address_line_1'
+        id='addressLine1'
         placeholder='1007 Mountain Drive'
         label='Address Line 1'
         onChange={handleChange}
       />
       <FormFieldText
-        id='address_line_2'
+        id='addressLine2'
         placeholder='Bat Cave Way'
         label='Address Line 2'
         onChange={handleChange}
@@ -55,6 +55,7 @@ const Address: React.FC = () => {
           <DropDownMenu
             placeholder='-Some state in the DC Universe-'
             data={STATES}
+            id='state'
             listName='State'
             handleInput={handleChange}
           />
@@ -67,6 +68,7 @@ const Address: React.FC = () => {
             placeholder='-Some country in the DC Universe-'
             data={COUNTRIES}
             listName='Country'
+            id='country'
             handleInput={handleChange}
           />
         </div>

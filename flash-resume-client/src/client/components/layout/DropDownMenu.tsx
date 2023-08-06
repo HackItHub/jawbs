@@ -7,6 +7,7 @@ interface ChildProps {
   listName: string;
   handleInput: (name: string, value: string) => void;
   placeholder: string;
+  id: string;
 }
 
 const DropDownMenu: React.FC<ChildProps> = ({
@@ -14,6 +15,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
   listName,
   handleInput,
   placeholder,
+  id,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [option, setOption] = useState("");
@@ -25,7 +27,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
   const handleOptions = (value: string) => {
     setIsOpen(!isOpen);
     setOption(value);
-    handleInput(listName, value);
+    handleInput(id, value);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent, value: string) => {
@@ -89,7 +91,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
                   tabIndex={index}
                   onClick={() => handleOptions(item)}
                   data-value={item}
-                  id={`${listName}-${item}`}
+                  id={id}
                 >
                   {item}
                 </div>

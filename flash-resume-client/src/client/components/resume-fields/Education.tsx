@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DropDownMenu } from "../layout";
+import { DropDownMenu, FormFieldText } from "../layout";
 
 interface EducationEntries {
   highestLevelOfEducation: string;
@@ -21,7 +21,12 @@ interface EducationEntries {
   tradeSchoolEndMonth?: string;
 }
 
-const EDUCATION_LEVEL = ["Highschool", "Some College", "College Degree"];
+const EDUCATION_LEVEL = [
+  "Highschool",
+  "Some College",
+  "Diploma",
+  "Certification",
+];
 
 const Education: React.FC = () => {
   const [education, setEducation] = useState<EducationEntries>({
@@ -32,10 +37,46 @@ const Education: React.FC = () => {
     setEducation({ ...education, [name]: value });
   };
 
+  let component;
+
+  switch (education.highestLevelOfEducation) {
+    case "Highschool":
+      component = (
+        <>
+          <FormFieldText
+            id='highschoolName'
+            label='Highschool Name'
+            placeholder='Princeton High'
+            onChange={handleChange}
+          />
+          <div className='flex w-full'>
+            <div>
+              <div className='form-input-container' role='presentation'>
+                Highschool Start
+                <DropDownMenu
+                  placeholder='Highschool Start'
+                  data={EDUCATION_LEVEL}
+                  listName='Highschool Start'
+                  id='highschoolStart'
+                  handleInput={handleChange}
+                />
+              </div>
+            </div>
+          </div>
+          <div>Something</div>
+        </>
+      );
+      break;
+    case "Some College":
+      <>Hello</>;
+      break;
+    default:
+      <>Jeez</>;
+  }
+
   return (
     <form action='submit'>
       <h3>Education</h3>
-
       <div>
         <div className='form-input-container' role='presentation'>
           Highest Level of Education
@@ -43,8 +84,10 @@ const Education: React.FC = () => {
             placeholder='Education Level'
             data={EDUCATION_LEVEL}
             listName='Education'
+            id='highestLevelOfEducation'
             handleInput={handleChange}
           />
+          {component}
         </div>
       </div>
     </form>

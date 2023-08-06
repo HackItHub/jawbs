@@ -7,6 +7,7 @@ describe("dropdown", () => {
     render(
       <DropDownMenu
         data={[]}
+        id='listName'
         listName='list name'
         handleInput={() => {}}
         placeholder='gotham'
@@ -20,6 +21,7 @@ describe("dropdown", () => {
   it("renders loading icon when no data is available", () => {
     render(
       <DropDownMenu
+        id='listName'
         data={[]}
         listName='list name'
         handleInput={() => {}}
@@ -42,6 +44,7 @@ describe("dropdown", () => {
         listName='list name'
         handleInput={() => {}}
         placeholder='gotham'
+        id='listName'
       />,
     );
     const dropdownElement = screen.getByText("gotham");
@@ -60,6 +63,7 @@ describe("dropdown", () => {
         listName='list name'
         handleInput={() => {}}
         placeholder='gotham'
+        id='listName'
       />,
     );
     const dropdownElement = screen.getByText("gotham");
