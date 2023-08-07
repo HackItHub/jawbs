@@ -56,7 +56,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
             aria-expanded={isOpen}
             aria-haspopup='true'
           >
-            {option.length ? (
+            {option ? (
               <div>{option}</div>
             ) : (
               <div className='text-[rgb(155,163,175)]'>{placeholder}</div>

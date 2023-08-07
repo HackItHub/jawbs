@@ -25,15 +25,11 @@ const Education: React.FC = () => {
       diploma: "",
       monthStart: "",
       monthEnd: "",
-      yearStart: currentYear - 4,
-      yearEnd: currentYear,
+      yearStart: 0,
+      yearEnd: 0,
     },
   ]);
   const [educationLevel, setEducationLevel] = useState<string>("");
-
-  const handleChange = (name: string, value: any) => {
-    setEducation({ ...education, [name]: value });
-  };
 
   const handleEducationLevel = (__: any, value: string) => {
     setEducationLevel(value);
@@ -70,6 +66,10 @@ const Education: React.FC = () => {
         yearEnd: currentYear,
       },
     ]);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
   };
 
   const addEducation = (_, index: number) => {
@@ -202,7 +202,7 @@ const Education: React.FC = () => {
   return (
     <>
       <h3 className='flex justify-center items-center'>Education</h3>
-      <form action='submit'>
+      <form action='submit' onSubmit={handleSubmit}>
         <DropDownMenu
           placeholder='Education Level'
           data={EDUCATION_LEVEL}
