@@ -77,7 +77,7 @@ const Education: React.FC = () => {
       <div className='border-2 rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
         <div className='rounded-md shadow-md '>
           <FormFieldText
-            dataId='education'
+            dataId='school'
             id={`eduction_${index}`}
             label='Name'
             placeholder='Princeton High'
