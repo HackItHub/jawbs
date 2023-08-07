@@ -31,7 +31,7 @@ const Education: React.FC = () => {
   ]);
   const [educationLevel, setEducationLevel] = useState<string>("");
 
-  const handleEducationLevel = (__: any, value: string) => {
+  const handleEducationLevel = (__, value: string) => {
     setEducationLevel(value);
   };
 
@@ -41,11 +41,7 @@ const Education: React.FC = () => {
     setEducation(updatedEducation);
   };
 
-  const handleEducationEntryChange = (
-    name: string,
-    value: any,
-    index: number,
-  ) => {
+  const handleEducationEntryChange = (name: string, value, index: number) => {
     const updatedEducation = [...education];
     updatedEducation[index] = {
       ...updatedEducation[index],

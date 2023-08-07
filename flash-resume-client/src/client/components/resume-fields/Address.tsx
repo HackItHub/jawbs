@@ -13,7 +13,7 @@ const Address: React.FC = () => {
     country: "",
   });
 
-  const handleChange = (name: string, value: any) => {
+  const handleChange = (name: string, value) => {
     if (name === "state" && value === "Not Applicable") {
       setAddressForm({ ...addressForm, state: "" });
     } else {

@@ -19,7 +19,7 @@ const Person: React.FC = () => {
     email: "",
   });
 
-  const handleChange = (name: string, value: any) => {
+  const handleChange = (name: string, value) => {
     setPerson({ ...person, [name]: value });
   };
 

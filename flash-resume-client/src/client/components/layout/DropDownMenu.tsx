@@ -5,7 +5,7 @@ import Loading from "./Loading";
 interface ChildProps {
   data: string[] | number[];
   listName: string;
-  handleInput: (name: string, value: any) => void;
+  handleInput: (name: string, value) => void;
   placeholder: string;
   id: string;
   dataId: string;
@@ -26,13 +26,13 @@ const DropDownMenu: React.FC<ChildProps> = ({
     setIsOpen(!isOpen);
   };
 
-  const handleOptions = (value: any) => {
+  const handleOptions = (value) => {
     setIsOpen(!isOpen);
     setOption(value);
     handleInput(dataId, value);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent, value: any) => {
+  const handleKeyDown = (event: React.KeyboardEvent, value) => {
     if (event.key === "Enter" || event.key === " ") {
       handleOptions(value);
     }
