@@ -79,7 +79,7 @@ const Education: React.FC = () => {
           <FormFieldText
             dataId='school'
             id={`eduction_${index}`}
-            label='Name'
+            label='Institution'
             placeholder='Princeton High'
             onChange={(name, value) =>
               handleEducationEntryChange(name, value, index)
@@ -88,7 +88,7 @@ const Education: React.FC = () => {
           <FormFieldText
             dataId='diploma'
             id={`diploma_${index}`}
-            label='Diploma'
+            label='Diploma/Certificates'
             placeholder='Diploma'
             onChange={(name, value) =>
               handleEducationEntryChange(name, value, index)
