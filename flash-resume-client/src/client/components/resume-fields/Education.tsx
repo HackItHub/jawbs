@@ -70,8 +70,8 @@ const Education: React.FC = () => {
 
   const addEducation = (_, index: number) => {
     return (
-      <div className='border-2 rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
-        <div className='rounded-md shadow-md '>
+      <div className='border-2 shadow-md rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
+        <div>
           <FormFieldText
             dataId='school'
             id={`eduction_${index}`}
@@ -208,7 +208,7 @@ const Education: React.FC = () => {
           handleInput={handleEducationLevel}
         />
         {education.map(addEducation)}
-        <div className='border-2 rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
+        <div className='border-2 rounded-md border-solid shadow-md border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
           <button
             onClick={handleAddEducation}
             type='button'
@@ -222,7 +222,7 @@ const Education: React.FC = () => {
         </div>
         <div className='flex justify-end items-center'>
           <button type='submit' className='submit-button'>
-            Submit
+            Next
           </button>
         </div>
       </form>
