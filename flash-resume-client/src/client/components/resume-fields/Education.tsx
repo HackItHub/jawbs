@@ -59,7 +59,7 @@ const Education: React.FC = () => {
     setEducation(updatedEducation);
   };
 
-  const handleEducationEntryChange = (name: string, value, index: number) => {
+  const handleEntryChange = (name: string, value, index: number) => {
     const updatedEducation = [...education];
     updatedEducation[index] = {
       ...updatedEducation[index],
@@ -68,7 +68,7 @@ const Education: React.FC = () => {
     setEducation(updatedEducation);
   };
 
-  const handleAddEducation = () => {
+  const handleAddEntry = () => {
     setEducation([
       ...education,
       {
@@ -86,7 +86,7 @@ const Education: React.FC = () => {
     e.preventDefault();
   };
 
-  const addEducation = (_, index: number) => {
+  const addEntry = (_, index: number) => {
     return (
       <div className='border-2 shadow-md rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
         <div>
@@ -95,18 +95,14 @@ const Education: React.FC = () => {
             id={`eduction_${index}`}
             label='Institution'
             placeholder='Princeton High'
-            onChange={(name, value) =>
-              handleEducationEntryChange(name, value, index)
-            }
+            onChange={(name, value) => handleEntryChange(name, value, index)}
           />
           <FormFieldText
             dataId='diploma'
             id={`diploma_${index}`}
             label='Diploma/Certificates'
             placeholder='Diploma'
-            onChange={(name, value) =>
-              handleEducationEntryChange(name, value, index)
-            }
+            onChange={(name, value) => handleEntryChange(name, value, index)}
           />
           <div className='flex w-full justify-between items-center gap-4'>
             <DropDownMenu
@@ -116,7 +112,7 @@ const Education: React.FC = () => {
               dataId='monthStart'
               id={`monthStart_${index}`}
               handleInput={(name, value) =>
-                handleEducationEntryChange(name, value, index)
+                handleEntryChange(name, value, index)
               }
             />
             <DropDownMenu
@@ -126,7 +122,7 @@ const Education: React.FC = () => {
               dataId='monthEnd'
               id={`monthEnd_${index}`}
               handleInput={(name, value) =>
-                handleEducationEntryChange(name, value, index)
+                handleEntryChange(name, value, index)
               }
             />
           </div>
@@ -138,7 +134,7 @@ const Education: React.FC = () => {
               dataId='yearStart'
               id={`yearStart_${index}`}
               handleInput={(name, value) =>
-                handleEducationEntryChange(name, value, index)
+                handleEntryChange(name, value, index)
               }
             />
             <DropDownMenu
@@ -148,7 +144,7 @@ const Education: React.FC = () => {
               dataId='yearEnd'
               id={`yearEnd_${index}`}
               handleInput={(name, value) =>
-                handleEducationEntryChange(name, value, index)
+                handleEntryChange(name, value, index)
               }
             />
           </div>
@@ -157,27 +153,21 @@ const Education: React.FC = () => {
             id={`addressLine1_${index}`}
             placeholder='1007 Mountain Drive'
             label='Address Line 1'
-            onChange={(name, value) =>
-              handleEducationEntryChange(name, value, index)
-            }
+            onChange={(name, value) => handleEntryChange(name, value, index)}
           />
           <FormFieldText
             dataId='addressLine2'
             id={`addressLine2_${index}`}
             placeholder='Bat Cave Way'
             label='Address Line 2'
-            onChange={(name, value) =>
-              handleEducationEntryChange(name, value, index)
-            }
+            onChange={(name, value) => handleEntryChange(name, value, index)}
           />
           <FormFieldText
             id='city'
             dataId={`city_${index}`}
             placeholder='Gotham City'
             label='City'
-            onChange={(name, value) =>
-              handleEducationEntryChange(name, value, index)
-            }
+            onChange={(name, value) => handleEntryChange(name, value, index)}
           />
           <DropDownMenu
             placeholder='-Some state in the DC Universe-'
@@ -185,9 +175,7 @@ const Education: React.FC = () => {
             id={`state_${index}`}
             dataId='state'
             listName='State'
-            handleInput={(name, value) =>
-              handleEducationEntryChange(name, value, index)
-            }
+            handleInput={(name, value) => handleEntryChange(name, value, index)}
           />
           <DropDownMenu
             placeholder='-Some country in the DC Universe-'
@@ -195,18 +183,14 @@ const Education: React.FC = () => {
             listName='Country'
             dataId='country'
             id={`country_${index}`}
-            handleInput={(name, value) =>
-              handleEducationEntryChange(name, value, index)
-            }
+            handleInput={(name, value) => handleEntryChange(name, value, index)}
           />
           <FormFieldText
             id={`zipcode_${index}`}
             dataId='zipcode'
             placeholder='6002318'
             label='Zip Code'
-            onChange={(name, value) =>
-              handleEducationEntryChange(name, value, index)
-            }
+            onChange={(name, value) => handleEntryChange(name, value, index)}
           />
         </div>
       </div>
@@ -225,10 +209,10 @@ const Education: React.FC = () => {
           id='educationLevel'
           handleInput={handleEducationLevel}
         />
-        {education.map(addEducation)}
+        {education.map(addEntry)}
         <div className='border-2 rounded-md border-solid shadow-md border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
           <button
-            onClick={handleAddEducation}
+            onClick={handleAddEntry}
             type='button'
             className='w-full py-4'
           >
