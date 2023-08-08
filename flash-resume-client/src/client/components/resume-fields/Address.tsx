@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { DropDownMenu, FormFieldText } from "../layout";
 import { COUNTRIES, STATES } from "../../utils/Constants";
-import { AddressForm } from "../../utils/Interfaces";
+
+export interface AddressForm {
+  addressLine1?: string;
+  addressLine2?: string;
+  zipCode?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+}
 
 const Address: React.FC = () => {
   const [addressForm, setAddressForm] = useState<AddressForm>({

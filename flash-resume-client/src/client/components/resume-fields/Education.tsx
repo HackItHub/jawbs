@@ -2,7 +2,25 @@ import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { DropDownMenu, FormFieldText } from "../layout";
 import { MONTHS, COUNTRIES, STATES } from "../../utils/Constants";
-import { School } from "../../utils/Interfaces";
+
+export interface AddressForm {
+  addressLine1: string;
+  addressLine2: string;
+  zipCode: string;
+  city: string;
+  state: string;
+  country: string;
+}
+
+export interface School {
+  school: string;
+  monthStart: string;
+  monthEnd?: string;
+  yearStart: number;
+  yearEnd?: number | string;
+  diploma?: string;
+  address?: AddressForm;
+}
 
 const currentYear = new Date().getFullYear();
 const range = (start: number, stop: number, step: number) =>
