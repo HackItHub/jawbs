@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { DropDownMenu, FormFieldText, TransparentContainer } from "../layout";
-import { MONTHS, COUNTRIES, STATES } from "../../utils/Constants";
+import {
+  MONTHS,
+  COUNTRIES,
+  STATES,
+  CURRENT_YEAR,
+  range,
+} from "../../utils/Constants";
 
 export interface AddressForm {
   addressLine1: string;
@@ -21,10 +27,6 @@ export interface School {
   diploma?: string;
   address?: AddressForm;
 }
-
-const currentYear = new Date().getFullYear();
-const range = (start: number, stop: number, step: number) =>
-  Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
 
 const EDUCATION_LEVEL = [
   "No formal education",
@@ -76,8 +78,8 @@ const Education: React.FC = () => {
         diploma: "",
         monthStart: "",
         monthEnd: "",
-        yearStart: currentYear - 4,
-        yearEnd: currentYear,
+        yearStart: CURRENT_YEAR - 4,
+        yearEnd: CURRENT_YEAR,
       },
     ]);
   };
@@ -129,7 +131,7 @@ const Education: React.FC = () => {
           <div className='flex w-full justify-between items-center gap-4'>
             <DropDownMenu
               placeholder='Start year'
-              data={range(currentYear, currentYear - 60, -1)}
+              data={range(CURRENT_YEAR, CURRENT_YEAR - 60, -1)}
               listName='Start year'
               dataId='yearStart'
               id={`yearStart_${index}`}
@@ -139,7 +141,7 @@ const Education: React.FC = () => {
             />
             <DropDownMenu
               placeholder='End year'
-              data={range(currentYear, currentYear - 58, -1)}
+              data={range(CURRENT_YEAR, CURRENT_YEAR - 58, -1)}
               listName='End year'
               dataId='yearEnd'
               id={`yearEnd_${index}`}

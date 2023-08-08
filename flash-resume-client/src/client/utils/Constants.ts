@@ -322,4 +322,8 @@ const MONTHS = [
 
 const REQUIRED = true;
 
-export { STATES, COUNTRIES, REQUIRED, MONTHS };
+const CURRENT_YEAR = new Date().getFullYear();
+const range = (start: number, stop: number, step: number) =>
+  Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
+
+export { STATES, COUNTRIES, REQUIRED, MONTHS, range, CURRENT_YEAR };
