@@ -1,6 +1,6 @@
 import express from "express";
 import { PORT } from "./server/utils/environmental.js";
-import router from "./server/users/router.js";
+import router from "./server/routes/users.js";
 
 const app = express();
 
