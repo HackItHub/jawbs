@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
-import { DropDownMenu, FormFieldText } from "../layout";
+import { DropDownMenu, FormFieldText, TransparentContainer } from "../layout";
 import { MONTHS, COUNTRIES, STATES } from "../../utils/Constants";
 
 export interface AddressForm {
@@ -214,7 +214,7 @@ const Education: React.FC = () => {
   };
 
   return (
-    <>
+    <TransparentContainer>
       <h3 className='flex justify-center items-center'>Education</h3>
       <form action='submit' onSubmit={handleSubmit}>
         <DropDownMenu
@@ -244,7 +244,7 @@ const Education: React.FC = () => {
           </button>
         </div>
       </form>
-    </>
+    </TransparentContainer>
   );
 };
 

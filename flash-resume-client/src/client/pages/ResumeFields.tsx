@@ -4,12 +4,12 @@ import { Experience } from "../components/resume-fields";
 
 const ResumeFields: React.FC = () => {
   return (
-    <TransparentContainer>
+    <>
       {/* <Address /> */}
       {/* <Person /> */}
       {/* <Education /> */}
       <Experience />
-    </TransparentContainer>
+    </>
   );
 };
 

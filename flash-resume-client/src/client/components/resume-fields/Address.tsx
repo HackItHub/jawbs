@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DropDownMenu, FormFieldText } from "../layout";
+import { DropDownMenu, FormFieldText, TransparentContainer } from "../layout";
 import { COUNTRIES, STATES } from "../../utils/Constants";
 
 export interface AddressForm {
@@ -30,71 +30,74 @@ const Address: React.FC = () => {
   };
 
   return (
-    <form action='submit'>
-      <FormFieldText
-        id='addressLine1'
-        dataId='addressLine1'
-        placeholder='1007 Mountain Drive'
-        label='Address Line 1'
-        onChange={handleChange}
-      />
-      <FormFieldText
-        id='addressLine2'
-        dataId='addressLine2'
-        placeholder='Bat Cave Way'
-        label='Address Line 2'
-        onChange={handleChange}
-      />
-      <FormFieldText
-        id='city'
-        dataId='city'
-        placeholder='Gotham City'
-        label='City'
-        onChange={handleChange}
-      />
-      <div>
-        <div className='form-input-container' role='presentation'>
-          State
-          <DropDownMenu
-            placeholder='-Some state in the DC Universe-'
-            data={STATES}
-            id='state'
-            dataId='state'
-            listName='State'
-            handleInput={handleChange}
-          />
+    <TransparentContainer>
+      <h3>Address</h3>
+      <form action='submit'>
+        <FormFieldText
+          id='addressLine1'
+          dataId='addressLine1'
+          placeholder='1007 Mountain Drive'
+          label='Address Line 1'
+          onChange={handleChange}
+        />
+        <FormFieldText
+          id='addressLine2'
+          dataId='addressLine2'
+          placeholder='Bat Cave Way'
+          label='Address Line 2'
+          onChange={handleChange}
+        />
+        <FormFieldText
+          id='city'
+          dataId='city'
+          placeholder='Gotham City'
+          label='City'
+          onChange={handleChange}
+        />
+        <div>
+          <div className='form-input-container' role='presentation'>
+            State
+            <DropDownMenu
+              placeholder='-Some state in the DC Universe-'
+              data={STATES}
+              id='state'
+              dataId='state'
+              listName='State'
+              handleInput={handleChange}
+            />
+          </div>
         </div>
-      </div>
-      <div>
-        <div className='form-input-container' role='presentation'>
-          Country
-          <DropDownMenu
-            placeholder='-Some country in the DC Universe-'
-            data={COUNTRIES}
-            listName='Country'
-            id='country'
-            dataId='country'
-            handleInput={handleChange}
-          />
+        <div>
+          <div className='form-input-container' role='presentation'>
+            Country
+            <DropDownMenu
+              placeholder='-Some country in the DC Universe-'
+              data={COUNTRIES}
+              listName='Country'
+              id='country'
+              dataId='country'
+              handleInput={handleChange}
+            />
+          </div>
         </div>
-      </div>
-      <FormFieldText
-        id='zipcode'
-        dataId='zipcode'
-        placeholder='6002318'
-        label='Zip Code'
-        onChange={handleChange}
-      />
-      <div className='flex justify-end'>
-        <button
-          type='submit'
-          className='submit-button'
-          aria-label='Submit Personal Information'
-        >
-          Submit
-        </button>
-      </div>
-    </form>
+        <FormFieldText
+          id='zipcode'
+          dataId='zipcode'
+          placeholder='6002318'
+          label='Zip Code'
+          onChange={handleChange}
+        />
+        <div className='flex justify-end'>
+          <button
+            type='submit'
+            className='submit-button'
+            aria-label='Submit Personal Information'
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </TransparentContainer>
   );
 };
 
