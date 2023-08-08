@@ -9,6 +9,14 @@ import {
   range,
 } from "../../utils/Constants";
 
+interface AddressForm {
+  addressLine1?: string;
+  addressLine2?: string;
+  zipCode?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+}
 interface ExperienceEntries {
   experience: string;
   title: string;
@@ -17,6 +25,7 @@ interface ExperienceEntries {
   endMonth: string;
   startYear: number | null;
   endYear: number | null;
+  address?: AddressForm;
 }
 
 const Experience: React.FC = () => {
@@ -55,6 +64,13 @@ const Experience: React.FC = () => {
     setExperience(updatedExperience);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    //  eslint-disable-next-line
+    console.log(experience);
+  };
+
   const addEntry = (_, index: number) => {
     return (
       <div className='border-2 shadow-md rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
@@ -78,8 +94,8 @@ const Experience: React.FC = () => {
               placeholder='Start month'
               data={MONTHS}
               listName='Start month'
-              dataId='monthStart'
-              id={`monthStart_${index}`}
+              dataId='startMonth'
+              id={`startMonth_${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
@@ -88,8 +104,8 @@ const Experience: React.FC = () => {
               placeholder='End month'
               data={MONTHS}
               listName='End month'
-              dataId='monthEnd'
-              id={`monthEnd_${index}`}
+              dataId='endMonth'
+              id={`endMonth_${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
@@ -100,8 +116,8 @@ const Experience: React.FC = () => {
               placeholder='Start year'
               data={range(CURRENT_YEAR, CURRENT_YEAR - 60, -1)}
               listName='Start year'
-              dataId='yearStart'
-              id={`yearStart_${index}`}
+              dataId='startYear'
+              id={`start_Year${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
@@ -110,8 +126,8 @@ const Experience: React.FC = () => {
               placeholder='End year'
               data={range(CURRENT_YEAR, CURRENT_YEAR - 58, -1)}
               listName='End year'
-              dataId='yearEnd'
-              id={`yearEnd_${index}`}
+              dataId='endYear'
+              id={`endYear_${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
@@ -169,13 +185,23 @@ const Experience: React.FC = () => {
   return (
     <TransparentContainer>
       <h3 className='flex justify-center items-center'>Experience</h3>
-      <form action='submit'>
+      <form action='submit' onSubmit={handleSubmit}>
+        {experience.map(addEntry)}
         <div className='border-2 rounded-md border-solid shadow-md border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
-          <button type='button' className='w-full py-4'>
+          <button
+            type='button'
+            className='w-full py-4'
+            onClick={handleAddEntry}
+          >
             <div className='text-text-placeholder flex justify-center items-center gap-2'>
               Add Experience
               <IoMdAddCircle />
             </div>
+          </button>
+        </div>
+        <div className='flex justify-end items-center'>
+          <button type='submit' className='submit-button'>
+            Next
           </button>
         </div>
       </form>

@@ -20,10 +20,10 @@ export interface AddressForm {
 
 export interface School {
   school: string;
-  monthStart: string;
-  monthEnd?: string;
-  yearStart: number;
-  yearEnd?: number | string;
+  startMonth: string;
+  endMonth?: string;
+  startYear: number;
+  endYear?: number | string;
   diploma?: string;
   address?: AddressForm;
 }
@@ -43,10 +43,10 @@ const Education: React.FC = () => {
     {
       school: "",
       diploma: "",
-      monthStart: "",
-      monthEnd: "",
-      yearStart: 0,
-      yearEnd: 0,
+      startMonth: "",
+      endMonth: "",
+      startYear: 0,
+      endYear: 0,
     },
   ]);
   const [educationLevel, setEducationLevel] = useState<string>("");
@@ -76,10 +76,10 @@ const Education: React.FC = () => {
       {
         school: "",
         diploma: "",
-        monthStart: "",
-        monthEnd: "",
-        yearStart: CURRENT_YEAR - 4,
-        yearEnd: CURRENT_YEAR,
+        startMonth: "",
+        endMonth: "",
+        startYear: CURRENT_YEAR - 4,
+        endYear: CURRENT_YEAR,
       },
     ]);
   };
@@ -111,8 +111,8 @@ const Education: React.FC = () => {
               placeholder='Start month'
               data={MONTHS}
               listName='Start month'
-              dataId='monthStart'
-              id={`monthStart_${index}`}
+              dataId='startMonth'
+              id={`startMonth_${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
@@ -121,8 +121,8 @@ const Education: React.FC = () => {
               placeholder='End month'
               data={MONTHS}
               listName='End month'
-              dataId='monthEnd'
-              id={`monthEnd_${index}`}
+              dataId='endMonth'
+              id={`endMonth_${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
@@ -133,8 +133,8 @@ const Education: React.FC = () => {
               placeholder='Start year'
               data={range(CURRENT_YEAR, CURRENT_YEAR - 60, -1)}
               listName='Start year'
-              dataId='yearStart'
-              id={`yearStart_${index}`}
+              dataId='startYear'
+              id={`startYear_${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
@@ -143,8 +143,8 @@ const Education: React.FC = () => {
               placeholder='End year'
               data={range(CURRENT_YEAR, CURRENT_YEAR - 58, -1)}
               listName='End year'
-              dataId='yearEnd'
-              id={`yearEnd_${index}`}
+              dataId='endYear'
+              id={`endYear_${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
