@@ -1,6 +1,5 @@
 const USERS = [
   {
-    id: 1,
     firstName: "Raj",
     lastName: "Seeball",
     phone: "1234567890",
@@ -34,6 +33,13 @@ const USERS = [
     //         }
     //     }
     // ],
+  },
+  {
+    firstName: "Jesse",
+    lastName: "Nava",
+    phone: "1234567810",
+    email: "jess@nav.com",
+    summary: "Good",
   },
 ];
 

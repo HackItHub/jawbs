@@ -14,7 +14,8 @@
     "start": "npm run build && node dist/index.js",
     "migrate": "npx prisma migrate dev --name init",
     "reset": "npx prisma migrate reset",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "seed": "ts-node ./prisma/seed/index.ts"
   },
   "repository": {
     "type": "git",

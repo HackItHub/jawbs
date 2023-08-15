@@ -1,6 +1,5 @@
 const ADDRESS = [
   {
-    id: 2,
     country: "United States",
     state: "CA",
     city: "Anaheim",
@@ -8,6 +7,15 @@ const ADDRESS = [
     line2: "Apt 12",
     zipcode: 12345,
     userId: 1,
+  },
+  {
+    country: "United States",
+    state: "CA",
+    city: "Irvine",
+    line: "345 Dream Ave",
+    line2: "",
+    zipcode: 34567,
+    userId: 2,
   },
 ];
 

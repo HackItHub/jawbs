@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { USERS } from "./data/index.js";
+import { USERS, ADDRESS, EXPERIENCE, WORK_ADDRESS } from "./data/index.js";
 
 const prisma = new PrismaClient();
 
@@ -8,38 +8,23 @@ async function main() {
     data: USERS,
   });
 
-  // await prisma.address.createMany({
-  //     data: address
-  // })
+  await prisma.address.createMany({
+    data: ADDRESS,
+  });
 
-  // for await (let user of users) {
-  //     await prisma.user.upsert({
-  //         where: { id: user.id },
-  //         update: {},
-  //         create: {
-  //             ...user,
-  //             address: {
-  //                 create: {
-  //                     ...address
-  //                 }
-  //             }
-  //         }
-  //     })
-  // }
+  await prisma.experience.createMany({
+    data: EXPERIENCE,
+  });
 
-  // for await (let add of address) {
-  //     await prisma.user.upsert({
-  //         where: { id: add.id },
-  //         update: {},
-  //         create: add
-  //     })
-  // }
+  await prisma.workAddress.createMany({
+    data: WORK_ADDRESS,
+  });
 }
 
-// main()
-//   .catch((err) => {
-//     console.log(err);
-//   })
-//   .finally(() => {
-//     prisma.$disconnect;
-//   });
+main()
+  .catch((err) => {
+    throw new Error(err);
+  })
+  .finally(() => {
+    prisma.$disconnect();
+  });

@@ -1,13 +1,13 @@
 import { Router } from "express";
 import controller from "../controllers/users.js";
 
-const router = Router();
+const users = Router();
 
-router.route("/users").get(controller.list).post(controller.create);
-router
+users.route("/users").get(controller.list).post(controller.create);
+users
   .route("/users/:email")
   .get(controller.read)
   .put(controller.update)
   .post(controller.destroy);
 
-export default router;
+export default users;

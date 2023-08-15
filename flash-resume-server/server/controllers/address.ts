@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 const create = async (req: Request, res: Response) => {
   try {
-    const newUser = await prisma.user.create({ data: req.body });
-    res.status(201).json(newUser);
+    const newAddress = await prisma.address.create({ data: req.body });
+    res.status(201).json(newAddress);
   } catch (err) {
-    res.status(400).json({ message: `${err}address ` });
+    res.status(400).json({ message: `${err}hello` });
   } finally {
     await prisma.$disconnect();
   }
@@ -16,8 +16,8 @@ const create = async (req: Request, res: Response) => {
 
 const list = async (_: Request, res: Response) => {
   try {
-    const allUsers = await prisma.user.findMany();
-    res.status(200).json(allUsers);
+    const allAddress = await prisma.address.findMany();
+    res.status(200).json(allAddress);
   } catch (err) {
     res.status(404).json({ message: err });
   } finally {
@@ -27,13 +27,13 @@ const list = async (_: Request, res: Response) => {
 
 const read = async (req: Request, res: Response) => {
   try {
-    const { email } = req.params;
-    const user = await prisma.user.findUnique({
+    const id = Number(req.params.id);
+    const address = await prisma.address.findUnique({
       where: {
-        email,
+        id,
       },
     });
-    res.status(200).json(user);
+    res.status(200).json(address);
   } catch (err) {
     res.status(400).json({ message: err });
   } finally {
@@ -43,10 +43,10 @@ const read = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
   try {
-    const { email } = req.params;
+    const id = Number(req.params.id);
     const updates = await req.body;
-    const updatedUser = await prisma.user.update({
-      where: { email },
+    const updatedUser = await prisma.address.update({
+      where: { id },
       data: { ...updates },
     });
     res.status(200).json(updatedUser);
@@ -59,9 +59,9 @@ const update = async (req: Request, res: Response) => {
 
 const destroy = async (req: Request, res: Response) => {
   try {
-    const { email } = req.params;
-    const deletedUser = await prisma.user.delete({
-      where: { email },
+    const id = Number(req.params.id);
+    const deletedUser = await prisma.address.delete({
+      where: { id },
     });
     res.status(200).json(deletedUser);
   } catch (err) {
