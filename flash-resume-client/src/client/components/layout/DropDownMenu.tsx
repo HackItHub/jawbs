@@ -43,6 +43,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
       <div className='form-input-container items-start' role='presentation'>
         {listName}
       </div>
+      <input type='text' value={option} style={{ display: "none" }} />
       <div
         className='relative inline-block text-left mb-2 w-full'
         id={listName.toLowerCase()}

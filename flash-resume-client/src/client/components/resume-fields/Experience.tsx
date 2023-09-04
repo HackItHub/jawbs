@@ -20,7 +20,7 @@ interface AddressForm {
 interface ExperienceEntries {
   experience: string;
   title: string;
-  responsibilities: string[] | null;
+  responsibilities: string[];
   startMonth: string;
   endMonth: string;
   startYear: number | null;
@@ -61,6 +61,18 @@ const Experience: React.FC = () => {
       ...updatedExperience[index],
       [name]: value,
     };
+    setExperience(updatedExperience);
+  };
+
+  const handleAddResponsibility = (index) => {
+    const updatedExperienceWithResponsibilities = [...experience];
+    updatedExperienceWithResponsibilities[index].responsibilities.push("");
+    setExperience(updatedExperienceWithResponsibilities);
+  };
+
+  const handleResponsibilityChange = (value, parentIndex, index) => {
+    const updatedExperience = [...experience];
+    updatedExperience[parentIndex].responsibilities[index] = value;
     setExperience(updatedExperience);
   };
 
@@ -132,6 +144,30 @@ const Experience: React.FC = () => {
                 handleEntryChange(name, value, index)
               }
             />
+          </div>
+          <div className='border-2 rounded-md border-solid shadow-md border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
+            <button
+              type='button'
+              className='w-full py-4'
+              onClick={() => handleAddResponsibility(index)}
+            >
+              <div className='text-text-placeholder flex justify-center items-center gap-2'>
+                Add Responsibility
+                <IoMdAddCircle />
+              </div>
+            </button>
+            {experience[index].responsibilities.map((__, childIndex) => (
+              <FormFieldText
+                type='textarea'
+                dataId='responsibility'
+                id={`responsibility_${index}`}
+                placeholder='Managed and directed multiple departments ensuring the best technologies and agencies for fighting crime.'
+                label={`Experience ${childIndex}`}
+                onChange={(___, value) =>
+                  handleResponsibilityChange(value, index, childIndex)
+                }
+              />
+            ))}
           </div>
           <FormFieldText
             dataId='addressLine1'
