@@ -1,6 +1,7 @@
 import React from "react";
 import "./assets/styles/styles.css";
 import "./assets/styles/scrollbar.css";
+import "./assets/styles/react-spring.css";
 import { BallBackground } from "./utils";
 import { ResumeFields } from "./pages";
 

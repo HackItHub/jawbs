@@ -7,8 +7,9 @@ interface Personal {
   firstName: string;
   lastName: string;
   middleName?: string;
-  phoneNumber: string;
+  phone: string;
   email: string;
+  summary: string;
 }
 
 const Person: React.FC = () => {
@@ -16,8 +17,9 @@ const Person: React.FC = () => {
     firstName: "",
     lastName: "",
     middleName: "",
-    phoneNumber: "",
+    phone: "",
     email: "",
+    summary: "",
   });
 
   const handleChange = (name: string, value) => {
@@ -52,10 +54,10 @@ const Person: React.FC = () => {
           isRequired={REQUIRED}
         />
         <FormFieldText
-          id='phoneNumber'
-          dataId='phoneNumber'
+          id='phone'
+          dataId='phone'
           placeholder='1-800-BATMAN'
-          label='Phone Number'
+          label='Phone'
           onChange={handleChange}
           isRequired={REQUIRED}
         />
@@ -68,11 +70,20 @@ const Person: React.FC = () => {
           isRequired={REQUIRED}
           type='email'
         />
+        <FormFieldText
+          id='summary'
+          dataId='summary'
+          placeholder='Billionaire playboy philanthropist'
+          label='Summary'
+          onChange={handleChange}
+          type='textarea'
+        />
         <div className='flex justify-end'>
           <button
             type='submit'
             className='submit-button'
             aria-label='Submit Personal Information'
+            onSubmit={() => {}}
           >
             Submit
           </button>
