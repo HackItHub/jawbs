@@ -8,6 +8,6 @@ experience
   .route("/experience/:id")
   .get(controller.read)
   .put(controller.update)
-  .post(controller.destroy);
+  .delete(controller.destroy);
 
 export default experience;

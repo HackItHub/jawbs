@@ -30,7 +30,7 @@ model Address {
   line    String?
   line2   String?
   zipcode Int?
-  user    User    @relation(fields: [userId], references: [id])
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  Int     @unique
 }
 
@@ -42,7 +42,7 @@ model Experience {
   endYear          String?
   startMonth       String?
   endMonth         String?
-  user             User          @relation(fields: [userId], references: [id])
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           Int           @unique
   workAddress      WorkAddress[]
 }
@@ -55,6 +55,6 @@ model WorkAddress {
   line         String?
   line2        String?
   zipcode      Int?
-  experience   Experience @relation(fields: [experienceId], references: [id])
+  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
   experienceId Int        @unique
 }

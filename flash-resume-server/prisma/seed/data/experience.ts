@@ -7,14 +7,6 @@ const EXPERIENCE = [
     startMonth: "June",
     endMonth: "July",
     userId: 1,
-    // workAddress: {
-    //     country: "United States",
-    //     state: "CA",
-    //     city: "Irvine",
-    //     line: "345 Dream Ave",
-    //     line2: "",
-    //     zipcode: 34567
-    // }
   },
   {
     name: "NFL",
@@ -24,14 +16,6 @@ const EXPERIENCE = [
     startMonth: "January",
     endMonth: "February",
     userId: 2,
-    // workAddress: {
-    //     country: "United States",
-    //     state: "CA",
-    //     city: "Irvine",
-    //     line: "345 Dream Ave",
-    //     line2: "",
-    //     zipcode: 34567
-    // }
   },
 ];
 

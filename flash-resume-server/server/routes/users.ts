@@ -5,9 +5,9 @@ const users = Router();
 
 users.route("/users").get(controller.list).post(controller.create);
 users
-  .route("/users/:email")
+  .route("/users/:id")
   .get(controller.read)
   .put(controller.update)
-  .post(controller.destroy);
+  .delete(controller.destroy);
 
 export default users;

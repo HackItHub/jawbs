@@ -27,10 +27,10 @@ const list = async (_: Request, res: Response) => {
 
 const read = async (req: Request, res: Response) => {
   try {
-    const { email } = req.params;
+    const id = Number(req.params.id);
     const user = await prisma.user.findUnique({
       where: {
-        email,
+        id,
       },
     });
     res.status(200).json(user);
@@ -43,10 +43,10 @@ const read = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
   try {
-    const { email } = req.params;
+    const id = Number(req.params.id);
     const updates = await req.body;
     const updatedUser = await prisma.user.update({
-      where: { email },
+      where: { id },
       data: { ...updates },
     });
     res.status(200).json(updatedUser);
@@ -59,9 +59,9 @@ const update = async (req: Request, res: Response) => {
 
 const destroy = async (req: Request, res: Response) => {
   try {
-    const { email } = req.params;
+    const id = Number(req.params.id);
     const deletedUser = await prisma.user.delete({
-      where: { email },
+      where: { id },
     });
     res.status(200).json(deletedUser);
   } catch (err) {
