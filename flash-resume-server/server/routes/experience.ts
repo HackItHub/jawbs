@@ -3,7 +3,7 @@ import controller from "../controllers/experience.js";
 
 const experience = Router();
 
-experience.route("/experience").get(controller.list).post(controller.create);
+experience.route("/experience").post(controller.create);
 experience
   .route("/experience/:id")
   .get(controller.read)

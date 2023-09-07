@@ -14,17 +14,6 @@ const create = async (req: Request, res: Response) => {
   }
 };
 
-const list = async (_: Request, res: Response) => {
-  try {
-    const allAddress = await prisma.address.findMany();
-    res.status(200).json(allAddress);
-  } catch (err) {
-    res.status(404).json({ message: err });
-  } finally {
-    await prisma.$disconnect();
-  }
-};
-
 const read = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -73,7 +62,6 @@ const destroy = async (req: Request, res: Response) => {
 
 export default {
   create,
-  list,
   read,
   update,
   destroy,

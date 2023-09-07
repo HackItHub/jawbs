@@ -3,7 +3,7 @@ import controller from "../controllers/workAddress.js";
 
 const workAddress = Router();
 
-workAddress.route("/workAddress").get(controller.list).post(controller.create);
+workAddress.route("/workAddress").post(controller.create);
 workAddress
   .route("/workAddress/:id")
   .get(controller.read)
