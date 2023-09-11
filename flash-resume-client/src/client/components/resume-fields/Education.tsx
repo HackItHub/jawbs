@@ -201,7 +201,7 @@ const Education: React.FC = () => {
 
   return (
     <TransparentContainer>
-      <h3 className='flex justify-center items-center'>Education</h3>
+      <h3 className='form-title'>Education</h3>
       <form action='submit' onSubmit={handleSubmit}>
         <DropDownMenu
           placeholder='Education Level'

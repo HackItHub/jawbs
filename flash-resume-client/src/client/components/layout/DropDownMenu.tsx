@@ -40,7 +40,10 @@ const DropDownMenu: React.FC<ChildProps> = ({
 
   return (
     <div className='w-full'>
-      <div className='form-input-container items-start' role='presentation'>
+      <div
+        className='form-input-container items-start label-text'
+        role='presentation'
+      >
         {listName}
       </div>
       <div
@@ -84,7 +87,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
         >
           <OverlayScrollbarsComponent defer>
             {isOpen && (
-              <div className='max-h-96 overflow-y-auto' role='none'>
+              <div className='overflow-y-auto' role='none'>
                 {isOpen && !data.length && <Loading />}
                 {data.map((item, index) => (
                   <div

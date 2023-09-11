@@ -220,7 +220,7 @@ const Experience: React.FC = () => {
 
   return (
     <TransparentContainer>
-      <h3 className='flex justify-center items-center'>Experience</h3>
+      <h3 className='form-title'>Experience</h3>
       <form action='submit' onSubmit={handleSubmit}>
         {experience.map(addEntry)}
         <div className='border-2 rounded-md border-solid shadow-md border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>

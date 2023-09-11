@@ -35,7 +35,7 @@ const FormFieldText: React.FC<Props> = ({
     <div className='mb-2'>
       {type === "textarea" ? (
         <label htmlFor={id} className='form-input-container'>
-          <div className='flex justify-start items-center'>{label}</div>
+          <div className='label-text'>{label}</div>
           <textarea
             id={id}
             onChange={handleTextAreaInput}
@@ -48,7 +48,7 @@ const FormFieldText: React.FC<Props> = ({
         </label>
       ) : (
         <label htmlFor={id} className='form-input-container'>
-          <div className='flex justify-start items-center'>{label}</div>
+          <div className='label-text'>{label}</div>
           <input
             id={id}
             onChange={handleInput}

@@ -31,7 +31,7 @@ const Address: React.FC = () => {
 
   return (
     <TransparentContainer>
-      <h3>Address</h3>
+      <h2 className='form-title'>Address</h2>
       <form action='submit'>
         <FormFieldText
           id='addressLine1'
@@ -54,32 +54,22 @@ const Address: React.FC = () => {
           label='City'
           onChange={handleChange}
         />
-        <div>
-          <div className='form-input-container' role='presentation'>
-            State
-            <DropDownMenu
-              placeholder='-Some state in the DC Universe-'
-              data={STATES}
-              id='state'
-              dataId='state'
-              listName='State'
-              handleInput={handleChange}
-            />
-          </div>
-        </div>
-        <div>
-          <div className='form-input-container' role='presentation'>
-            Country
-            <DropDownMenu
-              placeholder='-Some country in the DC Universe-'
-              data={COUNTRIES}
-              listName='Country'
-              id='country'
-              dataId='country'
-              handleInput={handleChange}
-            />
-          </div>
-        </div>
+        <DropDownMenu
+          placeholder='-Some state in the DC Universe-'
+          data={STATES}
+          id='state'
+          dataId='state'
+          listName='State'
+          handleInput={handleChange}
+        />
+        <DropDownMenu
+          placeholder='-Some country in the DC Universe-'
+          data={COUNTRIES}
+          listName='Country'
+          id='country'
+          dataId='country'
+          handleInput={handleChange}
+        />
         <FormFieldText
           id='zipcode'
           dataId='zipcode'
@@ -90,7 +80,7 @@ const Address: React.FC = () => {
         <div className='flex justify-end'>
           <button
             type='submit'
-            className='submit-button'
+            className='submit-button text-[16px]'
             aria-label='Submit Personal Information'
           >
             Submit

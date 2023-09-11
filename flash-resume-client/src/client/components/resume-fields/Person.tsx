@@ -28,7 +28,7 @@ const Person: React.FC = () => {
 
   return (
     <TransparentContainer>
-      <h3> Personal Information </h3>
+      <h3 className='form-title'>Personal Information</h3>
       <form action='submit'>
         <FormFieldText
           id='firstName'
@@ -81,7 +81,7 @@ const Person: React.FC = () => {
         <div className='flex justify-end'>
           <button
             type='submit'
-            className='submit-button'
+            className='submit-button text-[16px]'
             aria-label='Submit Personal Information'
             onSubmit={() => {}}
           >
