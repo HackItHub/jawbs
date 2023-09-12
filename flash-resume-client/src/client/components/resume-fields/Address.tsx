@@ -11,7 +11,11 @@ export interface AddressForm {
   country?: string;
 }
 
-const Address: React.FC = () => {
+type Props = {
+  handleFormChange: () => void;
+};
+
+const Address: React.FC<Props> = ({ handleFormChange }) => {
   const [addressForm, setAddressForm] = useState<AddressForm>({
     addressLine1: "",
     addressLine2: "",
@@ -82,6 +86,7 @@ const Address: React.FC = () => {
             type='submit'
             className='submit-button text-[16px]'
             aria-label='Submit Personal Information'
+            onSubmit={() => handleFormChange()}
           >
             Submit
           </button>

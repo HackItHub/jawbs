@@ -28,7 +28,11 @@ interface ExperienceEntries {
   address?: AddressForm;
 }
 
-const Experience: React.FC = () => {
+type Props = {
+  handleFormChange: () => void;
+};
+
+const Experience: React.FC<Props> = ({ handleFormChange }) => {
   const [experience, setExperience] = useState<ExperienceEntries[]>([
     {
       experience: "",
@@ -236,7 +240,11 @@ const Experience: React.FC = () => {
           </button>
         </div>
         <div className='flex justify-end items-center'>
-          <button type='submit' className='submit-button'>
+          <button
+            type='submit'
+            className='submit-button'
+            onSubmit={() => handleFormChange}
+          >
             Next
           </button>
         </div>

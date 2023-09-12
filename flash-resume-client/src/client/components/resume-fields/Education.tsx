@@ -28,6 +28,10 @@ export interface School {
   address?: AddressForm;
 }
 
+type Props = {
+  handleFormChange: () => void;
+};
+
 const EDUCATION_LEVEL = [
   "No formal education",
   "Less than high school",
@@ -38,7 +42,7 @@ const EDUCATION_LEVEL = [
   "Trade school or other",
 ];
 
-const Education: React.FC = () => {
+const Education: React.FC<Props> = ({ handleFormChange }) => {
   const [education, setEducation] = useState<School[]>([
     {
       school: "",
@@ -225,7 +229,11 @@ const Education: React.FC = () => {
           </button>
         </div>
         <div className='flex justify-end items-center'>
-          <button type='submit' className='submit-button'>
+          <button
+            type='submit'
+            className='submit-button'
+            onSubmit={() => handleFormChange()}
+          >
             Next
           </button>
         </div>

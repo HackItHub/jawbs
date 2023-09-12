@@ -12,7 +12,11 @@ interface Personal {
   summary: string;
 }
 
-const Person: React.FC = () => {
+type Props = {
+  handleFormChange: () => void;
+};
+
+const Person: React.FC<Props> = ({ handleFormChange }) => {
   const [person, setPerson] = useState<Personal>({
     firstName: "",
     lastName: "",
@@ -83,7 +87,9 @@ const Person: React.FC = () => {
             type='submit'
             className='submit-button text-[16px]'
             aria-label='Submit Personal Information'
-            onSubmit={() => {}}
+            onSubmit={() => {
+              handleFormChange();
+            }}
           >
             Submit
           </button>
