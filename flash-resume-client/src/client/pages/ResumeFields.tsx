@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import "../assets/styles/form.css";
-import {
-  Experience,
-  Person,
-  Address,
-  Education,
-} from "../components/resume-fields";
+import { Education } from "../components/resume-fields";
 
 const ResumeFields: React.FC = () => {
   const [formIndex, setFormIndex] = useState(0);
@@ -16,7 +11,7 @@ const ResumeFields: React.FC = () => {
 
   return (
     <motion.div animate={{ translateX: "20px" }}>
-      <Address handleFormChange={handleFormChange} />
+      <Education handleFormChange={handleFormChange} />
     </motion.div>
   );
 };

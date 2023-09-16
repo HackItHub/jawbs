@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
+import { BsTrashFill } from "react-icons/bs";
 import { DropDownMenu, FormFieldText, TransparentContainer } from "../layout";
 import {
   MONTHS,
@@ -42,6 +43,12 @@ const EDUCATION_LEVEL = [
   "Trade school or other",
 ];
 
+const removeEducationStyle = {
+  color: "#E42217",
+  width: "20px",
+  height: "20px",
+};
+
 const Education: React.FC<Props> = ({ handleFormChange }) => {
   const [education, setEducation] = useState<School[]>([
     {
@@ -55,7 +62,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
   ]);
   const [educationLevel, setEducationLevel] = useState<string>("");
 
-  const handleEducationLevel = (__, value: string) => {
+  const handleEducationLevel = (value: string) => {
     setEducationLevel(value);
   };
 
@@ -86,6 +93,14 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
         endYear: CURRENT_YEAR,
       },
     ]);
+    // eslint-disable-next-line
+    console.log(educationLevel);
+  };
+
+  const handleRemoveEducationKeyDown = (event: React.KeyboardEvent, index) => {
+    if (event.key === "Enter" || event.key === " ") {
+      handleRemoveEducation(index);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -94,7 +109,16 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
 
   const addEntry = (_, index: number) => {
     return (
-      <div className='border-2 shadow-md rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
+      <div className='border-2 shadow-md relative rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-3 mb-2'>
+        <div
+          className='absolute top-[10px] right-[10px] z-10'
+          onClick={() => handleRemoveEducation(index)}
+          onKeyDown={(e) => handleRemoveEducationKeyDown(e, index)}
+          role='button'
+          tabIndex={0}
+        >
+          <BsTrashFill style={removeEducationStyle} />
+        </div>
         <div>
           <FormFieldText
             dataId='school'
@@ -213,7 +237,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
           listName='Highest level of education'
           dataId='educationLevel'
           id='educationLevel'
-          handleInput={handleEducationLevel}
+          handleInput={(_, value) => handleEducationLevel(value)}
         />
         {education.map(addEntry)}
         <div className='border-2 rounded-md border-solid shadow-md border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>

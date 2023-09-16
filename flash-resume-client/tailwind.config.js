@@ -14,6 +14,7 @@ module.exports = {
       yellow: "#FCBC0F",
       orange: "#F85F36",
       white: "#FFFFFF",
+      red: "#E42217",
       "text-placeholder": "#9BA3AF",
       "transparent-background": "#F8F8F8",
     },
