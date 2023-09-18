@@ -42,6 +42,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           dataId='addressLine1'
           placeholder='1007 Mountain Drive'
           label='Address Line 1'
+          value={addressForm.addressLine1}
           onChange={handleChange}
         />
         <FormFieldText
@@ -49,12 +50,14 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           dataId='addressLine2'
           placeholder='Bat Cave Way'
           label='Address Line 2'
+          value={addressForm.addressLine2}
           onChange={handleChange}
         />
         <FormFieldText
           id='city'
           dataId='city'
           placeholder='Gotham City'
+          value={addressForm.city}
           label='City'
           onChange={handleChange}
         />
@@ -64,6 +67,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           id='state'
           dataId='state'
           listName='State'
+          value={addressForm.state}
           handleInput={handleChange}
         />
         <DropDownMenu
@@ -72,6 +76,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           listName='Country'
           id='country'
           dataId='country'
+          value={addressForm.country}
           handleInput={handleChange}
         />
         <FormFieldText
@@ -79,6 +84,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           dataId='zipcode'
           placeholder='6002318'
           label='Zip Code'
+          value={addressForm.zipCode}
           onChange={handleChange}
         />
         <div className='flex justify-end'>
