@@ -40,6 +40,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           placeholder='Bruce'
           label='First Name'
           onChange={handleChange}
+          value={person.firstName}
           isRequired={REQUIRED}
         />
         <FormFieldText
@@ -47,6 +48,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           dataId='middleName'
           placeholder='Thomas'
           label='Middle Name'
+          value={person.middleName}
           onChange={handleChange}
         />
         <FormFieldText
@@ -54,6 +56,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           dataId='lastName'
           placeholder='Wayne'
           label='Last Name'
+          value={person.lastName}
           onChange={handleChange}
           isRequired={REQUIRED}
         />
@@ -62,6 +65,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           dataId='phone'
           placeholder='1-800-BATMAN'
           label='Phone'
+          value={person.phone}
           onChange={handleChange}
           isRequired={REQUIRED}
         />
@@ -71,6 +75,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           placeholder='definitelynotbatman@waynecorp.org'
           label='Email'
           onChange={handleChange}
+          value={person.email}
           isRequired={REQUIRED}
           type='email'
         />
@@ -80,6 +85,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           placeholder='Billionaire playboy philanthropist'
           label='Summary'
           onChange={handleChange}
+          value={person.summary}
           type='textarea'
         />
         <div className='flex justify-end'>
