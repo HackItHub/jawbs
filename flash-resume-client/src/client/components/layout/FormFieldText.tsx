@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface Props {
   placeholder: string;
@@ -8,6 +8,7 @@ interface Props {
   id: string;
   type?: string;
   dataId: string;
+  value?: any;
 }
 
 const FormFieldText: React.FC<Props> = ({
@@ -18,19 +19,18 @@ const FormFieldText: React.FC<Props> = ({
   id,
   type,
   dataId,
+  value,
 }) => {
-  const [input, setInput] = useState("");
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setInput(value);
-    onChange(dataId, value);
+    const { value: inputValue } = e.target;
+    onChange(dataId, inputValue);
   };
 
   const handleTextAreaInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = e.target;
-    setInput(value);
-    onChange(dataId, value);
+    const { value: inputValue } = e.target;
+    onChange(dataId, inputValue);
   };
+
   return (
     <div className='mb-2'>
       {type === "textarea" ? (
@@ -43,7 +43,7 @@ const FormFieldText: React.FC<Props> = ({
             placeholder={placeholder}
             aria-required={isRequired}
             required={isRequired}
-            value={input}
+            value={value}
           />
         </label>
       ) : (
@@ -56,7 +56,7 @@ const FormFieldText: React.FC<Props> = ({
             placeholder={placeholder}
             aria-required={isRequired}
             required={isRequired}
-            value={input}
+            value={value}
             type={type}
           />
         </label>
@@ -68,6 +68,7 @@ const FormFieldText: React.FC<Props> = ({
 FormFieldText.defaultProps = {
   type: "text",
   isRequired: false,
+  value: "",
 };
 
 export default FormFieldText;

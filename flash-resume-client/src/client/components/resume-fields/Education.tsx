@@ -11,22 +11,22 @@ import {
 } from "../../utils/Constants";
 
 export interface AddressForm {
-  addressLine1: string;
-  addressLine2: string;
-  zipCode: string;
-  city: string;
-  state: string;
-  country: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  zipCode?: string;
+  city?: string;
+  state?: string;
+  country?: string;
 }
 
 export interface School {
   school: string;
   startMonth: string;
   endMonth?: string;
-  startYear: number;
+  startYear: number | string;
   endYear?: number | string;
   diploma?: string;
-  address?: AddressForm;
+  address: AddressForm;
 }
 
 type Props = {
@@ -58,6 +58,14 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
       endMonth: "",
       startYear: 0,
       endYear: 0,
+      address: {
+        addressLine1: "",
+        addressLine2: "",
+        zipCode: "",
+        city: "",
+        state: "",
+        country: "",
+      },
     },
   ]);
   const [educationLevel, setEducationLevel] = useState<string>("");
@@ -89,12 +97,18 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
         diploma: "",
         startMonth: "",
         endMonth: "",
-        startYear: CURRENT_YEAR - 4,
-        endYear: CURRENT_YEAR,
+        startYear: 0,
+        endYear: 0,
+        address: {
+          addressLine1: "",
+          addressLine2: "",
+          zipCode: "",
+          city: "",
+          state: "",
+          country: "",
+        },
       },
     ]);
-    // eslint-disable-next-line
-    console.log(educationLevel);
   };
 
   const handleRemoveEducationKeyDown = (event: React.KeyboardEvent, index) => {
@@ -125,6 +139,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             id={`eduction_${index}`}
             label='Institution'
             placeholder='Princeton High'
+            value={education[index].school}
             onChange={(name, value) => handleEntryChange(name, value, index)}
           />
           <FormFieldText
@@ -132,6 +147,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             id={`diploma_${index}`}
             label='Diploma/Certificates'
             placeholder='Diploma'
+            value={education[index].diploma}
             onChange={(name, value) => handleEntryChange(name, value, index)}
           />
           <div className='flex w-full justify-between items-center gap-4'>
@@ -140,6 +156,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
               data={MONTHS}
               listName='Start month'
               dataId='startMonth'
+              value={education[index].startMonth}
               id={`startMonth_${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
@@ -151,6 +168,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
               listName='End month'
               dataId='endMonth'
               id={`endMonth_${index}`}
+              value={education[index].endMonth}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
@@ -163,6 +181,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
               listName='Start year'
               dataId='startYear'
               id={`startYear_${index}`}
+              value={education[index].startYear}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
@@ -172,6 +191,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
               data={range(CURRENT_YEAR, CURRENT_YEAR - 58, -1)}
               listName='End year'
               dataId='endYear'
+              value={education[index].endYear}
               id={`endYear_${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
@@ -183,11 +203,13 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             id={`addressLine1_${index}`}
             placeholder='1007 Mountain Drive'
             label='Address Line 1'
+            value={education[index].address.addressLine1}
             onChange={(name, value) => handleEntryChange(name, value, index)}
           />
           <FormFieldText
             dataId='addressLine2'
             id={`addressLine2_${index}`}
+            value={education[index].address.addressLine2}
             placeholder='Bat Cave Way'
             label='Address Line 2'
             onChange={(name, value) => handleEntryChange(name, value, index)}
@@ -197,6 +219,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             dataId={`city_${index}`}
             placeholder='Gotham City'
             label='City'
+            value={education[index].address.city}
             onChange={(name, value) => handleEntryChange(name, value, index)}
           />
           <DropDownMenu
@@ -204,6 +227,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             data={STATES}
             id={`state_${index}`}
             dataId='state'
+            value={education[index].address.state}
             listName='State'
             handleInput={(name, value) => handleEntryChange(name, value, index)}
           />
@@ -212,6 +236,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             data={COUNTRIES}
             listName='Country'
             dataId='country'
+            value={education[index].address.country}
             id={`country_${index}`}
             handleInput={(name, value) => handleEntryChange(name, value, index)}
           />
@@ -220,6 +245,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             dataId='zipcode'
             placeholder='6002318'
             label='Zip Code'
+            value={education[index].address.zipCode}
             onChange={(name, value) => handleEntryChange(name, value, index)}
           />
         </div>
@@ -237,6 +263,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
           listName='Highest level of education'
           dataId='educationLevel'
           id='educationLevel'
+          value={educationLevel}
           handleInput={(_, value) => handleEducationLevel(value)}
         />
         {education.map(addEntry)}

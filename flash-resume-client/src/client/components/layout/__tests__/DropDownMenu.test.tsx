@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import DropDownMenu from "../DropDownMenu";
 
@@ -60,16 +60,23 @@ describe("dropdown", () => {
   });
 
   it("populates button with clicked on option and closes dropdown", () => {
-    render(
-      <DropDownMenu
-        data={["test 1", "test 2", "test 3"]}
-        listName='list name'
-        handleInput={() => {}}
-        placeholder='gotham'
-        id='listName'
-        dataId='listName'
-      />,
-    );
+    const TestFormContainer: React.FC = () => {
+      const [option, setOption] = useState("");
+      return (
+        <DropDownMenu
+          data={["test 1", "test 2", "test 3"]}
+          listName='list name'
+          value={option}
+          handleInput={(_, value) => {
+            setOption(value);
+          }}
+          placeholder='gotham'
+          id='listName'
+          dataId='listName'
+        />
+      );
+    };
+    render(<TestFormContainer />);
     const dropdownElement = screen.getByText("gotham");
 
     fireEvent.click(dropdownElement);

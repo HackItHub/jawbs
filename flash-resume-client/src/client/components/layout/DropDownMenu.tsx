@@ -9,6 +9,7 @@ interface ChildProps {
   placeholder: string;
   id: string;
   dataId: string;
+  value?: any;
 }
 
 const DropDownMenu: React.FC<ChildProps> = ({
@@ -18,6 +19,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
   placeholder,
   id,
   dataId,
+  value,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [option, setOption] = useState("");
@@ -26,15 +28,15 @@ const DropDownMenu: React.FC<ChildProps> = ({
     setIsOpen(!isOpen);
   };
 
-  const handleOptions = (value) => {
+  const handleOptions = (inputValue) => {
     setIsOpen(!isOpen);
-    setOption(value);
-    handleInput(dataId, value);
+    setOption(inputValue);
+    handleInput(dataId, inputValue);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent, value) => {
+  const handleKeyDown = (event: React.KeyboardEvent, inputValue) => {
     if (event.key === "Enter" || event.key === " ") {
-      handleOptions(value);
+      handleOptions(inputValue);
     }
   };
 
@@ -60,7 +62,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
             aria-haspopup='true'
           >
             {option ? (
-              <div>{option}</div>
+              <div>{value}</div>
             ) : (
               <div className='text-[rgb(155,163,175)]'>{placeholder}</div>
             )}
@@ -112,6 +114,10 @@ const DropDownMenu: React.FC<ChildProps> = ({
       </div>
     </div>
   );
+};
+
+DropDownMenu.defaultProps = {
+  value: "",
 };
 
 export default DropDownMenu;
