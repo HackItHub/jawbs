@@ -33,10 +33,15 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
     }
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleFormChange();
+  };
+
   return (
     <TransparentContainer>
       <h2 className='form-title'>Address</h2>
-      <form action='submit'>
+      <form action='submit' onSubmit={handleSubmit}>
         <FormFieldText
           id='addressLine1'
           dataId='addressLine1'
@@ -81,7 +86,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
         />
         <FormFieldText
           id='zipcode'
-          dataId='zipcode'
+          dataId='zipCode'
           placeholder='6002318'
           label='Zip Code'
           value={addressForm.zipCode}

@@ -30,10 +30,15 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
     setPerson({ ...person, [name]: value });
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleFormChange();
+  };
+
   return (
     <TransparentContainer>
       <h3 className='form-title'>Personal Information</h3>
-      <form action='submit'>
+      <form action='submit' onSubmit={handleSubmit}>
         <FormFieldText
           id='firstName'
           dataId='firstName'
@@ -93,9 +98,6 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
             type='submit'
             className='submit-button text-[16px]'
             aria-label='Submit Personal Information'
-            onSubmit={() => {
-              handleFormChange();
-            }}
           >
             Submit
           </button>

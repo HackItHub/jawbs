@@ -119,6 +119,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    handleFormChange();
   };
 
   const addEntry = (_, index: number) => {

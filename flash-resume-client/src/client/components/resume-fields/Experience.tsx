@@ -82,9 +82,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    //  eslint-disable-next-line
-    console.log(experience);
+    handleFormChange();
   };
 
   const addEntry = (_, index: number) => {
@@ -240,11 +238,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
           </button>
         </div>
         <div className='flex justify-end items-center'>
-          <button
-            type='submit'
-            className='submit-button'
-            onSubmit={() => handleFormChange}
-          >
+          <button type='submit' className='submit-button'>
             Next
           </button>
         </div>
