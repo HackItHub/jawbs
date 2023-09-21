@@ -11,10 +11,50 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  firstName String?
-  lastName  String?
-  phone     String
-  email     String   @unique
-  createdAt DateTime @default(now())
+  id         Int          @id @default(autoincrement())
+  firstName  String?
+  lastName   String?
+  phone      String?
+  email      String?      @unique
+  summary    String?
+  address    Address[]
+  experience Experience[]
+  createdAt  DateTime     @default(now())
+}
+
+model Address {
+  id      Int     @id @default(autoincrement())
+  country String?
+  state   String?
+  city    String?
+  line    String?
+  line2   String?
+  zipcode Int?
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  Int     @unique
+}
+
+model Experience {
+  id               Int           @id @default(autoincrement())
+  name             String?
+  responsabilities String[]
+  startYear        String?
+  endYear          String?
+  startMonth       String?
+  endMonth         String?
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           Int           @unique
+  workAddress      WorkAddress[]
+}
+
+model WorkAddress {
+  id           Int        @id @default(autoincrement())
+  country      String?
+  state        String?
+  city         String?
+  line         String?
+  line2        String?
+  zipcode      Int?
+  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  experienceId Int        @unique
 }

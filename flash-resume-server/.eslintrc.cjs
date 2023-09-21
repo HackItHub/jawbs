@@ -34,6 +34,7 @@ module.exports = {
         avoidEscape: true,
       },
     ],
+    "func-names": ["warn", "never"],
     "no-console": "error",
     "no-shadow": "off",
     "import/no-extraneous-dependencies": "off",
