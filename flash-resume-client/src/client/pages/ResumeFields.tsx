@@ -18,10 +18,10 @@ const ResumeFields: React.FC = () => {
     <div className='flex justify-center items-center py-10'>
       <AnimatePresence mode='wait'>
         <motion.div
-          key={`form-${formIndex}`} // Use a dynamic key based on formIndex
-          initial={{ x: "-100%" }} // Start form off-screen to the right
-          animate={{ x: 0 }} // Animate it to x: 0 (center)
-          exit={{ x: "100%" }} // Animate it off-screen to the left when exiting
+          key={`form-${formIndex}`}
+          initial={{ x: "-100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
           transition={{ type: "tween", duration: 0.25 }} // Customize the transition
         >
           {formIndex === 0 && <Person handleFormChange={handleFormChange} />}
