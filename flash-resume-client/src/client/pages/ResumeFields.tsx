@@ -15,44 +15,24 @@ const ResumeFields: React.FC = () => {
   };
 
   return (
-    <>
-      <AnimatePresence>
+    <div className='flex justify-center items-center py-10'>
+      <AnimatePresence mode='wait'>
         <motion.div
-          animate={{ x: 0 }}
-          initial={{ x: "-100%" }}
-          exit={{ x: "100%" }}
+          key={`form-${formIndex}`} // Use a dynamic key based on formIndex
+          initial={{ x: "-100%" }} // Start form off-screen to the right
+          animate={{ x: 0 }} // Animate it to x: 0 (center)
+          exit={{ x: "100%" }} // Animate it off-screen to the left when exiting
+          transition={{ type: "tween", duration: 0.25 }} // Customize the transition
         >
-          <Person handleFormChange={handleFormChange} />
+          {formIndex === 0 && <Person handleFormChange={handleFormChange} />}
+          {formIndex === 1 && <Address handleFormChange={handleFormChange} />}
+          {formIndex === 2 && <Education handleFormChange={handleFormChange} />}
+          {formIndex === 3 && (
+            <Experience handleFormChange={handleFormChange} />
+          )}
         </motion.div>
       </AnimatePresence>
-      <AnimatePresence>
-        <motion.div
-          animate={{ x: 0 }}
-          initial={{ x: "-100%" }}
-          exit={{ x: "100%" }}
-        >
-          <Address handleFormChange={handleFormChange} />
-        </motion.div>
-      </AnimatePresence>
-      <AnimatePresence>
-        <motion.div
-          animate={{ x: 0 }}
-          initial={{ x: "-100%" }}
-          exit={{ x: "100%" }}
-        >
-          <Education handleFormChange={handleFormChange} />
-        </motion.div>
-      </AnimatePresence>
-      <AnimatePresence>
-        <motion.div
-          animate={{ x: 0 }}
-          initial={{ x: "-100%" }}
-          exit={{ x: "100%" }}
-        >
-          <Experience handleFormChange={handleFormChange} />
-        </motion.div>
-      </AnimatePresence>
-    </>
+    </div>
   );
 };
 
