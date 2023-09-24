@@ -16,15 +16,16 @@ const create = async (req: Request, res: Response) => {
 
 const read = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
-    const user = await prisma.user.findUnique({
-      where: {
-        id,
-      },
-    });
-    res.status(200).json(user);
+    // const id = Number(req.params.id);
+    // const user = await prisma.user.findUnique({
+    //   where: {
+    //     id,
+    //   },
+    // });
+    const userInformation = await prisma.user.findMany();
+    res.status(200).json(userInformation);
   } catch (err) {
-    res.status(400).json({ message: err });
+    res.status(400).json({ message: `${err}, "test"` });
   } finally {
     await prisma.$disconnect();
   }
