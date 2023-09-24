@@ -2,4 +2,4 @@
 dist*
 node_modules*
 __snapshots__
-flash-resume-server/prisma/migrations
+flash-resume-server/prisma/migrations/
