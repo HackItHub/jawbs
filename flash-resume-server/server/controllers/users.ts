@@ -6,7 +6,7 @@ const create = async (req: Request, res: Response) => {
     const newUser = await prisma.user.create({ data: req.body });
     res.status(201).json(newUser);
   } catch (err) {
-    res.status(400).json({ message: `${err}address ` });
+    res.status(400).json({ message: err });
   } finally {
     await prisma.$disconnect();
   }
@@ -22,7 +22,7 @@ const read = async (req: Request, res: Response) => {
     });
     res.status(200).json(user);
   } catch (err) {
-    res.status(400).json({ message: `${err}, "test"` });
+    res.status(400).json({ message: err });
   } finally {
     await prisma.$disconnect();
   }
@@ -33,7 +33,7 @@ const readAll = async (req: Request, res: Response) => {
     const user = await prisma.user.findMany();
     res.status(200).json(user);
   } catch (err) {
-    res.status(400).json({ message: `${err}, "test"` });
+    res.status(400).json({ message: err });
   } finally {
     await prisma.$disconnect();
   }
