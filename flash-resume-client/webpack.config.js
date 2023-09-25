@@ -2,8 +2,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
-module.exports = [
-  {
+module.exports = (env) => {
+  return {
     entry: ["./src/client/index.tsx"],
     mode: "development",
     target: "web",
@@ -14,6 +14,9 @@ module.exports = [
     devServer: {
       port: 3000,
       host: "0.0.0.0",
+      proxy: {
+        "/": `http://api:3001`,
+      },
       hot: true,
     },
     watchOptions: {
@@ -63,4 +66,4 @@ module.exports = [
       ],
     },
   },
-];
+}
