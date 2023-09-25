@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import FormFieldText from "../layout/FormFieldText";
 import { REQUIRED } from "../../utils/Constants";
 import { TransparentContainer } from "../layout";
@@ -30,9 +31,15 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
     setPerson({ ...person, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleFormChange();
+    try {
+      await axios.post("/users", person);
+    } catch {
+      // eslint-disable-next-line
+      console.log("something went wrong");
+    }
   };
 
   return (

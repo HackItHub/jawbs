@@ -30,6 +30,17 @@ const read = async (req: Request, res: Response) => {
   }
 };
 
+const readAll = async (req: Request, res: Response) => {
+  try {
+    const user = await prisma.user.findMany();
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).json({ message: `${err}, "test"` });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
 const update = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -63,6 +74,7 @@ const destroy = async (req: Request, res: Response) => {
 export default {
   create,
   read,
+  readAll,
   update,
   destroy,
 };

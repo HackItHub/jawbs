@@ -14,6 +14,7 @@ model User {
   id         Int          @id @default(autoincrement())
   firstName  String?
   lastName   String?
+  middleName String?
   phone      String?
   email      String?      @unique
   summary    String?
@@ -27,9 +28,9 @@ model Address {
   country String?
   state   String?
   city    String?
-  line    String?
-  line2   String?
-  zipcode Int?
+  addressLine1    String?
+  addressLine2   String?
+  zipCode Int?
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  Int     @unique
 }
@@ -37,7 +38,7 @@ model Address {
 model Experience {
   id               Int           @id @default(autoincrement())
   name             String?
-  responsabilities String[]
+  responsibilities String[]
   startYear        String?
   endYear          String?
   startMonth       String?
@@ -52,9 +53,9 @@ model WorkAddress {
   country      String?
   state        String?
   city         String?
-  line         String?
-  line2        String?
-  zipcode      Int?
+  addressLine1         String?
+  addressLine2        String?
+  zipCode      Int?
   experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
   experienceId Int        @unique
 }

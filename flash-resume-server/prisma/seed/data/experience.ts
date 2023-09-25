@@ -1,7 +1,7 @@
 const EXPERIENCE = [
   {
     name: "NBA",
-    responsabilities: ["Dunk", "Pass", "Shoot"],
+    responsibilities: ["Dunk", "Pass", "Shoot"],
     startYear: "2000",
     endYear: "2020",
     startMonth: "June",
@@ -10,7 +10,7 @@ const EXPERIENCE = [
   },
   {
     name: "NFL",
-    responsabilities: ["Tackle", "Pass", "Run"],
+    responsibilities: ["Tackle", "Pass", "Run"],
     startYear: "1999",
     endYear: "2019",
     startMonth: "January",
