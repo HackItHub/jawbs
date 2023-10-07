@@ -27,15 +27,37 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
     summary: "",
   });
 
+  const [errors, setErrors] = useState<Partial<Personal>>({});
+
   const handleChange = (name: string, value) => {
+    setErrors({ ...errors, [name]: "" });
     setPerson({ ...person, [name]: value });
+  };
+
+  const hasErrors = () => {
+    const formErrors: Partial<Personal> = {};
+    if (!person.firstName) formErrors.firstName = "First Name is required";
+    if (!person.lastName) formErrors.lastName = "Last Name is required";
+    if (!person.phone) formErrors.phone = "Phone is required";
+    if (!person.email) formErrors.email = "Email is required";
+
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return true;
+    }
+    return false;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleFormChange();
+
+    if (hasErrors()) {
+      return;
+    }
+
     try {
       await axios.post("/users", person);
+      handleFormChange();
     } catch {
       // eslint-disable-next-line
       console.log("something went wrong");
