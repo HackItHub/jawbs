@@ -1,4 +1,6 @@
 import React from "react";
+import { AiFillWarning } from "react-icons/ai";
+import { WARNING_STYLE } from "../../utils/Constants";
 
 interface Props {
   placeholder: string;
@@ -9,6 +11,7 @@ interface Props {
   type?: string;
   dataId: string;
   value?: any;
+  errorMessage?: string | undefined;
 }
 
 const FormFieldText: React.FC<Props> = ({
@@ -20,6 +23,7 @@ const FormFieldText: React.FC<Props> = ({
   type,
   dataId,
   value,
+  errorMessage,
 }) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value: inputValue } = e.target;
@@ -39,7 +43,9 @@ const FormFieldText: React.FC<Props> = ({
           <textarea
             id={id}
             onChange={handleTextAreaInput}
-            className='rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 text-input'
+            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
+              errorMessage ? " border-red border-2 border-solid " : " ring-1 "
+            } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
             placeholder={placeholder}
             aria-required={isRequired}
             required={isRequired}
@@ -52,7 +58,9 @@ const FormFieldText: React.FC<Props> = ({
           <input
             id={id}
             onChange={handleInput}
-            className='rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 text-input'
+            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
+              errorMessage ? " border-red border-2 border-solid " : " ring-1 "
+            } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
             placeholder={placeholder}
             aria-required={isRequired}
             required={isRequired}
@@ -60,6 +68,12 @@ const FormFieldText: React.FC<Props> = ({
             type={type}
           />
         </label>
+      )}
+      {errorMessage && (
+        <div className='flex pt-1'>
+          <AiFillWarning style={WARNING_STYLE} />
+          <div className='text-red text-sm'>{errorMessage}</div>
+        </div>
       )}
     </div>
   );
@@ -69,6 +83,7 @@ FormFieldText.defaultProps = {
   type: "text",
   isRequired: false,
   value: "",
+  errorMessage: "",
 };
 
 export default FormFieldText;

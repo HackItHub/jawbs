@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import FormFieldText from "../layout/FormFieldText";
-import { REQUIRED } from "../../utils/Constants";
 import { TransparentContainer } from "../layout";
 
 interface Personal {
@@ -75,7 +74,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           label='First Name'
           onChange={handleChange}
           value={person.firstName}
-          isRequired={REQUIRED}
+          errorMessage={errors.firstName}
         />
         <FormFieldText
           id='middleName'
@@ -92,7 +91,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           label='Last Name'
           value={person.lastName}
           onChange={handleChange}
-          isRequired={REQUIRED}
+          errorMessage={errors.lastName}
         />
         <FormFieldText
           id='phone'
@@ -101,7 +100,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           label='Phone'
           value={person.phone}
           onChange={handleChange}
-          isRequired={REQUIRED}
+          errorMessage={errors.phone}
         />
         <FormFieldText
           id='email'
@@ -110,8 +109,8 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           label='Email'
           onChange={handleChange}
           value={person.email}
-          isRequired={REQUIRED}
           type='email'
+          errorMessage={errors.lastName}
         />
         <FormFieldText
           id='summary'

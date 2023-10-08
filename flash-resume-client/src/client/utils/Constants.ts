@@ -326,4 +326,19 @@ const CURRENT_YEAR = new Date().getFullYear();
 const range = (start: number, stop: number, step: number) =>
   Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
 
-export { STATES, COUNTRIES, REQUIRED, MONTHS, range, CURRENT_YEAR };
+const WARNING_STYLE = {
+  color: "#E42217",
+  width: "20px",
+  height: "20px",
+  marginRight: "5px",
+};
+
+export {
+  STATES,
+  COUNTRIES,
+  REQUIRED,
+  MONTHS,
+  range,
+  CURRENT_YEAR,
+  WARNING_STYLE,
+};

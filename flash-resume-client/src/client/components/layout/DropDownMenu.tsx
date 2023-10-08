@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import { AiFillWarning } from "react-icons/ai";
+import { WARNING_STYLE } from "../../utils/Constants";
 import Loading from "./Loading";
 
 interface ChildProps {
@@ -10,6 +12,7 @@ interface ChildProps {
   id: string;
   dataId: string;
   value?: any;
+  errorMessage?: string | undefined;
 }
 
 const DropDownMenu: React.FC<ChildProps> = ({
@@ -20,6 +23,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
   id,
   dataId,
   value,
+  errorMessage,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [option, setOption] = useState("");
@@ -56,7 +60,9 @@ const DropDownMenu: React.FC<ChildProps> = ({
           <button
             onClick={handleDropDownMenu}
             type='button'
-            className='flex w-full justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
+            className={`flex w-full justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
+              errorMessage ? "border-red border-1 border-solid" : "ring-1"
+            } ring-inset ring-gray-300 hover:bg-gray-50`}
             id='menu-button'
             aria-expanded={isOpen}
             aria-haspopup='true'
@@ -80,6 +86,12 @@ const DropDownMenu: React.FC<ChildProps> = ({
             </svg>
           </button>
         </div>
+        {errorMessage && (
+          <div className='flex'>
+            <AiFillWarning style={WARNING_STYLE} />
+            <div className='text-red text-sm'>{errorMessage}</div>
+          </div>
+        )}
         <div
           className='absolute w-full right-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg focus:outline-none'
           role='menu'
@@ -110,6 +122,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
               </div>
             )}
           </OverlayScrollbarsComponent>
+          d
         </div>
       </div>
     </div>
@@ -118,6 +131,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
 
 DropDownMenu.defaultProps = {
   value: "",
+  errorMessage: "",
 };
 
 export default DropDownMenu;
