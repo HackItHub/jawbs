@@ -6,7 +6,7 @@ const create = async (req: Request, res: Response) => {
     const newAddress = await prisma.address.create({ data: req.body });
     res.status(201).json(newAddress);
   } catch (err) {
-    res.status(400).json({ message: `${err}hello` });
+    res.status(400).json({ message: `${err}` });
   } finally {
     await prisma.$disconnect();
   }

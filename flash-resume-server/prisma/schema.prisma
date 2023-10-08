@@ -31,7 +31,7 @@ model Address {
   city    String?
   addressLine1    String?
   addressLine2   String?
-  zipCode Int?
+  zipCode String?
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  Int     @unique
 }

@@ -1,14 +1,26 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { DropDownMenu, FormFieldText, TransparentContainer } from "../layout";
 import { COUNTRIES, STATES } from "../../utils/Constants";
 
 export interface AddressForm {
   addressLine1?: string;
   addressLine2?: string;
+  zipCode?: number;
+  city?: string;
+  state?: string;
+  country?: string;
+  userId?: number;
+}
+
+export interface AddressFormErrors {
+  addressLine1?: string;
+  addressLine2?: string;
   zipCode?: string;
   city?: string;
   state?: string;
   country?: string;
+  userId?: number;
 }
 
 type Props = {
@@ -19,13 +31,13 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
   const [addressForm, setAddressForm] = useState<AddressForm>({
     addressLine1: "",
     addressLine2: "",
-    zipCode: "",
     city: "",
     state: "",
     country: "",
+    zipCode: 0,
   });
 
-  const [errors, setErrors] = useState<Partial<AddressForm>>({});
+  const [errors, setErrors] = useState<Partial<AddressFormErrors>>({});
 
   const handleChange = (name: string, value) => {
     if (name === "state" && value === "Not Applicable") {
@@ -37,7 +49,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
   };
 
   const hasErrors = () => {
-    const formErrors: Partial<AddressForm> = {};
+    const formErrors: Partial<AddressFormErrors> = {};
     if (!addressForm.addressLine1) {
       formErrors.addressLine1 = "Please enter a valid address";
     }
@@ -58,12 +70,23 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
     return false;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (hasErrors()) {
       return;
     }
-    handleFormChange();
+    const formData: Partial<AddressForm> = addressForm;
+    formData.userId = 3;
+
+    // eslint-disable-next-line
+    console.log(addressForm);
+    try {
+      await axios.post("/address", addressForm);
+      handleFormChange();
+    } catch {
+      // eslint-disable-next-line
+      console.log("Something went wrong");
+    }
   };
 
   return (
