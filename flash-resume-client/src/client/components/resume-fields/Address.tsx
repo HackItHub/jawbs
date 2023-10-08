@@ -25,16 +25,44 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
     country: "",
   });
 
+  const [errors, setErrors] = useState<Partial<AddressForm>>({});
+
   const handleChange = (name: string, value) => {
     if (name === "state" && value === "Not Applicable") {
       setAddressForm({ ...addressForm, state: "" });
     } else {
       setAddressForm({ ...addressForm, [name]: value });
+      setErrors({ ...errors, [name]: "" });
     }
+  };
+
+  const hasErrors = () => {
+    const formErrors: Partial<AddressForm> = {};
+    if (!addressForm.addressLine1) {
+      formErrors.addressLine1 = "Please enter a valid address";
+    }
+    if (!addressForm.city) {
+      formErrors.city = "Please enter a valid city";
+    }
+    if (!addressForm.zipCode) {
+      formErrors.zipCode = "Please enter a valid zip code";
+    }
+    if (!addressForm.state) {
+      formErrors.state = "Please select a valid state";
+    }
+    if (!addressForm.country) {
+      formErrors.country = "Please select a valid country";
+    }
+    setErrors(formErrors);
+    if (Object.keys(formErrors).length) return true;
+    return false;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (hasErrors()) {
+      return;
+    }
     handleFormChange();
   };
 
@@ -49,6 +77,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           label='Address Line 1'
           value={addressForm.addressLine1}
           onChange={handleChange}
+          errorMessage={errors.addressLine1}
         />
         <FormFieldText
           id='addressLine2'
@@ -65,6 +94,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           value={addressForm.city}
           label='City'
           onChange={handleChange}
+          errorMessage={errors.city}
         />
         <DropDownMenu
           placeholder='-Some state in the DC Universe-'
@@ -74,6 +104,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           listName='State'
           value={addressForm.state}
           handleInput={handleChange}
+          errorMessage={errors.state}
         />
         <DropDownMenu
           placeholder='-Some country in the DC Universe-'
@@ -83,6 +114,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           dataId='country'
           value={addressForm.country}
           handleInput={handleChange}
+          errorMessage={errors.country}
         />
         <FormFieldText
           id='zipcode'
@@ -91,8 +123,9 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           label='Zip Code'
           value={addressForm.zipCode}
           onChange={handleChange}
+          errorMessage={errors.zipCode}
         />
-        <div className='flex justify-end'>
+        <div className='flex flex-col items-end justify-center'>
           <button
             type='submit'
             className='submit-button text-[16px]'
@@ -100,6 +133,9 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
             onSubmit={() => handleFormChange()}
           >
             Submit
+          </button>
+          <button type='button' className='pt-2 underline border-0 bg-none'>
+            Skip
           </button>
         </div>
       </form>

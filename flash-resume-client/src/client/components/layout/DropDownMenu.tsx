@@ -61,8 +61,10 @@ const DropDownMenu: React.FC<ChildProps> = ({
             onClick={handleDropDownMenu}
             type='button'
             className={`flex w-full justify-between rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
-              errorMessage ? "border-red border-1 border-solid" : "ring-1"
-            } ring-inset ring-gray-300 hover:bg-gray-50`}
+              errorMessage
+                ? "border-red border-2 border-solid"
+                : "ring-1 ring-inset ring-gray-300"
+            } hover:bg-gray-50`}
             id='menu-button'
             aria-expanded={isOpen}
             aria-haspopup='true'
@@ -122,7 +124,6 @@ const DropDownMenu: React.FC<ChildProps> = ({
               </div>
             )}
           </OverlayScrollbarsComponent>
-          d
         </div>
       </div>
     </div>
