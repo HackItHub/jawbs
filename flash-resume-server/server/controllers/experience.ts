@@ -30,7 +30,7 @@ const read = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
+    const { id } = req.params;
     const updates = await req.body;
     const updatedUser = await prisma.user.update({
       where: { id },

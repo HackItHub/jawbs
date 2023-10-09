@@ -12,51 +12,73 @@ datasource db {
 }
 
 model User {
-  id         Int          @id @default(autoincrement())
+  id         String       @id @default(uuid())
+  email      String      @unique
+  address    Address?
+  experience Experience[]
+  education  Education[]
+  person     Person?      @relation(fields: [personId], references: [id])
+  createdAt  DateTime     @default(now())
+  personId   String?
+}
+
+model Person {
+  id         String  @id @default(uuid())
   firstName  String?
   lastName   String?
   middleName String?
   phone      String?
-  email      String?      @unique
-  summary    String?
-  address    Address[]
-  experience Experience[]
-  createdAt  DateTime     @default(now())
+  summary String?
+  User       User[]
 }
 
 model Address {
-  id      Int     @id @default(autoincrement())
-  country String?
-  state   String?
-  city    String?
-  addressLine1    String?
-  addressLine2   String?
-  zipCode String?
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  Int     @unique
+  id           Int         @id @default(autoincrement())
+  country      String?
+  state        String?
+  city         String?
+  addressLine1 String?
+  addressLine2 String?
+  zipCode      String?
+  user         User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String?     @unique
+  experience   Experience? @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  experienceId Int?        @unique
+
+  School School[]
 }
 
 model Experience {
-  id               Int           @id @default(autoincrement())
+  id               Int      @id @default(autoincrement())
   name             String?
   responsibilities String[]
   startYear        String?
   endYear          String?
   startMonth       String?
   endMonth         String?
-  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId           Int           @unique
-  workAddress      WorkAddress[]
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String   @unique
+  address          Address?
 }
 
-model WorkAddress {
-  id           Int        @id @default(autoincrement())
-  country      String?
-  state        String?
-  city         String?
-  addressLine1         String?
-  addressLine2        String?
-  zipCode      Int?
-  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
-  experienceId Int        @unique
+model Education {
+  id             Int      @id @default(autoincrement())
+  educationLevel String
+  school         School[]
+  User           User?    @relation(fields: [userId], references: [id])
+  userId         String?
+}
+
+model School {
+  id          Int        @id @default(autoincrement())
+  school      String
+  diploma     String
+  startYear   String?
+  endYear     String?
+  startMonth  String?
+  endMonth    String?
+  address     Address?   @relation(fields: [addressId], references: [id])
+  Education   Education? @relation(fields: [educationId], references: [id])
+  educationId Int?
+  addressId   Int?
 }

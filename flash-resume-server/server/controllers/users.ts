@@ -2,8 +2,25 @@ import { Request, Response } from "express";
 import prisma from "../libs/prisma.js";
 
 const create = async (req: Request, res: Response) => {
+  const { firstName, lastName, email, phone, summary } = req.body;
+  if (!firstName || !lastName || !email || !phone) {
+    res.status(400).json("Improper format");
+    return;
+  }
   try {
-    const newUser = await prisma.user.create({ data: req.body });
+    const newUser = await prisma.user.create({
+      data: {
+        email,
+        person: {
+          create: {
+            firstName,
+            lastName,
+            phone,
+            summary,
+          },
+        },
+      },
+    });
     res.status(201).json(newUser);
   } catch (err) {
     res.status(400).json({ message: err });
@@ -14,7 +31,7 @@ const create = async (req: Request, res: Response) => {
 
 const read = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
+    const { id } = req.params;
     const user = await prisma.user.findUnique({
       where: {
         id,
@@ -41,7 +58,7 @@ const readAll = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
+    const { id } = req.params;
     const updates = await req.body;
     const updatedUser = await prisma.user.update({
       where: { id },
@@ -57,7 +74,7 @@ const update = async (req: Request, res: Response) => {
 
 const destroy = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
+    const { id } = req.params;
     const deletedUser = await prisma.user.delete({
       where: { id },
     });
