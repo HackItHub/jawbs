@@ -24,3 +24,5 @@ app.listen(PORT || 3001, () => {
   // eslint-disable-next-line no-console
   console.log(`Server running on PORT: ${PORT}`);
 });
+
+export default app;
