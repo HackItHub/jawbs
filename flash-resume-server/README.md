@@ -66,3 +66,6 @@ docker exec -it awesome-api-test-api-1 npx prisma migrate dev --name init
 ```
 
 13. After the migration finished, you're ready to develop your app
+
+14. Seeding data
+    - npm run reset (includes seeding)

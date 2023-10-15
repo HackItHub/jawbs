@@ -5,6 +5,7 @@ import {
   address,
   experience,
   workAddress,
+  admin,
 } from "./server/routes/index.js";
 
 const app = express();
@@ -15,6 +16,7 @@ app.get("/", (_, res) => {
   res.status(200).json("Hello World!");
 });
 
+app.use(admin);
 app.use(users);
 app.use(address);
 app.use(experience);
