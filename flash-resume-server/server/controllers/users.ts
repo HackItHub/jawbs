@@ -30,6 +30,17 @@ const read = async (req: Request, res: Response) => {
   }
 };
 
+const readAll = async (req: Request, res: Response) => {
+  try {
+    const users = await prisma.user.findMany();
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(400).json({ message: err });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
 const update = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
@@ -60,9 +71,25 @@ const destroy = async (req: Request, res: Response) => {
   }
 };
 
+const destroyByEmail = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.params;
+    const deletedUser = await prisma.user.delete({
+      where: { email },
+    });
+    res.status(200).json(deletedUser);
+  } catch (err) {
+    res.status(400).json({ message: err });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
 export default {
   create,
   read,
+  readAll,
   update,
   destroy,
+  destroyByEmail,
 };
