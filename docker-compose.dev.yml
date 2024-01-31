@@ -24,6 +24,25 @@ services:
     restart: always
     networks:
       - mynetwork
+  prisma-studio:
+    build:
+      context: ./flash-resume-server # Assuming this is where your Prisma schema is
+      target: development
+    container_name: prisma-studio-dev
+    ports:
+      - '${PRISMA_STUDIO}:5555' # Expose Prisma Studio on port 5555
+    command: npm run studio
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: true
+      WATCHPACK_POLLING: true
+    depends_on:
+      - postgres
+    networks:
+      - mynetwork
+    volumes:
+      - ./flash-resume-server:/usr/src/app
   client:
     build:
       context: ./flash-resume-client
@@ -60,7 +79,7 @@ services:
   postgres-test:
     image: postgres:latest
     ports:
-      - '5433:5432'
+      - '${POSTGRES_TESTING_PORT}:5433'
     environment:
       POSTGRES_USER: testuser
       POSTGRES_PASSWORD: testpassword

@@ -1,25 +1,21 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
-// Docker dev database
 datasource db {
   provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id         String       @id @default(uuid())
   email      String      @unique
-  address    Address?
-  experience Experience[]
-  education  Education[]
-  person     Person?      @relation(fields: [personId], references: [id])
-  createdAt  DateTime     @default(now())
+  createdAt  DateTime    @default(now())
+  id         String      @id @default(uuid())
   personId   String?
+  address    Address?
+  education  Education[]
+  experience Experience?
+  person     Person?     @relation(fields: [personId], references: [id])
 }
 
 model Person {
@@ -28,24 +24,23 @@ model Person {
   lastName   String?
   middleName String?
   phone      String?
-  summary String?
+  summary    String?
   User       User[]
 }
 
 model Address {
-  id           Int         @id @default(autoincrement())
+  id           String         @id @default(uuid())
   country      String?
   state        String?
   city         String?
   addressLine1 String?
   addressLine2 String?
   zipCode      String?
-  user         User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String?     @unique
-  experience   Experience? @relation(fields: [experienceId], references: [id], onDelete: Cascade)
   experienceId Int?        @unique
-
-  School School[]
+  experience   Experience? @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  user         User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  School       School[]
 }
 
 model Experience {
@@ -56,17 +51,17 @@ model Experience {
   endYear          String?
   startMonth       String?
   endMonth         String?
-  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           String   @unique
   address          Address?
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Education {
-  id             Int      @id @default(autoincrement())
+  id             String      @id @default(uuid())
   educationLevel String
-  school         School[]
-  User           User?    @relation(fields: [userId], references: [id])
   userId         String?
+  User           User?    @relation(fields: [userId], references: [id])
+  school         School[]
 }
 
 model School {
@@ -77,8 +72,8 @@ model School {
   endYear     String?
   startMonth  String?
   endMonth    String?
+  educationId String?
+  addressId   String?
   address     Address?   @relation(fields: [addressId], references: [id])
-  Education   Education? @relation(fields: [educationId], references: [id])
-  educationId Int?
-  addressId   Int?
+  education   Education? @relation(fields: [educationId], references: [id])
 }

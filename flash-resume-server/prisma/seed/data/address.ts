@@ -6,7 +6,6 @@ const ADDRESS = [
     addressLine1: "123 Fake St",
     addressLine2: "Apt 12",
     zipCode: "12345",
-    userId: 1,
   },
   {
     country: "United States",
@@ -15,7 +14,6 @@ const ADDRESS = [
     addressLine1: "345 Dream Ave",
     addressLine2: "",
     zipCode: "34567",
-    userId: 2,
   },
 ];
 

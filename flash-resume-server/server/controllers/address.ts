@@ -14,7 +14,7 @@ const create = async (req: Request, res: Response) => {
 
 const read = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
+    const { id } = req.params;
     const address = await prisma.address.findUnique({
       where: {
         id,
@@ -30,7 +30,7 @@ const read = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
+    const { id } = req.params;
     const updates = await req.body;
     const updatedUser = await prisma.address.update({
       where: { id },
@@ -46,7 +46,7 @@ const update = async (req: Request, res: Response) => {
 
 const destroy = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
+    const { id } = req.params;
     const deletedUser = await prisma.address.delete({
       where: { id },
     });

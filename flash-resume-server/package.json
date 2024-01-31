@@ -15,7 +15,8 @@
     "migrate": "npx prisma migrate dev --name init",
     "reset": "npx prisma migrate reset",
     "lint:fix": "eslint . --fix",
-    "seed": "ts-node ./prisma/seed/index.ts"
+    "seed": "ts-node ./prisma/seed/index.ts",
+    "studio": "npx prisma studio"
   },
   "repository": {
     "type": "git",

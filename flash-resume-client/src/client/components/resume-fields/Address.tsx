@@ -83,9 +83,9 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
     try {
       await axios.post("/address", addressForm);
       handleFormChange();
-    } catch {
+    } catch (error) {
       // eslint-disable-next-line
-      console.log("Something went wrong");
+      console.error("Something went wrong", error);
     }
   };
 

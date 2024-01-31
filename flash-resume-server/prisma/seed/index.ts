@@ -1,30 +1,18 @@
-// import { PrismaClient } from "@prisma/client";
-// import { USERS, ADDRESS, EXPERIENCE, WORK_ADDRESS } from "./data/index.js";
+import { PrismaClient } from "@prisma/client";
+import { USERS } from "./data/index.js";
 
-// const prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
-// async function main() {
-//   await prisma.user.createMany({
-//     data: USERS,
-//   });
+async function main() {
+  USERS.forEach(async (user) => {
+    await prisma.user.create({ data: user });
+  });
+}
 
-//   await prisma.address.createMany({
-//     data: ADDRESS,
-//   });
-
-//   await prisma.experience.createMany({
-//     data: EXPERIENCE,
-//   });
-
-//   await prisma.workAddress.createMany({
-//     data: WORK_ADDRESS,
-//   });
-// }
-
-// main()
-//   .catch((err) => {
-//     throw new Error(err);
-//   })
-//   .finally(() => {
-//     prisma.$disconnect();
-//   });
+main()
+  .catch((err) => {
+    throw new Error(err);
+  })
+  .finally(() => {
+    prisma.$disconnect();
+  });

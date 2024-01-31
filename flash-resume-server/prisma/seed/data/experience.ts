@@ -6,7 +6,6 @@ const EXPERIENCE = [
     endYear: "2020",
     startMonth: "June",
     endMonth: "July",
-    userId: 1,
   },
   {
     name: "NFL",
@@ -15,7 +14,6 @@ const EXPERIENCE = [
     endYear: "2019",
     startMonth: "January",
     endMonth: "February",
-    userId: 2,
   },
 ];
 
