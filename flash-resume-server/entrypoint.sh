@@ -23,7 +23,6 @@ if [ ! -f /initial_build_completed ]; then
   touch /initial_build_completed
 fi
 
-npx prisma studio
 # Build dist file and start application
 
 exec npm run dev:build

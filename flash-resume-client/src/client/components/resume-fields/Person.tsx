@@ -5,11 +5,19 @@ import { TransparentContainer } from "../layout";
 
 interface Personal {
   firstName: string;
+  d;
   lastName: string;
   middleName?: string;
-  phone: string;
+  phone: number;
   email: string;
   summary: string;
+}
+
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  email?: string;
 }
 
 type Props = {
@@ -17,16 +25,9 @@ type Props = {
 };
 
 const Person: React.FC<Props> = ({ handleFormChange }) => {
-  const [person, setPerson] = useState<Personal>({
-    firstName: "",
-    lastName: "",
-    middleName: "",
-    phone: "",
-    email: "",
-    summary: "",
-  });
+  const [person, setPerson] = useState<Partial<Personal>>({});
 
-  const [errors, setErrors] = useState<Partial<Personal>>({});
+  const [errors, setErrors] = useState<Partial<FormErrors>>({});
 
   const handleChange = (name: string, value) => {
     setErrors({ ...errors, [name]: "" });
@@ -34,7 +35,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
   };
 
   const hasErrors = () => {
-    const formErrors: Partial<Personal> = {};
+    const formErrors: Partial<FormErrors> = {};
     if (!person.firstName) formErrors.firstName = "First Name is required";
     if (!person.lastName) formErrors.lastName = "Last Name is required";
     if (!person.phone) formErrors.phone = "Phone is required";
@@ -57,9 +58,9 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
     try {
       await axios.post("/users", person);
       handleFormChange();
-    } catch {
+    } catch (err) {
       // eslint-disable-next-line
-      console.log("something went wrong");
+      console.error("something went wrong", err);
     }
   };
 
@@ -98,7 +99,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           dataId='phone'
           placeholder='1-800-BATMAN'
           label='Phone'
-          value={person.phone}
+          value={person.phone === 0 ? "" : person.phone}
           onChange={handleChange}
           errorMessage={errors.phone}
         />

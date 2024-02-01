@@ -13,7 +13,7 @@ import {
 export interface AddressForm {
   addressLine1?: string;
   addressLine2?: string;
-  zipCode?: string;
+  zipCode?: number;
   city?: string;
   state?: string;
   country?: string;
@@ -23,8 +23,8 @@ export interface School {
   school: string;
   startMonth: string;
   endMonth?: string;
-  startYear: number | string;
-  endYear?: number | string;
+  startYear: number;
+  endYear?: number;
   diploma?: string;
   address: AddressForm;
 }
@@ -61,7 +61,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
       address: {
         addressLine1: "",
         addressLine2: "",
-        zipCode: "",
+        zipCode: 0,
         city: "",
         state: "",
         country: "",
@@ -102,7 +102,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
         address: {
           addressLine1: "",
           addressLine2: "",
-          zipCode: "",
+          zipCode: 0,
           city: "",
           state: "",
           country: "",

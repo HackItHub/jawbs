@@ -8,72 +8,66 @@ datasource db {
 }
 
 model User {
-  email      String      @unique
-  createdAt  DateTime    @default(now())
-  id         String      @id @default(uuid())
-  personId   String?
-  address    Address?
-  education  Education[]
-  experience Experience?
-  person     Person?     @relation(fields: [personId], references: [id])
+  id          String       @id @default(uuid())
+  email       String       @unique
+  createdAt   DateTime     @default(now())
+  person      Person?
+  address     Address?
+  education   Education[]
+  experience  Experience[]
 }
 
 model Person {
-  id         String  @id @default(uuid())
-  firstName  String?
-  lastName   String?
+  id        String   @id @default(uuid())
+  firstName String
+  lastName  String
   middleName String?
-  phone      String?
-  summary    String?
-  User       User[]
+  phone     Int?
+  summary   String?
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Address {
-  id           String         @id @default(uuid())
+  id           String   @id @default(uuid())
   country      String?
   state        String?
   city         String?
   addressLine1 String?
   addressLine2 String?
-  zipCode      String?
-  userId       String?     @unique
-  experienceId Int?        @unique
-  experience   Experience? @relation(fields: [experienceId], references: [id], onDelete: Cascade)
-  user         User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  School       School[]
-}
-
-model Experience {
-  id               Int      @id @default(autoincrement())
-  name             String?
-  responsibilities String[]
-  startYear        String?
-  endYear          String?
-  startMonth       String?
-  endMonth         String?
-  userId           String   @unique
-  address          Address?
-  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  zipCode      Int?
+  userId       String   @unique
+  user         User     @relation(fields: [userId], references: [id])
 }
 
 model Education {
-  id             String      @id @default(uuid())
+  id             String    @id @default(uuid())
   educationLevel String
-  userId         String?
-  User           User?    @relation(fields: [userId], references: [id])
+  userId         String
+  user           User      @relation(fields: [userId], references: [id])
   school         School[]
 }
 
+model Experience {
+  id               String   @id @default(uuid())
+  name             String?
+  responsibilities String[]
+  startYear        Int?
+  endYear          Int?
+  startMonth       String?
+  endMonth         String?
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+}
+
 model School {
-  id          Int        @id @default(autoincrement())
-  school      String
+  id          String    @id @default(uuid())
+  name        String
   diploma     String
-  startYear   String?
-  endYear     String?
+  startYear   Int?
+  endYear     Int?
   startMonth  String?
   endMonth    String?
-  educationId String?
-  addressId   String?
-  address     Address?   @relation(fields: [addressId], references: [id])
-  education   Education? @relation(fields: [educationId], references: [id])
+  educationId String
+  education   Education @relation(fields: [educationId], references: [id])
 }

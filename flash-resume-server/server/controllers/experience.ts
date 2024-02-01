@@ -14,7 +14,7 @@ const create = async (req: Request, res: Response) => {
 
 const read = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
+    const { id } = req.params;
     const experience = await prisma.experience.findUnique({
       where: {
         id,
@@ -46,7 +46,7 @@ const update = async (req: Request, res: Response) => {
 
 const destroy = async (req: Request, res: Response) => {
   try {
-    const id = Number(req.params.id);
+    const { id } = req.params;
     const deletedUser = await prisma.experience.delete({
       where: { id },
     });

@@ -15,6 +15,6 @@
   "ts-node": {
     "esm": true
   },
-  "include": ["server/**/**/*", "prisma/**/**/*","./index.ts"],
+  "include": ["server/**/**/*", "prisma/**/**/*", "./index.ts"],
   "exclude": ["node_modules", "dist"]
 }

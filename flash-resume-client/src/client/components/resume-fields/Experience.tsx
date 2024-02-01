@@ -23,8 +23,8 @@ interface ExperienceEntries {
   responsibilities: string[];
   startMonth: string;
   endMonth: string;
-  startYear: number | null;
-  endYear: number | null;
+  startYear: number;
+  endYear: number;
   address?: AddressForm;
 }
 
@@ -40,8 +40,8 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
       responsibilities: [],
       startMonth: "",
       endMonth: "",
-      startYear: null,
-      endYear: null,
+      startYear: 0,
+      endYear: 0,
     },
   ]);
   const handleAddEntry = () => {
@@ -53,8 +53,8 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
         responsibilities: [],
         startMonth: "",
         endMonth: "",
-        startYear: null,
-        endYear: null,
+        startYear: 0,
+        endYear: 0,
       },
     ]);
   };
