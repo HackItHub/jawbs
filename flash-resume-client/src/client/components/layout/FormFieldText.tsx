@@ -28,11 +28,12 @@ const FormFieldText: React.FC<Props> = ({
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value: inputValue } = e.target;
     if (type === "numeric" || type === "tel") {
-      if (Number.isNaN(Number(inputValue))) {
-        return;
+      if (!Number.isNaN(Number(inputValue))) {
+        onChange(dataId, Number(inputValue));
       }
+    } else {
+      onChange(dataId, inputValue);
     }
-    onChange(dataId, inputValue);
   };
 
   const handleTextAreaInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

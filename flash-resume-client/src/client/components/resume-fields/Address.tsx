@@ -36,7 +36,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
   });
   const [errors, setErrors] = useState<Partial<AddressFormErrors>>({});
 
-  const handleChange = (name: string, value) => {
+  const handleChange = (name: string, value: any) => {
     if (name === "state" && value === "Not Applicable") {
       setAddressForm({ ...addressForm, state: "" });
     } else {
@@ -77,7 +77,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
       handleFormChange();
     } catch (error) {
       // eslint-disable-next-line
-      console.error("Something went wrong", error);
+      console.error(error);
     }
   };
 
@@ -132,12 +132,12 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           errorMessage={errors.country}
         />
         <FormFieldText
-          id='zipcode'
+          id='zipCode'
           dataId='zipCode'
           placeholder='6002318'
           label='Zip Code'
           type='numeric'
-          value={addressForm.zipCode}
+          value={addressForm.zipCode === 0 ? "" : addressForm.zipCode}
           onChange={handleChange}
           errorMessage={errors.zipCode}
         />
