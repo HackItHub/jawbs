@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { DropDownMenu, FormFieldText, TransparentContainer } from "../layout";
 import { COUNTRIES, STATES } from "../../utils/Constants";
+import { useAuthContext } from "../../contexts";
 
 export interface AddressForm {
   addressLine1?: string;
@@ -10,7 +11,7 @@ export interface AddressForm {
   city?: string;
   state?: string;
   country?: string;
-  userId?: number;
+  userId?: string;
 }
 
 export interface AddressFormErrors {
@@ -20,7 +21,7 @@ export interface AddressFormErrors {
   city?: string;
   state?: string;
   country?: string;
-  userId?: number;
+  userId?: string;
 }
 
 type Props = {
@@ -28,15 +29,11 @@ type Props = {
 };
 
 const Address: React.FC<Props> = ({ handleFormChange }) => {
-  const [addressForm, setAddressForm] = useState<AddressForm>({
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    state: "",
-    country: "",
-    zipCode: 0,
-  });
+  const { currentUser } = useAuthContext();
 
+  const [addressForm, setAddressForm] = useState<AddressForm>({
+    userId: currentUser,
+  });
   const [errors, setErrors] = useState<Partial<AddressFormErrors>>({});
 
   const handleChange = (name: string, value) => {
@@ -75,11 +72,6 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
     if (hasErrors()) {
       return;
     }
-    const formData: Partial<AddressForm> = addressForm;
-    formData.userId = 3;
-
-    // eslint-disable-next-line
-    console.log(addressForm);
     try {
       await axios.post("/address", addressForm);
       handleFormChange();
@@ -144,6 +136,7 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
           dataId='zipCode'
           placeholder='6002318'
           label='Zip Code'
+          type='numeric'
           value={addressForm.zipCode}
           onChange={handleChange}
           errorMessage={errors.zipCode}

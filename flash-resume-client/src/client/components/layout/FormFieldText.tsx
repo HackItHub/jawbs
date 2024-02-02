@@ -2,11 +2,13 @@ import React from "react";
 import { AiFillWarning } from "react-icons/ai";
 import { WARNING_STYLE } from "../../utils/Constants";
 
+/* eslint-disable  */
+
 interface Props {
   placeholder: string;
   isRequired?: boolean;
   label: string;
-  onChange: (name: string, value: string) => void;
+  onChange: (name: string, value: any) => void;
   id: string;
   type?: string;
   dataId: string;
@@ -27,6 +29,11 @@ const FormFieldText: React.FC<Props> = ({
 }) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value: inputValue } = e.target;
+    if (type === "numeric" || type === "tel") {
+      if (Number.isNaN(Number(inputValue))) {
+        return;
+      }
+    }
     onChange(dataId, inputValue);
   };
 
@@ -37,7 +44,24 @@ const FormFieldText: React.FC<Props> = ({
 
   return (
     <div className='mb-2'>
-      {type === "textarea" ? (
+      {(type === "text" || type === "email" || !type) && (
+        <label htmlFor={id} className='form-input-container'>
+          <div className='label-text'>{label}</div>
+          <input
+            id={id}
+            onChange={handleInput}
+            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
+              errorMessage ? " border-red border-2 border-solid " : " ring-1 "
+            } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
+            placeholder={placeholder}
+            aria-required={isRequired}
+            required={isRequired}
+            type={type}
+            value={value}
+          />
+        </label>
+      )}
+      {type === "textarea" && (
         <label htmlFor={id} className='form-input-container'>
           <div className='label-text'>{label}</div>
           <textarea
@@ -52,7 +76,25 @@ const FormFieldText: React.FC<Props> = ({
             value={value}
           />
         </label>
-      ) : (
+      )}
+      {type === "tel" && (
+        <label htmlFor={id} className='form-input-container'>
+          <div className='label-text'>{label}</div>
+          <input
+            id={id}
+            onChange={handleInput}
+            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
+              errorMessage ? " border-red border-2 border-solid " : " ring-1 "
+            } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
+            placeholder={placeholder}
+            aria-required={isRequired}
+            required={isRequired}
+            value={value}
+            type={type}
+          />
+        </label>
+      )}
+      {type === "numeric" && (
         <label htmlFor={id} className='form-input-container'>
           <div className='label-text'>{label}</div>
           <input

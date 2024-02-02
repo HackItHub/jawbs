@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import FormFieldText from "../layout/FormFieldText";
 import { TransparentContainer } from "../layout";
+import { useAuthContext } from "../../contexts";
 
 interface Personal {
   firstName: string;
-  d;
   lastName: string;
   middleName?: string;
   phone: number;
@@ -25,6 +25,7 @@ type Props = {
 };
 
 const Person: React.FC<Props> = ({ handleFormChange }) => {
+  const { setCurrentUser } = useAuthContext();
   const [person, setPerson] = useState<Partial<Personal>>({});
 
   const [errors, setErrors] = useState<Partial<FormErrors>>({});
@@ -56,7 +57,10 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
     }
 
     try {
-      await axios.post("/users", person);
+      const response = await axios.post("/users", person);
+      // eslint-disable-next-line
+      setCurrentUser(response.data);
+
       handleFormChange();
     } catch (err) {
       // eslint-disable-next-line
@@ -99,6 +103,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           dataId='phone'
           placeholder='1-800-BATMAN'
           label='Phone'
+          type='tel'
           value={person.phone === 0 ? "" : person.phone}
           onChange={handleChange}
           errorMessage={errors.phone}
