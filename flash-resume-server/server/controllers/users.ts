@@ -21,7 +21,7 @@ const create = async (req: Request, res: Response) => {
         },
       },
     });
-    res.status(201).json(newUser);
+    res.status(201).json(newUser.id);
   } catch (err) {
     res.status(400).json({ message: err });
   } finally {
