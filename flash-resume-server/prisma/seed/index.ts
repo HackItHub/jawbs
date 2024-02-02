@@ -4,9 +4,18 @@ import { USERS } from "./data/index.js";
 const prisma = new PrismaClient();
 
 async function main() {
-  USERS.forEach(async (user) => {
-    await prisma.user.create({ data: user });
-  });
+  try {
+    // eslint-disable-next-line
+    for (const user of USERS) {
+      // eslint-disable-next-line
+      await prisma.user.create({ data: user });
+    }
+  } catch (err) {
+    // eslint-disable-next-line
+    console.error(err);
+  } finally {
+    await prisma.$disconnect();
+  }
 }
 
 main()
