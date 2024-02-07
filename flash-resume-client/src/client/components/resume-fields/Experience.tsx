@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
+import { useAuthContext } from "../../contexts";
 import { TransparentContainer, FormFieldText, DropDownMenu } from "../layout";
 import {
   MONTHS,
@@ -8,6 +9,8 @@ import {
   CURRENT_YEAR,
   range,
 } from "../../utils/Constants";
+
+/* eslint-disable */
 
 interface AddressForm {
   addressLine1?: string;
@@ -33,6 +36,7 @@ type Props = {
 };
 
 const Experience: React.FC<Props> = ({ handleFormChange }) => {
+  const { currentUser } = useAuthContext();
   const [experience, setExperience] = useState<ExperienceEntries[]>([
     {
       experience: "",
@@ -59,7 +63,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
     ]);
   };
 
-  const handleEntryChange = (name: string, value, index: number) => {
+  const handleEntryChange = (name: string, value: any, index: number) => {
     const updatedExperience = [...experience];
     updatedExperience[index] = {
       ...updatedExperience[index],
@@ -68,13 +72,17 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
     setExperience(updatedExperience);
   };
 
-  const handleAddResponsibility = (index) => {
+  const handleAddResponsibility = (index: number) => {
     const updatedExperienceWithResponsibilities = [...experience];
     updatedExperienceWithResponsibilities[index].responsibilities.push("");
     setExperience(updatedExperienceWithResponsibilities);
   };
 
-  const handleResponsibilityChange = (value, parentIndex, index) => {
+  const handleResponsibilityChange = (
+    value: any,
+    parentIndex: number,
+    index: number,
+  ) => {
     const updatedExperience = [...experience];
     updatedExperience[parentIndex].responsibilities[index] = value;
     setExperience(updatedExperience);
@@ -85,9 +93,12 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
     handleFormChange();
   };
 
-  const addEntry = (_, index: number) => {
+  const addEntry = (_: any, index: number) => {
     return (
-      <div className='border-2 shadow-md rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
+      <div
+        key={Date.now()}
+        className='border-2 shadow-md rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'
+      >
         <div>
           <FormFieldText
             dataId='experience'
@@ -131,6 +142,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
               data={range(CURRENT_YEAR, CURRENT_YEAR - 60, -1)}
               listName='Start year'
               dataId='startYear'
+              type='number'
               id={`start_Year${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
@@ -141,6 +153,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
               data={range(CURRENT_YEAR, CURRENT_YEAR - 58, -1)}
               listName='End year'
               dataId='endYear'
+              type='number'
               id={`endYear_${index}`}
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
@@ -160,6 +173,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             </button>
             {experience[index].responsibilities.map((__, childIndex) => (
               <FormFieldText
+                key={Math.random()}
                 type='textarea'
                 dataId='responsibility'
                 id={`responsibility_${index}`}
@@ -209,8 +223,9 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             handleInput={(name, value) => handleEntryChange(name, value, index)}
           />
           <FormFieldText
-            id={`zipcode_${index}`}
-            dataId='zipcode'
+            id={`zipCode_${index}`}
+            dataId='zipCode'
+            type='numeric'
             placeholder='6002318'
             label='Zip Code'
             onChange={(name, value) => handleEntryChange(name, value, index)}

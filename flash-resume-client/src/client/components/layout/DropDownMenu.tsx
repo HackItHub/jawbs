@@ -12,6 +12,7 @@ interface ChildProps {
   id: string;
   dataId: string;
   value?: any;
+  type?: string;
   errorMessage?: string | undefined;
 }
 
@@ -23,6 +24,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
   id,
   dataId,
   value,
+  type,
   errorMessage,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -32,10 +34,14 @@ const DropDownMenu: React.FC<ChildProps> = ({
     setIsOpen(!isOpen);
   };
 
-  const handleOptions = (inputValue) => {
+  const handleOptions = (inputValue: any) => {
     setIsOpen(!isOpen);
     setOption(inputValue);
-    handleInput(dataId, inputValue);
+    if (type === "number") {
+      handleInput(dataId, Number(inputValue));
+    } else {
+      handleInput(dataId, inputValue);
+    }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent, inputValue) => {
@@ -133,6 +139,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
 DropDownMenu.defaultProps = {
   value: "",
   errorMessage: "",
+  type: "",
 };
 
 export default DropDownMenu;

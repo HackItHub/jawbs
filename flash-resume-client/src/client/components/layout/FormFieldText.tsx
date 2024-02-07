@@ -2,6 +2,7 @@ import React from "react";
 import { AiFillWarning } from "react-icons/ai";
 import { WARNING_STYLE } from "../../utils/Constants";
 
+/* eslint-disable */
 interface Props {
   placeholder: string;
   isRequired?: boolean;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { BsTrashFill } from "react-icons/bs";
+import axios from "axios";
 import { DropDownMenu, FormFieldText, TransparentContainer } from "../layout";
 import {
   MONTHS,
@@ -9,6 +10,9 @@ import {
   CURRENT_YEAR,
   range,
 } from "../../utils/Constants";
+import { useAuthContext } from "../../contexts";
+
+/* eslint-disable */
 
 export interface AddressForm {
   addressLine1?: string;
@@ -69,6 +73,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
     },
   ]);
   const [educationLevel, setEducationLevel] = useState<string>("");
+  const { currentUser } = useAuthContext();
 
   const handleEducationLevel = (value: string) => {
     setEducationLevel(value);
@@ -80,12 +85,28 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
     setEducation(updatedEducation);
   };
 
-  const handleEntryChange = (name: string, value, index: number) => {
+  const handleEntryChange = (name: string, value: any, index: number) => {
     const updatedEducation = [...education];
     updatedEducation[index] = {
       ...updatedEducation[index],
       [name]: value,
     };
+    setEducation(updatedEducation);
+  };
+
+  const handleEntryChangeAddress = (
+    name: string,
+    value: any,
+    index: number,
+  ) => {
+    const updatedEducation = [...education];
+    const address = education[index].address;
+    address[name] = value;
+    updatedEducation[index] = {
+      ...updatedEducation[index],
+      address,
+    };
+
     setEducation(updatedEducation);
   };
 
@@ -117,12 +138,23 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleFormChange();
+    const completeEducation = {
+      educationLevel,
+      schools: education,
+      userId: currentUser,
+    };
+    try {
+      await axios.post("/education", completeEducation);
+      handleFormChange();
+    } catch (err) {
+      // eslint-disable-next-line
+      console.error(err);
+    }
   };
 
-  const addEntry = (_, index: number) => {
+  const addEntry = (__, index: number) => {
     return (
       <div className='border-2 shadow-md relative rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-3 mb-2'>
         <div
@@ -181,6 +213,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
               data={range(CURRENT_YEAR, CURRENT_YEAR - 60, -1)}
               listName='Start year'
               dataId='startYear'
+              type='number'
               id={`startYear_${index}`}
               value={education[index].startYear}
               handleInput={(name, value) =>
@@ -192,6 +225,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
               data={range(CURRENT_YEAR, CURRENT_YEAR - 58, -1)}
               listName='End year'
               dataId='endYear'
+              type='number'
               value={education[index].endYear}
               id={`endYear_${index}`}
               handleInput={(name, value) =>
@@ -205,7 +239,9 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             placeholder='1007 Mountain Drive'
             label='Address Line 1'
             value={education[index].address.addressLine1}
-            onChange={(name, value) => handleEntryChange(name, value, index)}
+            onChange={(name, value) =>
+              handleEntryChangeAddress(name, value, index)
+            }
           />
           <FormFieldText
             dataId='addressLine2'
@@ -213,15 +249,19 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             value={education[index].address.addressLine2}
             placeholder='Bat Cave Way'
             label='Address Line 2'
-            onChange={(name, value) => handleEntryChange(name, value, index)}
+            onChange={(name, value) =>
+              handleEntryChangeAddress(name, value, index)
+            }
           />
           <FormFieldText
-            id='city'
-            dataId={`city_${index}`}
+            id={`city_${index}`}
+            dataId='city'
             placeholder='Gotham City'
             label='City'
             value={education[index].address.city}
-            onChange={(name, value) => handleEntryChange(name, value, index)}
+            onChange={(name, value) =>
+              handleEntryChangeAddress(name, value, index)
+            }
           />
           <DropDownMenu
             placeholder='-Some state in the DC Universe-'
@@ -230,7 +270,9 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             dataId='state'
             value={education[index].address.state}
             listName='State'
-            handleInput={(name, value) => handleEntryChange(name, value, index)}
+            handleInput={(name, value) =>
+              handleEntryChangeAddress(name, value, index)
+            }
           />
           <DropDownMenu
             placeholder='-Some country in the DC Universe-'
@@ -239,15 +281,20 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
             dataId='country'
             value={education[index].address.country}
             id={`country_${index}`}
-            handleInput={(name, value) => handleEntryChange(name, value, index)}
+            handleInput={(name, value) =>
+              handleEntryChangeAddress(name, value, index)
+            }
           />
           <FormFieldText
-            id={`zipcode_${index}`}
-            dataId='zipcode'
+            id={`zipCode_${index}`}
+            dataId='zipCode'
             placeholder='6002318'
             label='Zip Code'
+            type='numeric'
             value={education[index].address.zipCode}
-            onChange={(name, value) => handleEntryChange(name, value, index)}
+            onChange={(name, value) =>
+              handleEntryChangeAddress(name, value, index)
+            }
           />
         </div>
       </div>
