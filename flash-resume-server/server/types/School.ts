@@ -2,7 +2,7 @@ import Address from "./Address";
 
 type School = {
   create?: {
-    school: string;
+    name: string;
     diploma: string;
     startYear?: number;
     endYear?: number;
@@ -10,7 +10,7 @@ type School = {
     endMonth?: string;
     address?: Address;
   };
-  school?: string;
+  name?: string;
   diploma?: string;
   startYear?: number;
   endYear?: number;

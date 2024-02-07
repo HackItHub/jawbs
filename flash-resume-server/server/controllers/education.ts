@@ -11,9 +11,9 @@ const create = async (req: Request, res: Response) => {
       educations.push({
         userId,
         educationLevel,
-        school: {
+        schools: {
           create: {
-            school: school.school,
+            name: school.name,
             diploma: school.diploma,
             startYear: school.startYear,
             endYear: school.endYear,
@@ -33,6 +33,7 @@ const create = async (req: Request, res: Response) => {
         },
       });
     });
+    // eslint-disable
     educations.forEach(async (education: any) => {
       await prisma.education.create({ data: education });
     });

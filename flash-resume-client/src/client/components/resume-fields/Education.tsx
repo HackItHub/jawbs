@@ -24,7 +24,7 @@ export interface AddressForm {
 }
 
 export interface School {
-  school: string;
+  name: string;
   startMonth: string;
   endMonth?: string;
   startYear: number;
@@ -56,7 +56,7 @@ const removeEducationStyle = {
 const Education: React.FC<Props> = ({ handleFormChange }) => {
   const [education, setEducation] = useState<School[]>([
     {
-      school: "",
+      name: "",
       diploma: "",
       startMonth: "",
       endMonth: "",
@@ -114,7 +114,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
     setEducation([
       ...education,
       {
-        school: "",
+        name: "",
         diploma: "",
         startMonth: "",
         endMonth: "",
@@ -168,11 +168,11 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
         </div>
         <div>
           <FormFieldText
-            dataId='school'
+            dataId='name'
             id={`eduction_${index}`}
             label='Institution'
             placeholder='Princeton High'
-            value={education[index].school}
+            value={education[index].name}
             onChange={(name, value) => handleEntryChange(name, value, index)}
           />
           <FormFieldText

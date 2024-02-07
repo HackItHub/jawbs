@@ -5,7 +5,7 @@ const experience = Router();
 
 experience.route("/experience").post(controller.create);
 experience
-  .route("/experience/:id")
+  .route("/experience/:userId")
   .get(controller.read)
   .put(controller.update)
   .delete(controller.destroy);

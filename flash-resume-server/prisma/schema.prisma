@@ -39,7 +39,7 @@ model Address {
   userId       String?   @unique
   user         User?     @relation(fields: [userId], references: [id])
   schoolId     String?   @unique
-  School       School?   @relation(fields: [schoolId], references: [id])
+  school       School?   @relation(fields: [schoolId], references: [id])
 }
 
 model Education {
@@ -64,7 +64,7 @@ model Experience {
 
 model School {
   id          String    @id @default(uuid())
-  school        String
+  name        String
   diploma     String
   startYear   Int?
   endYear     Int?
