@@ -72,6 +72,17 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
     setExperience(updatedExperience);
   };
 
+  const handleAddressChange = (name: string, value: any, index: number) => {
+    const updatedExperience = [...experience];
+    updatedExperience[index] = {
+      ...updatedExperience[index],
+      address: {
+        [name]: value,
+      }
+    };
+    setExperience(updatedExperience);
+  }
+
   const handleAddResponsibility = (index: number) => {
     const updatedExperienceWithResponsibilities = [...experience];
     updatedExperienceWithResponsibilities[index].responsibilities.push("");
@@ -96,7 +107,6 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
   const addEntry = (_: any, index: number) => {
     return (
       <div
-        key={Date.now()}
         className='border-2 shadow-md rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'
       >
         <div>
@@ -106,6 +116,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             label='Company'
             placeholder='Wayne Inc.'
             onChange={(name, value) => handleEntryChange(name, value, index)}
+            value={experience[index].experience}
           />
           <FormFieldText
             dataId='title'
@@ -113,6 +124,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             label='Title'
             placeholder='CTO'
             onChange={(name, value) => handleEntryChange(name, value, index)}
+            value={experience[index].title}
           />
           <div className='flex w-full justify-between items-center gap-4'>
             <DropDownMenu
@@ -124,6 +136,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
+              value={experience[index].startMonth}
             />
             <DropDownMenu
               placeholder='End month'
@@ -134,6 +147,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
+              value={experience[index].endMonth}
             />
           </div>
           <div className='flex w-full justify-between items-center gap-4'>
@@ -147,6 +161,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
+              value={experience[index].startYear}
             />
             <DropDownMenu
               placeholder='End year'
@@ -158,6 +173,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
               handleInput={(name, value) =>
                 handleEntryChange(name, value, index)
               }
+              value={experience[index].endYear}
             />
           </div>
           <div className='border-2 rounded-md border-solid shadow-md border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
@@ -173,15 +189,15 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             </button>
             {experience[index].responsibilities.map((__, childIndex) => (
               <FormFieldText
-                key={Math.random()}
                 type='textarea'
                 dataId='responsibility'
                 id={`responsibility_${index}`}
                 placeholder='Managed and directed multiple departments ensuring the best technologies and agencies for fighting crime.'
-                label={`Experience ${childIndex}`}
+                label={`Experience ${childIndex + 1}`}
                 onChange={(___, value) =>
                   handleResponsibilityChange(value, index, childIndex)
                 }
+                value={experience[index].responsibilities[childIndex]}
               />
             ))}
           </div>
@@ -190,21 +206,24 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             id={`addressLine1_${index}`}
             placeholder='1007 Mountain Drive'
             label='Address Line 1'
-            onChange={(name, value) => handleEntryChange(name, value, index)}
+            onChange={(name, value) => handleAddressChange(name, value, index)}
+            value={experience[index].address?.addressLine1}
           />
           <FormFieldText
             dataId='addressLine2'
             id={`addressLine2_${index}`}
             placeholder='Bat Cave Way'
             label='Address Line 2'
-            onChange={(name, value) => handleEntryChange(name, value, index)}
+            onChange={(name, value) => handleAddressChange(name, value, index)}
+            value={experience[index].address?.addressLine2}
           />
           <FormFieldText
             id='city'
             dataId={`city_${index}`}
             placeholder='Gotham City'
             label='City'
-            onChange={(name, value) => handleEntryChange(name, value, index)}
+            onChange={(name, value) => handleAddressChange(name, value, index)}
+            value={experience[index].address?.city}
           />
           <DropDownMenu
             placeholder='-Some state in the DC Universe-'
@@ -212,7 +231,8 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             id={`state_${index}`}
             dataId='state'
             listName='State'
-            handleInput={(name, value) => handleEntryChange(name, value, index)}
+            handleInput={(name, value) => handleAddressChange(name, value, index)}
+            value={experience[index].address?.state}
           />
           <DropDownMenu
             placeholder='-Some country in the DC Universe-'
@@ -220,7 +240,8 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             listName='Country'
             dataId='country'
             id={`country_${index}`}
-            handleInput={(name, value) => handleEntryChange(name, value, index)}
+            handleInput={(name, value) => handleAddressChange(name, value, index)}
+            value={experience[index].address?.country}
           />
           <FormFieldText
             id={`zipCode_${index}`}
@@ -228,7 +249,8 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             type='numeric'
             placeholder='6002318'
             label='Zip Code'
-            onChange={(name, value) => handleEntryChange(name, value, index)}
+            onChange={(name, value) => handleAddressChange(name, value, index)}
+            value={experience[index].address?.zipCode}
           />
         </div>
       </div>

@@ -24,10 +24,10 @@ const ResumeFields: React.FC = () => {
           exit={{ x: "100%" }}
           transition={{ type: "tween", duration: 0.25 }} // Customize the transition
         >
-          {formIndex === 0 && <Person handleFormChange={handleFormChange} />}
+          {formIndex === 3 && <Person handleFormChange={handleFormChange} />}
           {formIndex === 1 && <Address handleFormChange={handleFormChange} />}
           {formIndex === 2 && <Education handleFormChange={handleFormChange} />}
-          {formIndex === 3 && (
+          {formIndex === 0 && (
             <Experience handleFormChange={handleFormChange} />
           )}
         </motion.div>
