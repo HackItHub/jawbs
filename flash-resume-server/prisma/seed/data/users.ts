@@ -16,7 +16,7 @@ interface Address {
 }
 
 interface Experience {
-  name: string;
+  experience: string;
   responsibilities: string[];
   startYear: number;
   endYear: number;
@@ -122,7 +122,7 @@ const ADDRESSES = [
 
 const EXPERIENCES = [
   {
-    name: "Software Development",
+    experience: "Software Development",
     responsibilities: ["Coding", "Testing", "Debugging"],
     startYear: 2015,
     endYear: 2020,
@@ -130,7 +130,7 @@ const EXPERIENCES = [
     endMonth: "December",
   },
   {
-    name: "Graphic Design",
+    experience: "Graphic Design",
     responsibilities: ["Designing", "Branding", "Illustrating"],
     startYear: 2016,
     endYear: 2021,
@@ -138,7 +138,7 @@ const EXPERIENCES = [
     endMonth: "November",
   },
   {
-    name: "Marketing",
+    experience: "Marketing",
     responsibilities: ["Advertising", "Social Media", "SEO"],
     startYear: 2017,
     endYear: 2022,
@@ -146,7 +146,7 @@ const EXPERIENCES = [
     endMonth: "October",
   },
   {
-    name: "Management",
+    experience: "Management",
     responsibilities: ["Planning", "Organizing", "Leading"],
     startYear: 2018,
     endYear: 2023,
@@ -154,7 +154,7 @@ const EXPERIENCES = [
     endMonth: "September",
   },
   {
-    name: "Research",
+    experience: "Research",
     responsibilities: ["Investigating", "Data Analysis", "Reporting"],
     startYear: 2019,
     endYear: 2024,

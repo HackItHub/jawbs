@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { IoMdAddCircle } from "react-icons/io";
 import { useAuthContext } from "../../contexts";
 import { TransparentContainer, FormFieldText, DropDownMenu } from "../layout";
@@ -73,15 +74,16 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
   };
 
   const handleAddressChange = (name: string, value: any, index: number) => {
+    console.log(name, index, value);
     const updatedExperience = [...experience];
+    const addressedIndex = { ...updatedExperience[index].address };
+    addressedIndex[name] = value;
     updatedExperience[index] = {
       ...updatedExperience[index],
-      address: {
-        [name]: value,
-      }
+      address: addressedIndex,
     };
     setExperience(updatedExperience);
-  }
+  };
 
   const handleAddResponsibility = (index: number) => {
     const updatedExperienceWithResponsibilities = [...experience];
@@ -99,16 +101,28 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
     setExperience(updatedExperience);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleFormChange();
+    const experienceFormData = {
+      experiences: [...experience],
+      userId: currentUser,
+    };
+    try {
+      const result = await axios.post("/experience", experienceFormData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      handleFormChange();
+    } catch (err) {
+      // eslint-disable-next-line
+      console.error(err);
+    }
   };
 
   const addEntry = (_: any, index: number) => {
     return (
-      <div
-        className='border-2 shadow-md rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'
-      >
+      <div className='border-2 shadow-md rounded-md border-solid border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
         <div>
           <FormFieldText
             dataId='experience'
@@ -177,16 +191,6 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             />
           </div>
           <div className='border-2 rounded-md border-solid shadow-md border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
-            <button
-              type='button'
-              className='w-full py-4'
-              onClick={() => handleAddResponsibility(index)}
-            >
-              <div className='text-text-placeholder flex justify-center items-center gap-2'>
-                Add Responsibility
-                <IoMdAddCircle />
-              </div>
-            </button>
             {experience[index].responsibilities.map((__, childIndex) => (
               <FormFieldText
                 type='textarea'
@@ -200,6 +204,18 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
                 value={experience[index].responsibilities[childIndex]}
               />
             ))}
+            <div className='border-2 rounded-md border-solid shadow-md border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2'>
+              <button
+                type='button'
+                className='w-full py-4'
+                onClick={() => handleAddResponsibility(index)}
+              >
+                <div className='text-text-placeholder flex justify-center items-center gap-2'>
+                  Add Responsibility
+                  <IoMdAddCircle />
+                </div>
+              </button>
+            </div>
           </div>
           <FormFieldText
             dataId='addressLine1'
@@ -218,8 +234,8 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             value={experience[index].address?.addressLine2}
           />
           <FormFieldText
-            id='city'
-            dataId={`city_${index}`}
+            id={`city_${index}`}
+            dataId={`city`}
             placeholder='Gotham City'
             label='City'
             onChange={(name, value) => handleAddressChange(name, value, index)}
@@ -231,7 +247,9 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             id={`state_${index}`}
             dataId='state'
             listName='State'
-            handleInput={(name, value) => handleAddressChange(name, value, index)}
+            handleInput={(name, value) =>
+              handleAddressChange(name, value, index)
+            }
             value={experience[index].address?.state}
           />
           <DropDownMenu
@@ -240,7 +258,9 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
             listName='Country'
             dataId='country'
             id={`country_${index}`}
-            handleInput={(name, value) => handleAddressChange(name, value, index)}
+            handleInput={(name, value) =>
+              handleAddressChange(name, value, index)
+            }
             value={experience[index].address?.country}
           />
           <FormFieldText

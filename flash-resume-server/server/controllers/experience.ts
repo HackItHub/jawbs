@@ -2,9 +2,28 @@ import { Request, Response } from "express";
 import prisma from "../libs/prisma.js";
 
 const create = async (req: Request, res: Response) => {
+  const { experiences, userId } = req.body;
   try {
-    const newExperience = await prisma.experience.create({ data: req.body });
-    res.status(201).json(newExperience);
+    // eslint-disable-next-line
+    experiences.forEach(async (experience: any) => {
+      const { address } = experience;
+      const createAddress = { create: { ...address } };
+      const experienceFormData = {
+        experience: experience.experience,
+        title: experience.title,
+        responsibilities: experience.responsibilities,
+        startMonth: experience.startMonth,
+        endMonth: experience.endMonth,
+        startYear: experience.startYear,
+        endYear: experience.endYear,
+        address: createAddress,
+        userId,
+      };
+      const newExperience = await prisma.experience.create({
+        data: experienceFormData,
+      });
+      res.status(201).json(newExperience);
+    });
   } catch (err) {
     res.status(400).json({ message: err });
   } finally {
