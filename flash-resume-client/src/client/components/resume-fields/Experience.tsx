@@ -11,8 +11,6 @@ import {
   range,
 } from "../../utils/Constants";
 
-/* eslint-disable */
-
 interface AddressForm {
   addressLine1?: string;
   addressLine2?: string;
@@ -74,7 +72,6 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
   };
 
   const handleAddressChange = (name: string, value: any, index: number) => {
-    console.log(name, index, value);
     const updatedExperience = [...experience];
     const addressedIndex = { ...updatedExperience[index].address };
     addressedIndex[name] = value;
@@ -108,7 +105,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
       userId: currentUser,
     };
     try {
-      const result = await axios.post("/experience", experienceFormData, {
+      await axios.post("/experience", experienceFormData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -235,7 +232,7 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
           />
           <FormFieldText
             id={`city_${index}`}
-            dataId={`city`}
+            dataId='city'
             placeholder='Gotham City'
             label='City'
             onChange={(name, value) => handleAddressChange(name, value, index)}
