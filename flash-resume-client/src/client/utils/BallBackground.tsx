@@ -50,7 +50,7 @@ const BallBackground: React.FC = () => {
   }, []);
 
   return (
-    <div className='ball-background-container h-full w-full absolute left-0 top-0'>
+    <div className='ball-background-container h-full w-full fixed left-0 top-0'>
       <div className='ball-background relative w-full h-full' />
     </div>
   );

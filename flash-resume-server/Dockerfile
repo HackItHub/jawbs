@@ -1,4 +1,4 @@
-FROM node:18 as development
+FROM node:20 as development
 
 RUN apt-get update && apt-get install -y netcat-traditional
 
@@ -28,7 +28,33 @@ RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-FROM node:18 as production
+FROM node:20 as prisma-studio
+
+RUN apt-get update && apt-get install -y netcat-traditional
+
+RUN apt-get update && apt-get install -y rsync
+
+WORKDIR /usr/src/cache
+
+COPY package.json ./
+
+COPY package-lock.json ./
+
+RUN npm install
+
+RUN mkdir /usr/src/app
+
+WORKDIR /usr/src/app
+
+COPY prisma/schema.prisma ./prisma/
+
+ENV NODE_ENV=development
+
+COPY . .
+
+CMD [ "npm run studio" ]
+
+FROM node:20 as production
 
 ENV NODE_ENV=production
 

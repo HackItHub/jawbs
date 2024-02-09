@@ -1,3 +1,6 @@
 .env*
 dist*
 node_modules*
+__snapshots__
+flash-resume-server/prisma/migrations
+.DS_Store

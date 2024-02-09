@@ -9,9 +9,7 @@
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitThis": true,
-    "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitAny": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
     "strictBindCallApply": true,
@@ -19,6 +17,7 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "lib": ["dom", "dom.iterable", "esnext"],
+    "noImplicitAny": false,
     "skipLibCheck": true,
     "jsx": "react",
     "allowJs": true,
@@ -29,6 +28,6 @@
       "react-dom/client": ["./node_modules/react/react-dom-client"]
     }
   },
-  "include": ["src/**/**/*"],
+  "include": ["src/**/**/*", "jest-setup.ts"],
   "exclude": ["node_modules"]
 }

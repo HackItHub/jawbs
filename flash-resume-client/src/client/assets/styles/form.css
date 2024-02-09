@@ -1,0 +1,34 @@
+.text-input:focus {
+  outline: none;
+  border-color: #719ece;
+  box-shadow: 0 0 10px #719ece;
+}
+
+.form-input-container {
+  @apply flex flex-col gap-1;
+}
+
+.submit-button {
+  @apply bg-blue py-2 px-4 border-none rounded-md shadow-md text-white;
+}
+
+.dropdown-list-item {
+  @apply block px-4 py-2 text-sm cursor-pointer border-opacity-0 border-white;
+}
+
+button,
+label {
+  font-size: 14px;
+}
+
+.form-title {
+  @apply text-[16px] justify-center flex text-[#181818];
+}
+
+.form-input-container > div {
+  @apply text-[#181818];
+}
+
+.label-text {
+  @apply text-[14px] text-black flex justify-start;
+}

@@ -22,7 +22,7 @@ module.exports = {
     sourceType: "module",
     project: "./tsconfig.json",
   },
-  plugins: ["react", "@typescript-eslint", "prettier"],
+  plugins: ["import", "react", "@typescript-eslint", "prettier"],
   rules: {
     "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
     "react/function-component-definition": [
@@ -47,6 +47,16 @@ module.exports = {
         avoidEscape: true,
       },
     ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: false,
+        optionalDependencies: false,
+        peerDependencies: false,
+        packageDir: __dirname,
+      },
+    ],
+    "@typescript-eslint/no-explicit-any": "off",
     "react/jsx-uses-react": ["off"],
     "react/react-in-jsx-scope": ["off"],
     "react/jsx-props-so-spreading": ["off"],

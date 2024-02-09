@@ -3,8 +3,8 @@ import { PORT } from "./server/utils/environmental.js";
 import {
   users,
   address,
+  education,
   experience,
-  workAddress,
 } from "./server/routes/index.js";
 
 const app = express();
@@ -17,8 +17,8 @@ app.get("/", (_, res) => {
 
 app.use(users);
 app.use(address);
+app.use(education);
 app.use(experience);
-app.use(workAddress);
 
 app.listen(PORT || 3001, () => {
   // eslint-disable-next-line no-console

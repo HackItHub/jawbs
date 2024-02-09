@@ -1,6 +1,49 @@
 version: '3.8'
 
 services:
+  api:
+    build:
+      context: ./flash-resume-server
+      target: development
+    container_name: flash-resume-server-dev
+    ports:
+      - '${PORT}:3001'
+      - '${DEBUG}:9229'
+    environment:
+      PORT: ${PORT}
+      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: true
+      WATCHPACK_POLLING: true
+    volumes:
+      - ./flash-resume-server:/usr/src/app
+    depends_on:
+      - postgres
+    stdin_open: true
+    tty: true
+    restart: always
+    networks:
+      - mynetwork
+  prisma-studio:
+    build:
+      context: ./flash-resume-server # Assuming this is where your Prisma schema is
+      target: prisma-studio
+    container_name: prisma-studio-dev
+    ports:
+      - '${PRISMA_STUDIO}:5555' # Expose Prisma Studio on port 5555
+    command: npm run studio
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: true
+      WATCHPACK_POLLING: true
+    depends_on:
+      - api
+      - postgres
+    networks:
+      - mynetwork
+    volumes:
+      - ./flash-resume-server:/usr/src/app
   client:
     build:
       context: ./flash-resume-client
@@ -18,29 +61,9 @@ services:
     restart: always
     depends_on:
       - postgres
-  api:
-    build:
-      context: ./flash-resume-server
-      target: development
-    container_name: flash-resume-server-dev
-    ports:
-      - '${PORT}:3001'
-      - '${DEBUG}:9229'
-    environment:
-      PORT: ${PORT}
-      DATABASE_URL: ${DATABASE_URL}
-      NODE_ENV: development
-      CHOKIDAR_USEPOLLING: true
-      WATCHPACK_POLLING: true
-    volumes:
-      - ./flash-resume-server:/usr/src/app
-    links:
-      - postgres
-    depends_on:
-      - postgres
-    stdin_open: true
-    tty: true
-    restart: always
+      - api
+    networks:
+      - mynetwork
   postgres:
     image: postgres:15
     container_name: postgres
@@ -52,5 +75,21 @@ services:
     restart: always
     volumes:
       - postgres:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+  postgres-test:
+    image: postgres:latest
+    ports:
+      - '${POSTGRES_TESTING_PORT}:5433'
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: testdb
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+    driver: bridge
+
 volumes:
   postgres: ~

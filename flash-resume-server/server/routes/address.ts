@@ -5,7 +5,7 @@ const address = Router();
 
 address.route("/address").post(controller.create);
 address
-  .route("/address/:id")
+  .route("/address/:userId")
   .get(controller.read)
   .put(controller.update)
   .delete(controller.destroy);

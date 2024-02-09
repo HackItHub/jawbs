@@ -1,24 +1,21 @@
 import { PrismaClient } from "@prisma/client";
-import { USERS, ADDRESS, EXPERIENCE, WORK_ADDRESS } from "./data/index.js";
+import { USERS } from "./data/index.js";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.user.createMany({
-    data: USERS,
-  });
-
-  await prisma.address.createMany({
-    data: ADDRESS,
-  });
-
-  await prisma.experience.createMany({
-    data: EXPERIENCE,
-  });
-
-  await prisma.workAddress.createMany({
-    data: WORK_ADDRESS,
-  });
+  try {
+    // eslint-disable-next-line
+    for (const user of USERS) {
+      // eslint-disable-next-line
+      await prisma.user.create({ data: user });
+    }
+  } catch (err) {
+    // eslint-disable-next-line
+    console.error(err);
+  } finally {
+    await prisma.$disconnect();
+  }
 }
 
 main()
