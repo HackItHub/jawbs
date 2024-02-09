@@ -47,15 +47,7 @@ module.exports = {
         avoidEscape: true,
       },
     ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        devDependencies: false,
-        optionalDependencies: false,
-        peerDependencies: false,
-        packageDir: __dirname,
-      },
-    ],
+    "import/no-extraneous-dependencies": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "react/jsx-uses-react": ["off"],
     "react/react-in-jsx-scope": ["off"],

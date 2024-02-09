@@ -32,9 +32,26 @@ const create = async (req: Request, res: Response) => {
 const read = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: {
         id,
+      },
+      include: {
+        address: true,
+        education: {
+          include: {
+            schools: {
+              include: {
+                address: true,
+              },
+            },
+          },
+        },
+        experience: {
+          include: {
+            address: true,
+          },
+        },
       },
     });
     res.status(200).json(user);
@@ -45,7 +62,7 @@ const read = async (req: Request, res: Response) => {
   }
 };
 
-const readAll = async (req: Request, res: Response) => {
+const readAll = async (__: Request, res: Response) => {
   try {
     const user = await prisma.user.findMany();
     res.status(200).json(user);

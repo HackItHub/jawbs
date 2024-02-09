@@ -16,10 +16,13 @@
     "@types/react-test-renderer": "^18.0.0",
     "axios": "^1.4.0",
     "framer-motion": "^10.16.4",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.4",
     "overlayscrollbars-react": "^0.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.10.1"
+    "react-icons": "^4.10.1",
+    "sort-by": "^1.2.0"
   },
   "keywords": [],
   "author": "",
@@ -62,6 +65,7 @@
     "postcss-loader": "^7.3.3",
     "postcss-preset-env": "^9.1.0",
     "prettier": "^2.8.8",
+    "react-router-dom": "^6.22.0",
     "react-test-renderer": "^18.2.0",
     "style-loader": "^3.3.3",
     "tailwindcss": "^3.3.3",

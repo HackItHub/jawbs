@@ -1,4 +1,4 @@
 import ResumeFields from "./ResumeFields";
+import Portfolio from "./Portfolio";
 
-//  eslint-disable-next-line
-export { ResumeFields };
+export { ResumeFields, Portfolio };

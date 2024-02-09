@@ -1,20 +1,36 @@
 import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./assets/styles/styles.css";
 import "./assets/styles/scrollbar.css";
 import "./assets/styles/react-spring.css";
 import { BallBackground } from "./utils";
-import { ResumeFields } from "./pages";
+import { ResumeFields, Portfolio } from "./pages";
 import { ThemeContextProvider, AuthContextProvider } from "./contexts";
-//  eslint-disable-next-line
-const App: React.FC = () => (
-  <ThemeContextProvider>
-    <AuthContextProvider>
-      <div className='background'>
-        <BallBackground />
-        <ResumeFields />
-      </div>
-    </AuthContextProvider>
-  </ThemeContextProvider>
-);
+
+const App: React.FC = () => {
+  const router = createBrowserRouter([
+    {
+      path: "/resume-fields",
+      element: (
+        <div className='background'>
+          <BallBackground />
+          <ResumeFields />
+        </div>
+      ),
+    },
+    {
+      path: "/",
+      element: <Portfolio />,
+    },
+  ]);
+
+  return (
+    <ThemeContextProvider>
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
+    </ThemeContextProvider>
+  );
+};
 
 export default App;
