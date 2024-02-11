@@ -37,6 +37,7 @@ const read = async (req: Request, res: Response) => {
         id,
       },
       include: {
+        person: true,
         address: true,
         education: {
           include: {

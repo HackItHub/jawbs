@@ -1,18 +1,53 @@
-export interface AddressForm {
+export interface Address {
+  id: string;
   addressLine1?: string;
   addressLine2?: string;
-  zipCode?: string;
+  zipCode?: number;
   city?: string;
   state?: string;
   country?: string;
 }
+export interface Education {
+  educationLevel: string;
+  create?: School[];
+  school?: School[];
+  id?: string;
+}
 
 export interface School {
-  school: string;
-  monthStart: string;
-  monthEnd?: string;
-  yearStart: number;
-  yearEnd?: number | string;
+  id?: string;
+  name?: string;
   diploma?: string;
-  address?: AddressForm;
+  startYear?: number;
+  endYear?: number;
+  startMonth?: string;
+  endMonth?: string;
+  address?: Address;
+}
+
+export interface Experience {
+  id?: string;
+  title?: string;
+  responsibilities?: string[];
+  startMonth?: string;
+  endMonth?: string;
+  startYear?: number;
+  endYear?: number;
+}
+
+interface Person {
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  phone: number;
+  summary: string;
+}
+
+export interface User {
+  id: string;
+  email: string;
+  education: Education[];
+  address: Address;
+  experience: Experience[];
+  person: Person;
 }

@@ -5,7 +5,12 @@ import "./assets/styles/scrollbar.css";
 import "./assets/styles/react-spring.css";
 import { BallBackground } from "./utils";
 import { ResumeFields, Portfolio } from "./pages";
-import { ThemeContextProvider, AuthContextProvider } from "./contexts";
+import {
+  ThemeContextProvider,
+  AuthContextProvider,
+  UserInfoContextProvider,
+} from "./contexts";
+import { MainContainer } from "./components/layout";
 
 const App: React.FC = () => {
   const router = createBrowserRouter([
@@ -26,9 +31,13 @@ const App: React.FC = () => {
 
   return (
     <ThemeContextProvider>
-      <AuthContextProvider>
-        <RouterProvider router={router} />
-      </AuthContextProvider>
+      <MainContainer>
+        <AuthContextProvider>
+          <UserInfoContextProvider>
+            <RouterProvider router={router} />
+          </UserInfoContextProvider>
+        </AuthContextProvider>
+      </MainContainer>
     </ThemeContextProvider>
   );
 };
