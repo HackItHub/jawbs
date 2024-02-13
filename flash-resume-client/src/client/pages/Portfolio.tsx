@@ -15,7 +15,7 @@ const Portfolio: React.FC = () => {
     try {
       setHasError(false);
       setIsLoading(true);
-      const response = await axios.get(`/users/${currentUser}`);
+      const response = await axios.get(`/user/portfolio/${currentUser}`);
       setPortfolio(response.data);
       setIsLoading(false);
     } catch (err) {

@@ -36,6 +36,22 @@ const read = async (req: Request, res: Response) => {
       where: {
         id,
       },
+    });
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).json({ message: err });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+const readPortfolio = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const user = await prisma.user.findFirst({
+      where: {
+        id,
+      },
       include: {
         person: true,
         address: true,
@@ -107,6 +123,7 @@ const destroy = async (req: Request, res: Response) => {
 export default {
   create,
   read,
+  readPortfolio,
   readAll,
   update,
   destroy,

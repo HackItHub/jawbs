@@ -9,5 +9,6 @@ users
   .get(controller.read)
   .put(controller.update)
   .delete(controller.destroy);
+users.route("/user/portfolio/:id").get(controller.readPortfolio);
 
 export default users;
