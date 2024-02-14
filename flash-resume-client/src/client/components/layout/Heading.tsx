@@ -17,7 +17,7 @@ const Heading: React.FC<Props> = ({ children, color, size }) => {
 
 Heading.defaultProps = {
   size: "h3",
-  color: "black",
+  color: "text-black",
 };
 
 export default Heading;

@@ -2,7 +2,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext, useUserInfoContext } from "../contexts";
-import { LayoutContainer, Loading, ErrorMessage } from "../components/layout";
+import {
+  LayoutContainer,
+  Loading,
+  ErrorMessage,
+  Section,
+  Heading,
+  DisplayText,
+} from "../components/layout";
 import { User } from "../utils/Interfaces";
 
 const Portfolio: React.FC = () => {
@@ -30,12 +37,12 @@ const Portfolio: React.FC = () => {
   const PersonalInformation = () => {
     return (
       <LayoutContainer color='bg-white' shadow={true}>
-        <div className='font-heading text-4xl'>
+        <Heading size='h2'>
           {portfolio.person?.firstName} {portfolio.person?.lastName}
-        </div>
-        <LayoutContainer>
-          <p className='font-display-text text-base'>${portfolio?.email}</p>
-        </LayoutContainer>
+        </Heading>
+        <Section>
+          <DisplayText>${portfolio?.email}</DisplayText>
+        </Section>
       </LayoutContainer>
     );
   };

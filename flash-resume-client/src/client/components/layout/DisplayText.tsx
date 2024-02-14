@@ -10,7 +10,7 @@ const DisplayText: React.FC<Props> = ({ children, color }) => (
 );
 
 DisplayText.defaultProps = {
-  color: "black",
+  color: "text-black",
 };
 
 export default DisplayText;
