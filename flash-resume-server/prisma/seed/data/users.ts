@@ -1,28 +1,4 @@
-interface Person {
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  phone: number;
-  summary: string;
-}
-
-interface Address {
-  country: string;
-  state: string;
-  city: string;
-  addressLine1: string;
-  addressLine2: string;
-  zipCode: number;
-}
-
-interface Experience {
-  experience: string;
-  responsibilities: string[];
-  startYear: number;
-  endYear: number;
-  startMonth: string;
-  endMonth: string;
-}
+import { Person, Address, Experience } from "../../../server/interfaces";
 
 interface User {
   email: string;
@@ -44,35 +20,35 @@ const PERSONS = [
     firstName: "John",
     lastName: "Doe",
     middleName: "A",
-    phone: 1234567890,
+    phone: "1234567890",
     summary: "Enthusiastic developer",
   },
   {
     firstName: "Jane",
     lastName: "Doe",
     middleName: "B",
-    phone: 2345678901,
+    phone: "2345678901",
     summary: "Creative designer",
   },
   {
     firstName: "Alice",
     lastName: "Smith",
     middleName: "C",
-    phone: 3456789012,
+    phone: "3456789012",
     summary: "Expert marketer",
   },
   {
     firstName: "Bob",
     lastName: "Brown",
     middleName: "D",
-    phone: 4567890123,
+    phone: "4567890123",
     summary: "Seasoned manager",
   },
   {
     firstName: "Charlie",
     lastName: "Davis",
     middleName: "E",
-    phone: 5678901234,
+    phone: "5678901234",
     summary: "Dedicated researcher",
   },
 ];

@@ -1,6 +1,6 @@
 import Address from "./Address";
 
-type School = {
+interface School {
   create?: {
     name: string;
     diploma: string;
@@ -17,6 +17,6 @@ type School = {
   startMonth?: string;
   endMonth?: string;
   address?: Address;
-};
+}
 
 export default School;

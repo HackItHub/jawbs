@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import "../assets/styles/form.css";
+import "../assets/styles/forms/form.css";
 import {
   Education,
   Experience,

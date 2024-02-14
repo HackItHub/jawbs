@@ -8,7 +8,7 @@ interface Personal {
   firstName: string;
   lastName: string;
   middleName?: string;
-  phone: number;
+  phone: string;
   email: string;
   summary: string;
 }
@@ -104,7 +104,7 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
           placeholder='1-800-BATMAN'
           label='Phone'
           type='tel'
-          value={person.phone === 0 ? "" : person.phone}
+          value={person.phone}
           onChange={handleChange}
           errorMessage={errors.phone}
         />

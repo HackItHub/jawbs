@@ -4,6 +4,7 @@ import DropDownMenu from "./DropDownMenu";
 import TransparentContainer from "./TransparentContainer";
 import MainContainer from "./MainContainer";
 import LayoutContainer from "./LayoutContainer";
+import ErrorMessage from "./ErrorMessage";
 
 export {
   Loading,
@@ -12,4 +13,5 @@ export {
   TransparentContainer,
   MainContainer,
   LayoutContainer,
+  ErrorMessage,
 };

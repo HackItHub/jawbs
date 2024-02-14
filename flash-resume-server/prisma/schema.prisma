@@ -22,7 +22,7 @@ model Person {
   firstName  String
   lastName   String
   middleName String?
-  phone      BigInt?
+  phone      String?
   summary    String?
   userId     String  @unique
   user       User    @relation(fields: [userId], references: [id])

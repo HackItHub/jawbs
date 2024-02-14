@@ -1,15 +1,16 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuthContext } from "../contexts";
+import { useAuthContext, useUserInfoContext } from "../contexts";
+import { LayoutContainer, Loading, ErrorMessage } from "../components/layout";
 import { User } from "../utils/Interfaces";
-import { MainContainer, LayoutContainer } from "../components/layout";
 
 const Portfolio: React.FC = () => {
   const [portfolio, setPortfolio] = useState<Partial<User>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const currentUser = "79d1ab3c-4a82-4514-8543-bfb1b8ee0403";
+  const currentUser = "06a75613-1925-4d87-b62b-c0cf26545e04";
+  const { setUserInfo } = useUserInfoContext();
 
   const getPortfolio = async () => {
     try {
@@ -18,7 +19,9 @@ const Portfolio: React.FC = () => {
       const response = await axios.get(`/user/portfolio/${currentUser}`);
       setPortfolio(response.data);
       setIsLoading(false);
+      setUserInfo(response.data);
     } catch (err) {
+      console.error(err);
       setHasError(true);
     }
   };
@@ -27,7 +30,7 @@ const Portfolio: React.FC = () => {
     return (
       <LayoutContainer color='bg-white'>
         <div>Name:</div>
-        {portfolio.person?.firstName}
+        {portfolio.person?.firstName} {portfolio.person?.lastName}
       </LayoutContainer>
     );
   };
@@ -35,7 +38,15 @@ const Portfolio: React.FC = () => {
   useEffect(() => {
     getPortfolio();
   }, []);
-  return <PersonalInformation />;
+  return (
+    <>
+      {isLoading && <Loading />}
+      {hasError && (
+        <ErrorMessage message='Something went wrong. Please try again.' />
+      )}
+      {!hasError && !isLoading && <PersonalInformation />}
+    </>
+  );
 };
 
 export default Portfolio;
