@@ -2,17 +2,23 @@ import React from "react";
 
 type Props = {
   children: React.ReactNode;
-  color: string;
+  color?: string;
+  shadow?: boolean;
 };
 
-const LayoutContainer: React.FC<Props> = ({ children, color }) => {
+const LayoutContainer: React.FC<Props> = ({ children, color, shadow }) => {
   return (
-    <div className={`px-6 ${color}`}>
-      <div className='rounded-md drop-shadow-md w-full'>
-        <div className='px-8 py-10'> {children} </div>
+    <div className={color}>
+      <div className={`rounded-md ${shadow ? "drop-shadow-md" : ""} w-full`}>
+        <div className='px-4 py-8'> {children} </div>
       </div>
     </div>
   );
+};
+
+LayoutContainer.defaultProps = {
+  color: "bg-white",
+  shadow: false,
 };
 
 export default LayoutContainer;

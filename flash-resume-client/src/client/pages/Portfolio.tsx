@@ -22,15 +22,20 @@ const Portfolio: React.FC = () => {
       setUserInfo(response.data);
     } catch (err) {
       console.error(err);
+      setIsLoading(false);
       setHasError(true);
     }
   };
 
   const PersonalInformation = () => {
     return (
-      <LayoutContainer color='bg-white'>
-        <div>Name:</div>
-        {portfolio.person?.firstName} {portfolio.person?.lastName}
+      <LayoutContainer color='bg-white' shadow={true}>
+        <div className='font-heading text-4xl'>
+          {portfolio.person?.firstName} {portfolio.person?.lastName}
+        </div>
+        <LayoutContainer>
+          <p className='font-display-text text-base'>${portfolio?.email}</p>
+        </LayoutContainer>
       </LayoutContainer>
     );
   };

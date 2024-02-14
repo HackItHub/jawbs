@@ -18,6 +18,10 @@ module.exports = {
       "text-placeholder": "#9BA3AF",
       "transparent-background": "#F8F8F8",
     },
+    fontFamily: {
+      "display-text": ["Nunito", "ui-monospace", "SFMono-Regular"],
+      heading: ["Roboto", "Georgia", "system-ui", "ui-sans-serif"],
+    },
     extend: {
       spacing: {
         128: "32rem",
