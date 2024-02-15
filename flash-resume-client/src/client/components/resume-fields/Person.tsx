@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import FormFieldText from "../layout/FormFieldText";
+import FormFieldText from "../forms/FormFieldText";
 import { TransparentContainer } from "../layout";
 import { useAuthContext } from "../../contexts";
 

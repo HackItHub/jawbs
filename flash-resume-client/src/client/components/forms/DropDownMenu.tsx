@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { AiFillWarning } from "react-icons/ai";
 import { WARNING_STYLE } from "../../utils/Constants";
-import Loading from "./Loading";
+import Loading from "../layout/Loading";
 
 interface ChildProps {
   data: string[] | number[];
