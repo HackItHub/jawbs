@@ -4,7 +4,7 @@ import jawbsLogo from "../../assets/images/logos/jawbs-logo-original-copy.png";
 
 const Header: React.FC = () => {
   return (
-    <header className='px-2 py-4 drop-shadow-md border-b-black'>
+    <header className='pb-2 drop-shadow-md border-b-black'>
       <NavLink to='/' className='flex text-heading text-lg items-center'>
         <img
           src={jawbsLogo}

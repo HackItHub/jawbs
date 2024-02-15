@@ -8,10 +8,12 @@ type Props = {
 
 const LayoutContainer: React.FC<Props> = ({ children, color, shadow }) => {
   return (
-    <div className={color}>
-      <div className={`rounded-md ${shadow ? "drop-shadow-md" : ""} w-full`}>
-        <div className='px-4 py-8'> {children} </div>
-      </div>
+    <div
+      className={`${color} rounded-xl overflow-hidden ${
+        shadow ? "shadow-md" : ""
+      }`}
+    >
+      <div className='px-4 py-8'> {children} </div>
     </div>
   );
 };
