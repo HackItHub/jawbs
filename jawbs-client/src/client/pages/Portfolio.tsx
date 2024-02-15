@@ -11,6 +11,7 @@ import {
   DisplayText,
 } from "../components/layout";
 import { User } from "../utils/Interfaces";
+import Header from "../components/header/Header";
 
 const Portfolio: React.FC = () => {
   const [portfolio, setPortfolio] = useState<Partial<User>>({});
@@ -52,6 +53,7 @@ const Portfolio: React.FC = () => {
   }, []);
   return (
     <>
+      <Header />
       {isLoading && <Loading />}
       {hasError && (
         <ErrorMessage message='Something went wrong. Please try again.' />

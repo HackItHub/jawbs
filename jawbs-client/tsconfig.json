@@ -28,6 +28,6 @@
       "react-dom/client": ["./node_modules/react/react-dom-client"]
     }
   },
-  "include": ["src/**/**/*", "jest-setup.ts"],
+  "include": ["src/**/**/*", "jest-setup.ts", "index.d.ts"],
   "exclude": ["node_modules"]
 }
