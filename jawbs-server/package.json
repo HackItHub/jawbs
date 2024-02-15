@@ -1,7 +1,7 @@
 {
-  "name": "typescript-node-template",
+  "name": "jawbs-server",
   "version": "1.0.0",
-  "description": "Typescript node template with jest and express",
+  "description": "Backend for the Jawbs app",
   "main": "index.js",
   "scripts": {
     "generate": "npx prisma generate",

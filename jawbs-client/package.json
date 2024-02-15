@@ -1,7 +1,7 @@
 {
-  "name": "react-typescript-template",
+  "name": "jawbs-client",
   "version": "1.0.0",
-  "description": "",
+  "description": "Frontend for Jawbs application",
   "main": "index.js",
   "scripts": {
     "test": "jest --env=jsdom",

@@ -1,4 +1,12 @@
-import { Person, Address, Experience } from "../../../server/interfaces";
+import { Experience, Address } from "../../../server/interfaces";
+
+interface Person {
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  phone: string;
+  summary: string;
+}
 
 interface User {
   email: string;
@@ -104,6 +112,7 @@ const EXPERIENCES = [
     endYear: 2020,
     startMonth: "January",
     endMonth: "December",
+    title: "Developer",
   },
   {
     experience: "Graphic Design",
@@ -112,6 +121,7 @@ const EXPERIENCES = [
     endYear: 2021,
     startMonth: "February",
     endMonth: "November",
+    title: "designer",
   },
   {
     experience: "Marketing",
@@ -120,6 +130,7 @@ const EXPERIENCES = [
     endYear: 2022,
     startMonth: "March",
     endMonth: "October",
+    title: "Marketer",
   },
   {
     experience: "Management",
@@ -128,6 +139,7 @@ const EXPERIENCES = [
     endYear: 2023,
     startMonth: "April",
     endMonth: "September",
+    title: "manager",
   },
   {
     experience: "Research",
@@ -136,6 +148,7 @@ const EXPERIENCES = [
     endYear: 2024,
     startMonth: "May",
     endMonth: "August",
+    title: "Researcher",
   },
 ];
 

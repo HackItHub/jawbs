@@ -16,7 +16,7 @@ const Portfolio: React.FC = () => {
   const [portfolio, setPortfolio] = useState<Partial<User>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const currentUser = "06a75613-1925-4d87-b62b-c0cf26545e04";
+  const currentUser = "072cd781-4ce8-4708-82be-14206be52cc2";
   const { setUserInfo } = useUserInfoContext();
 
   const getPortfolio = async () => {
@@ -41,7 +41,7 @@ const Portfolio: React.FC = () => {
           {portfolio.person?.firstName} {portfolio.person?.lastName}
         </Heading>
         <Section>
-          <DisplayText>${portfolio?.email}</DisplayText>
+          <DisplayText>{portfolio?.email}</DisplayText>
         </Section>
       </LayoutContainer>
     );
