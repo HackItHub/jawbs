@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { isPossiblePhoneNumber } from "react-phone-number-input";
 import FormFieldText from "../forms/FormFieldText";
 import { TransparentContainer } from "../layout";
 import { useAuthContext } from "../../contexts";
@@ -40,6 +41,8 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
     if (!person.firstName) formErrors.firstName = "First Name is required";
     if (!person.lastName) formErrors.lastName = "Last Name is required";
     if (!person.phone) formErrors.phone = "Phone is required";
+    if (person.phone && !isPossiblePhoneNumber(person.phone))
+      formErrors.phone = "Invalid Phone Number";
     if (!person.email) formErrors.email = "Email is required";
 
     if (Object.keys(formErrors).length > 0) {
