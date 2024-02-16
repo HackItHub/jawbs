@@ -1,5 +1,5 @@
 import React from "react";
-import { BiSolidErrorCircle } from "react-icons/bi";
+import { FaCircleExclamation } from "react-icons/fa6";
 import "../../assets/styles/error/error.css";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 const ErrorMessage: React.FC<Props> = ({ message }) => (
   <div className='error-message'>
     <span className='error-icon'>
-      <BiSolidErrorCircle />
+      <FaCircleExclamation />
     </span>
     <span>{message}</span>
   </div>

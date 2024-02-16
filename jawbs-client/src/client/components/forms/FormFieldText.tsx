@@ -1,5 +1,5 @@
 import React from "react";
-import { AiFillWarning } from "react-icons/ai";
+import { FaCircleExclamation } from "react-icons/fa6";
 import { WARNING_STYLE } from "../../utils/Constants";
 
 /* eslint-disable */
@@ -113,7 +113,7 @@ const FormFieldText: React.FC<Props> = ({
       )}
       {errorMessage && (
         <div className='flex pt-1'>
-          <AiFillWarning style={WARNING_STYLE} />
+          <FaCircleExclamation style={WARNING_STYLE} />
           <div className='text-red text-sm'>{errorMessage}</div>
         </div>
       )}

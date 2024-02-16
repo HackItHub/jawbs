@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import { AiFillWarning } from "react-icons/ai";
+import { FaCircleExclamation } from "react-icons/fa6";
 import { WARNING_STYLE } from "../../utils/Constants";
 import Loading from "../layout/Loading";
 
@@ -96,7 +96,7 @@ const DropDownMenu: React.FC<ChildProps> = ({
         </div>
         {errorMessage && (
           <div className='flex'>
-            <AiFillWarning style={WARNING_STYLE} />
+            <FaCircleExclamation style={WARNING_STYLE} />
             <div className='text-red text-sm'>{errorMessage}</div>
           </div>
         )}

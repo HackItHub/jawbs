@@ -8,8 +8,10 @@ import ErrorMessage from "./ErrorMessage";
 import Heading from "./Heading";
 import DisplayText from "./DisplayText";
 import Section from "./Section";
+import SubSection from "./SubSection";
 
 export {
+  SubSection,
   Section,
   DisplayText,
   Heading,

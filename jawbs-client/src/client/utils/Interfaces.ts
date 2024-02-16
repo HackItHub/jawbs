@@ -39,7 +39,7 @@ export interface Person {
   firstName: string;
   lastName: string;
   middleName: string;
-  phone: number;
+  phone: string;
   summary: string;
 }
 

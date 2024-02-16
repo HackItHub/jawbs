@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { IoMdAddCircle } from "react-icons/io";
-import { BsTrashFill } from "react-icons/bs";
+import { FaCirclePlus, FaTrashCan } from "react-icons/fa6";
 import axios from "axios";
 import { DropDownMenu, FormFieldText, TransparentContainer } from "../layout";
 import {
@@ -164,7 +163,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
           role='button'
           tabIndex={0}
         >
-          <BsTrashFill style={removeEducationStyle} />
+          <FaTrashCan style={removeEducationStyle} />
         </div>
         <div>
           <FormFieldText
@@ -323,7 +322,7 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
           >
             <div className='text-text-placeholder flex justify-center items-center gap-2'>
               Add Education
-              <IoMdAddCircle />
+              <FaCirclePlus />
             </div>
           </button>
         </div>
