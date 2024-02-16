@@ -1,4 +1,6 @@
 import React from "react";
+import PhoneInputWithCountrySelect from "react-phone-number-input";
+import { E164Number } from "libphonenumber-js/types.cjs";
 import { FaCircleExclamation } from "react-icons/fa6";
 import { WARNING_STYLE } from "../../utils/Constants";
 
@@ -35,6 +37,10 @@ const FormFieldText: React.FC<Props> = ({
     } else {
       onChange(dataId, inputValue);
     }
+  };
+
+  const handlePhoneInput = (e: E164Number) => {
+    onChange(dataId, e);
   };
 
   const handleTextAreaInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -80,17 +86,17 @@ const FormFieldText: React.FC<Props> = ({
       {type === "tel" && (
         <label htmlFor={id} className='form-input-container'>
           <div className='label-text'>{label}</div>
-          <input
+          <PhoneInputWithCountrySelect
+            styles={""}
             id={id}
-            onChange={handleInput}
-            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
+            onChange={handlePhoneInput}
+            className={`rounded-md bg-white  text-sm font-semibold text-gray-900 shadow-sm ${
               errorMessage ? " border-red border-2 border-solid " : " ring-1 "
             } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
             placeholder={placeholder}
-            aria-required={isRequired}
+            aria-require={isRequired}
             required={isRequired}
             value={value}
-            type={type}
           />
         </label>
       )}

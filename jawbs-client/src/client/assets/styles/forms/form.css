@@ -32,3 +32,30 @@ label {
 .label-text {
   @apply text-[14px] text-black flex justify-start;
 }
+
+.PhoneInput {
+  @apply flex items-center px-2;
+}
+
+.PhoneInput.error {
+  @apply border-red border-2 border-solid;
+}
+
+.PhoneInputCountrySelect {
+  @apply hidden;
+}
+
+.PhoneInputCountryIcon {
+  @apply w-6 h-6 flex items-center;
+}
+
+.PhoneInputCountry {
+  @apply flex;
+}
+
+.PhoneInputInput {
+  outline: none;
+  margin: 1px 0;
+  width: 100%;
+  @apply h-full px-3 py-2 bg-transparent-background;
+}
