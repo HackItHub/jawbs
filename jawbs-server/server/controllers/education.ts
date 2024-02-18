@@ -38,7 +38,7 @@ const create = async (req: Request, res: Response) => {
     }
 
     for (const school of schoolList) {
-      const newSchools = await prisma.school.create({
+      await prisma.school.create({
         data: {
           educationId: newEducation.id,
           ...school,
