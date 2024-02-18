@@ -5,12 +5,19 @@ import React, {
   SetStateAction,
   useMemo,
 } from "react";
-import { User } from "../utils/Interfaces";
+import { Experience, Address, Education, Person } from "../utils/Interfaces";
 
 type SetCurrentUserType = React.Dispatch<SetStateAction<string>>;
 
 interface UserInfoContextType {
-  userInfo: Partial<User>;
+  userInfo: {
+    id?: string;
+    email?: string;
+    experience?: Experience[];
+    education?: Education;
+    address?: Address;
+    person?: Person;
+  };
   setUserInfo: SetCurrentUserType;
 }
 

@@ -8,38 +8,36 @@ const PersonalInfo: React.FC = () => {
 
   return (
     <div>
-      <Heading size='h2'>
-        {portfolio.person?.firstName}{" "}
-        {portfolio.person?.middleName
-          ? `${portfolio.person?.middleName.charAt(0)}.`
-          : ""}{" "}
-        {portfolio.person?.lastName}
-      </Heading>
+      <div className='flex justify-center'>
+        <Heading size='h2'>
+          {portfolio.person?.firstName}{" "}
+          {portfolio.person?.middleName
+            ? `${portfolio.person?.middleName.charAt(0)}.`
+            : ""}{" "}
+          {portfolio.person?.lastName}
+        </Heading>
+      </div>
       <Section>
-        <SubSection>
+        <div className='flex items-center justify-center gap-4'>
           <div className='flex gap-2 items-center'>
             <FaEnvelope className='text-xl' />
             <DisplayText>{portfolio?.email}</DisplayText>
           </div>
-        </SubSection>
-        {portfolio.person?.phone && (
-          <SubSection>
+          {portfolio.person?.phone && (
             <div className='flex gap-2 item-center'>
               <FaPhone className='text-xl' />
               <DisplayText>{portfolio.person.phone}</DisplayText>
             </div>
-          </SubSection>
-        )}
-        {portfolio.address?.city && portfolio.address?.country && (
-          <SubSection>
+          )}
+          {portfolio.address?.city && portfolio.address?.country && (
             <div className='flex gap-2 items-center'>
               <FaLocationDot className='text-xl' />
               <DisplayText>
                 {portfolio.address.city}, {portfolio.address.country}
               </DisplayText>
             </div>
-          </SubSection>
-        )}
+          )}
+        </div>
       </Section>
       {portfolio.person?.summary && (
         <Section>

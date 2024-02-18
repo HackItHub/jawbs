@@ -1,5 +1,5 @@
-import AddressForm from "./AddressForm";
 import PersonForm from "./PersonForm";
+import AddressForm from "./AddressForm";
 import EducationForm from "./EducationForm";
 import ExperienceForm from "./ExperienceForm";
 

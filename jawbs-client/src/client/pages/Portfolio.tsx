@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext, useUserInfoContext } from "../contexts";
 import { Loading, ErrorMessage, LayoutContainer } from "../components/layout";
-import Header from "../components/header/Header";
 import PersonalInfo from "../components/portfolio/PersonalInfo";
+import PortfolioExperience from "../components/portfolio/Experience";
+import Header from "../components/header/Header";
 
 const Portfolio: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +42,7 @@ const Portfolio: React.FC = () => {
       {!hasError && !isLoading && (
         <LayoutContainer>
           <PersonalInfo />
+          <PortfolioExperience />
         </LayoutContainer>
       )}
     </>

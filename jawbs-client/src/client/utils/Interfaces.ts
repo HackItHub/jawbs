@@ -27,11 +27,12 @@ export interface School {
 
 export interface Experience {
   id?: string;
-  title?: string;
-  responsibilities?: string[];
-  startMonth?: string;
+  experience: string;
+  title: string;
+  responsibilities: string[];
+  startMonth: string;
   endMonth?: string;
-  startYear?: number;
+  startYear: number;
   endYear?: number;
 }
 
@@ -46,7 +47,7 @@ export interface Person {
 export interface User {
   id: string;
   email: string;
-  education: Education[];
+  education: Education;
   address: Address;
   experience: Experience[];
   person: Person;
