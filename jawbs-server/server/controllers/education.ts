@@ -34,9 +34,9 @@ const create = async (req: Request, res: Response) => {
       });
     });
     // eslint-disable
-    educations.forEach(async (education: any) => {
+    for (const education of educations) {
       await prisma.education.create({ data: education });
-    });
+    }
     res.status(201).json(educations);
   } catch (err) {
     res.status(400).json({ message: err });
