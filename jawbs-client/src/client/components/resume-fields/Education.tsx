@@ -53,24 +53,7 @@ const removeEducationStyle = {
 };
 
 const Education: React.FC<Props> = ({ handleFormChange }) => {
-  const [education, setEducation] = useState<School[]>([
-    {
-      name: "",
-      diploma: "",
-      startMonth: "",
-      endMonth: "",
-      startYear: 0,
-      endYear: 0,
-      address: {
-        addressLine1: "",
-        addressLine2: "",
-        zipCode: 0,
-        city: "",
-        state: "",
-        country: "",
-      },
-    },
-  ]);
+  const [education, setEducation] = useState<School[]>([]);
   const [educationLevel, setEducationLevel] = useState<string>("");
   const { currentUser } = useAuthContext();
 

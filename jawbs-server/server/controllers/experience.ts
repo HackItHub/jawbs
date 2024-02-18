@@ -47,6 +47,7 @@ const create = async (req: Request, res: Response) => {
       });
       experienceList.push(newExperiences);
     }
+
     res.status(201).json({
       data: experienceList,
       message: "Created experiences",

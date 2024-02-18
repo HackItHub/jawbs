@@ -87,14 +87,12 @@ const FormFieldText: React.FC<Props> = ({
         <label htmlFor={id} className='form-input-container'>
           <div className='label-text'>{label}</div>
           <PhoneInputWithCountrySelect
-            styles={""}
             id={id}
             onChange={handlePhoneInput}
             className={`rounded-md bg-white  text-sm font-semibold text-gray-900 shadow-sm ${
               errorMessage ? " border-red border-2 border-solid " : " ring-1 "
             } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
             placeholder={placeholder}
-            aria-require={isRequired}
             required={isRequired}
             value={value}
           />
