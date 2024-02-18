@@ -38,5 +38,8 @@ module.exports = {
     "no-console": "error",
     "no-shadow": "off",
     "import/no-extraneous-dependencies": "off",
+    "no-await-in-loop": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-restricted-syntax": "off",
   },
 };

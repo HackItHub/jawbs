@@ -1,14 +1,32 @@
 import { Request, Response } from "express";
 import prisma from "../libs/prisma.js";
+import { Address } from "../interfaces/index.js";
 
 const create = async (req: Request, res: Response) => {
-  const { experiences, userId } = req.body;
+  const { experiences, userId }: any = req.body;
+  const experienceList = [];
+  if (!userId) {
+    res.status(400).json("Needs an authorized user");
+    return;
+  }
   try {
-    // eslint-disable-next-line
-    experiences.forEach(async (experience: any) => {
+    for (const experience of experiences) {
       const { address } = experience;
-      const createAddress = { create: { ...address } };
-      const experienceFormData = {
+      let hasAddress = false;
+      let createAddress: Partial<Address> = {};
+      if (
+        address &&
+        address.addressLine1 &&
+        address.state &&
+        address.city &&
+        address.country &&
+        address.zipCode
+      ) {
+        createAddress = { create: { ...address } };
+        hasAddress = true;
+      }
+
+      const experienceFormData: any = {
         experience: experience.experience,
         title: experience.title,
         responsibilities: experience.responsibilities,
@@ -16,18 +34,27 @@ const create = async (req: Request, res: Response) => {
         endMonth: experience.endMonth,
         startYear: experience.startYear,
         endYear: experience.endYear,
-        address: createAddress,
         userId,
+        address: createAddress,
       };
-      const newExperience = await prisma.experience.create({
+      if (!hasAddress) {
+        delete experienceFormData.address;
+      }
+
+      // eslint-disable-next-line
+      const newExperiences = prisma.experience.create({
         data: experienceFormData,
       });
-      res.status(201).json(newExperience);
+      experienceList.push(newExperiences);
+    }
+    res.status(201).json({
+      data: experienceList,
+      message: "Created experiences",
     });
   } catch (err) {
     res.status(400).json({ message: err });
   } finally {
-    await prisma.$disconnect();
+    prisma.$disconnect();
   }
 };
 

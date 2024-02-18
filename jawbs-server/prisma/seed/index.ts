@@ -7,7 +7,6 @@ async function main() {
   try {
     // eslint-disable-next-line
     for (const user of USERS) {
-      // eslint-disable-next-line
       await prisma.user.create({ data: user });
     }
   } catch (err) {

@@ -1,19 +1,24 @@
+import Address from "./Address";
+
 interface Experience {
-  experience?: string;
-  title?: string;
-  responsibilities?: string[];
-  startYear?: number;
-  endYear?: number;
-  startMonth?: string;
-  endMonth?: string;
+  id?: string;
+  userId?: string;
+  experience: string;
+  title: string;
+  responsibilities: string[];
+  startYear: number;
+  endYear: number;
+  startMonth: string;
+  endMonth: string;
+  address?: Address;
   create?: {
-    experience?: string;
-    title?: string;
-    responsibilities?: string[];
-    startYear?: number;
-    endYear?: number;
-    startMonth?: string;
-    endMonth?: string;
+    experience: string;
+    title: string;
+    responsibilities: string[];
+    startYear: number;
+    endYear: number;
+    startMonth: string;
+    endMonth: string;
   };
 }
 

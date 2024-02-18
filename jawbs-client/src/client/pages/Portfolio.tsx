@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext, useUserInfoContext } from "../contexts";
 import { Loading, ErrorMessage, LayoutContainer } from "../components/layout";
-import { User } from "../utils/Interfaces";
 import Header from "../components/header/Header";
 import PersonalInfo from "../components/portfolio/PersonalInfo";
 
