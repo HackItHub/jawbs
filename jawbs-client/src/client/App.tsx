@@ -15,7 +15,7 @@ import { MainContainer } from "./components/layout";
 const App: React.FC = () => {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/resume-fields",
       element: (
         <div className='background'>
           <BallBackground />
@@ -24,7 +24,7 @@ const App: React.FC = () => {
       ),
     },
     {
-      path: "/portfolio",
+      path: "/",
       element: <Portfolio />,
     },
   ]);

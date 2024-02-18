@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../assets/styles/forms/form.css";
 import {
-  Education,
-  Experience,
-  Person,
-  Address,
+  EducationForm,
+  ExperienceForm,
+  PersonForm,
+  AddressForm,
 } from "../components/resume-fields";
 
 const ResumeFields: React.FC = () => {
@@ -24,11 +24,17 @@ const ResumeFields: React.FC = () => {
           exit={{ x: "100%" }}
           transition={{ type: "tween", duration: 0.25 }} // Customize the transition
         >
-          {formIndex === 0 && <Person handleFormChange={handleFormChange} />}
-          {formIndex === 1 && <Address handleFormChange={handleFormChange} />}
-          {formIndex === 2 && <Education handleFormChange={handleFormChange} />}
+          {formIndex === 0 && (
+            <PersonForm handleFormChange={handleFormChange} />
+          )}
+          {formIndex === 1 && (
+            <AddressForm handleFormChange={handleFormChange} />
+          )}
+          {formIndex === 2 && (
+            <EducationForm handleFormChange={handleFormChange} />
+          )}
           {formIndex === 3 && (
-            <Experience handleFormChange={handleFormChange} />
+            <ExperienceForm handleFormChange={handleFormChange} />
           )}
         </motion.div>
       </AnimatePresence>

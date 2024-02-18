@@ -52,7 +52,7 @@ const removeEducationStyle = {
   height: "20px",
 };
 
-const Education: React.FC<Props> = ({ handleFormChange }) => {
+const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
   const [education, setEducation] = useState<School[]>([]);
   const [educationLevel, setEducationLevel] = useState<string>("");
   const { currentUser } = useAuthContext();
@@ -323,4 +323,4 @@ const Education: React.FC<Props> = ({ handleFormChange }) => {
   );
 };
 
-export default Education;
+export default EducationForm;

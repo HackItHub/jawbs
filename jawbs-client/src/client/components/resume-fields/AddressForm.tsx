@@ -4,7 +4,7 @@ import { DropDownMenu, FormFieldText, TransparentContainer } from "../layout";
 import { COUNTRIES, STATES } from "../../utils/Constants";
 import { useAuthContext } from "../../contexts";
 
-export interface AddressForm {
+export interface AddressFormType {
   addressLine1?: string;
   addressLine2?: string;
   zipCode?: number;
@@ -28,10 +28,10 @@ type Props = {
   handleFormChange: () => void;
 };
 
-const Address: React.FC<Props> = ({ handleFormChange }) => {
+const AddressForm: React.FC<Props> = ({ handleFormChange }) => {
   const { currentUser } = useAuthContext();
 
-  const [addressForm, setAddressForm] = useState<AddressForm>({
+  const [addressForm, setAddressForm] = useState<AddressFormType>({
     userId: currentUser,
   });
   const [errors, setErrors] = useState<Partial<AddressFormErrors>>({});
@@ -159,4 +159,4 @@ const Address: React.FC<Props> = ({ handleFormChange }) => {
   );
 };
 
-export default Address;
+export default AddressForm;

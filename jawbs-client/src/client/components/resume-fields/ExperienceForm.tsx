@@ -34,7 +34,7 @@ type Props = {
   handleFormChange: () => void;
 };
 
-const Experience: React.FC<Props> = ({ handleFormChange }) => {
+const ExperienceForm: React.FC<Props> = ({ handleFormChange }) => {
   const { currentUser } = useAuthContext();
   const [experience, setExperience] = useState<ExperienceEntries[]>([
     {
@@ -301,4 +301,4 @@ const Experience: React.FC<Props> = ({ handleFormChange }) => {
   );
 };
 
-export default Experience;
+export default ExperienceForm;

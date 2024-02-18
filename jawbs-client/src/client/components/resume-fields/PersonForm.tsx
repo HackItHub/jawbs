@@ -25,7 +25,7 @@ type Props = {
   handleFormChange: () => void;
 };
 
-const Person: React.FC<Props> = ({ handleFormChange }) => {
+const PersonForm: React.FC<Props> = ({ handleFormChange }) => {
   const { setCurrentUser } = useAuthContext();
   const [person, setPerson] = useState<Partial<Personal>>({});
 
@@ -144,4 +144,4 @@ const Person: React.FC<Props> = ({ handleFormChange }) => {
   );
 };
 
-export default Person;
+export default PersonForm;

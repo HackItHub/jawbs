@@ -1,6 +1,6 @@
-import Address from "./Address";
-import Person from "./Person";
-import Education from "./Education";
-import Experience from "./Experience";
+import AddressForm from "./AddressForm";
+import PersonForm from "./PersonForm";
+import EducationForm from "./EducationForm";
+import ExperienceForm from "./ExperienceForm";
 
-export { Address, Person, Education, Experience };
+export { AddressForm, PersonForm, EducationForm, ExperienceForm };

@@ -5,13 +5,6 @@ import { Heading, DisplayText, Section, SubSection } from "../layout";
 
 const PersonalInfo: React.FC = () => {
   const { userInfo: portfolio } = useUserInfoContext();
-  const formatPhone = (phone: string) => {
-    const phoneLength = Math.floor(phone.length / 10) + (phone.length % 10) - 1;
-    return `+${phone.slice(0, phoneLength)} (${phone.slice(
-      1,
-      4,
-    )})-${phone.slice(4, 7)}-${phone.slice()}`;
-  };
 
   return (
     <div>
@@ -33,7 +26,7 @@ const PersonalInfo: React.FC = () => {
           <SubSection>
             <div className='flex gap-2 item-center'>
               <FaPhone className='text-xl' />
-              <DisplayText>{formatPhone(portfolio.person.phone)}</DisplayText>
+              <DisplayText>{portfolio.person.phone}</DisplayText>
             </div>
           </SubSection>
         )}
