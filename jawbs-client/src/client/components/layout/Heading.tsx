@@ -9,9 +9,11 @@ type Props = {
 const Heading: React.FC<Props> = ({ children, color, size }) => {
   const HeadingSize = size || "h3";
   return (
-    <HeadingSize className={`${color} m-0 font-heading`}>
-      {children}
-    </HeadingSize>
+    <div>
+      <HeadingSize className={`${color} m-0 font-heading`}>
+        {children}
+      </HeadingSize>
+    </div>
   );
 };
 

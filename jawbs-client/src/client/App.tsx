@@ -15,17 +15,19 @@ import { MainContainer } from "./components/layout";
 const App: React.FC = () => {
   const router = createBrowserRouter([
     {
-      path: "/resume-fields",
-      element: (
-        <div className='background'>
-          <BallBackground />
-          <ResumeFields />
-        </div>
-      ),
-    },
-    {
       path: "/",
       element: <Portfolio />,
+      children: [
+        {
+          path: "/resume-fields",
+          element: (
+            <div className='background'>
+              <BallBackground />
+              <ResumeFields />
+            </div>
+          ),
+        },
+      ],
     },
   ]);
 

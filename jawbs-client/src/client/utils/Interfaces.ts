@@ -1,5 +1,5 @@
 export interface Address {
-  id: string;
+  id?: string;
   addressLine1?: string;
   addressLine2?: string;
   zipCode?: number;
@@ -10,19 +10,20 @@ export interface Address {
 export interface Education {
   educationLevel: string;
   create?: School[];
-  school?: School[];
+  school: School[];
   id?: string;
+  userId?: string;
 }
 
 export interface School {
   id?: string;
-  name?: string;
+  name: string;
   diploma?: string;
-  startYear?: number;
+  startYear: number;
   endYear?: number;
-  startMonth?: string;
+  startMonth: string;
   endMonth?: string;
-  address?: Address;
+  address: Address | null;
 }
 
 export interface Experience {

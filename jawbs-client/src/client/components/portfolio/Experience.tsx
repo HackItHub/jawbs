@@ -2,13 +2,13 @@ import React from "react";
 import { Section, Heading, SubSection, DisplayText } from "../layout";
 import { useUserInfoContext } from "../../contexts";
 
-const PortfolioExperience: React.FC = () => {
+const ExperiencePortfolio: React.FC = () => {
   const { userInfo } = useUserInfoContext();
   const { experience } = userInfo;
   return (
     <div>
       <Section>
-        <Heading size='h3'>Experience:</Heading>
+        <Heading size='h3'>Experience</Heading>
         {experience &&
           experience.map((role) => (
             <SubSection key={role.id}>
@@ -44,4 +44,4 @@ const PortfolioExperience: React.FC = () => {
   );
 };
 
-export default PortfolioExperience;
+export default ExperiencePortfolio;

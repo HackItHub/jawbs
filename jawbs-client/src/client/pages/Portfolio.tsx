@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext, useUserInfoContext } from "../contexts";
 import { Loading, ErrorMessage, LayoutContainer } from "../components/layout";
-import PersonalInfo from "../components/portfolio/PersonalInfo";
-import PortfolioExperience from "../components/portfolio/Experience";
+import PersonalInfoPortfolio from "../components/portfolio/PersonalInfo";
+import ExperiencePortfolio from "../components/portfolio/Experience";
+import EducationPortfolio from "../components/portfolio/Education";
 import Header from "../components/header/Header";
 
 const Portfolio: React.FC = () => {
@@ -41,8 +42,9 @@ const Portfolio: React.FC = () => {
       )}
       {!hasError && !isLoading && (
         <LayoutContainer>
-          <PersonalInfo />
-          <PortfolioExperience />
+          <PersonalInfoPortfolio />
+          <ExperiencePortfolio />
+          <EducationPortfolio />
         </LayoutContainer>
       )}
     </>

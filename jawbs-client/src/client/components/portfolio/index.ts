@@ -1,4 +1,9 @@
-import PersonalInfo from "./PersonalInfo";
-import PortfolioExperience from "./Experience";
+import EducationPortfolio from "./Education";
+import ExperiencePortfolio from "./Experience";
+import PersonalInfoPortfolio from "./PersonalInfo";
 
-export default { PersonalInfo, PortfolioExperience };
+export default {
+  PersonalInfoPortfolio,
+  ExperiencePortfolio,
+  EducationPortfolio,
+};

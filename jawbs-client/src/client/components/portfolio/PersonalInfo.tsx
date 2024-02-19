@@ -3,7 +3,7 @@ import { FaEnvelope, FaPhone, FaLocationDot } from "react-icons/fa6";
 import { useUserInfoContext } from "../../contexts";
 import { Heading, DisplayText, Section, SubSection } from "../layout";
 
-const PersonalInfo: React.FC = () => {
+const PersonalInfoPortfolio: React.FC = () => {
   const { userInfo: portfolio } = useUserInfoContext();
 
   return (
@@ -41,7 +41,7 @@ const PersonalInfo: React.FC = () => {
       </Section>
       {portfolio.person?.summary && (
         <Section>
-          <Heading size='h3'>Summary:</Heading>
+          <Heading size='h3'>Summary</Heading>
           <SubSection>
             <DisplayText>{portfolio.person.summary}</DisplayText>
           </SubSection>
@@ -51,4 +51,4 @@ const PersonalInfo: React.FC = () => {
   );
 };
 
-export default PersonalInfo;
+export default PersonalInfoPortfolio;

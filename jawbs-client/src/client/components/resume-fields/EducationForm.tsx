@@ -10,27 +10,7 @@ import {
   range,
 } from "../../utils/Constants";
 import { useAuthContext } from "../../contexts";
-
-/* eslint-disable */
-
-export interface AddressForm {
-  addressLine1?: string;
-  addressLine2?: string;
-  zipCode?: number;
-  city?: string;
-  state?: string;
-  country?: string;
-}
-
-export interface School {
-  name: string;
-  startMonth: string;
-  endMonth?: string;
-  startYear: number;
-  endYear?: number;
-  diploma?: string;
-  address: AddressForm;
-}
+import { Education, School } from "../../utils/Interfaces";
 
 type Props = {
   handleFormChange: () => void;
@@ -82,14 +62,15 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
     index: number,
   ) => {
     const updatedEducation = [...education];
-    const address = education[index].address;
-    address[name] = value;
-    updatedEducation[index] = {
-      ...updatedEducation[index],
-      address,
-    };
-
-    setEducation(updatedEducation);
+    const { address } = education[index];
+    if (address) {
+      address[name] = value;
+      updatedEducation[index] = {
+        ...updatedEducation[index],
+        address,
+      };
+      setEducation(updatedEducation);
+    }
   };
 
   const handleAddEntry = () => {
@@ -122,9 +103,9 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const completeEducation = {
+    const completeEducation: Education = {
       educationLevel,
-      schools: education,
+      school: education,
       userId: currentUser,
     };
     try {
@@ -220,7 +201,7 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
             id={`addressLine1_${index}`}
             placeholder='1007 Mountain Drive'
             label='Address Line 1'
-            value={education[index].address.addressLine1}
+            value={education[index].address?.addressLine1}
             onChange={(name, value) =>
               handleEntryChangeAddress(name, value, index)
             }
@@ -228,7 +209,7 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
           <FormFieldText
             dataId='addressLine2'
             id={`addressLine2_${index}`}
-            value={education[index].address.addressLine2}
+            value={education[index].address?.addressLine2}
             placeholder='Bat Cave Way'
             label='Address Line 2'
             onChange={(name, value) =>
@@ -240,7 +221,7 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
             dataId='city'
             placeholder='Gotham City'
             label='City'
-            value={education[index].address.city}
+            value={education[index].address?.city}
             onChange={(name, value) =>
               handleEntryChangeAddress(name, value, index)
             }
@@ -250,7 +231,7 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
             data={STATES}
             id={`state_${index}`}
             dataId='state'
-            value={education[index].address.state}
+            value={education[index].address?.state}
             listName='State'
             handleInput={(name, value) =>
               handleEntryChangeAddress(name, value, index)
@@ -261,7 +242,7 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
             data={COUNTRIES}
             listName='Country'
             dataId='country'
-            value={education[index].address.country}
+            value={education[index].address?.country}
             id={`country_${index}`}
             handleInput={(name, value) =>
               handleEntryChangeAddress(name, value, index)
@@ -273,7 +254,7 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
             placeholder='6002318'
             label='Zip Code'
             type='numeric'
-            value={education[index].address.zipCode}
+            value={education[index].address?.zipCode}
             onChange={(name, value) =>
               handleEntryChangeAddress(name, value, index)
             }
