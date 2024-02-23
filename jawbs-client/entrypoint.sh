@@ -4,4 +4,4 @@
 rsync -arv /usr/src/cache/node_modules/. /usr/src/app/node_modules/
 
 # Start your application
-exec npm run dev
+exec npm run dev:vite

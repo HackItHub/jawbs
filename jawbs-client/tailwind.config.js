@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["./src/client/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/client/**/*.{js,jsx,ts,tsx}", "index.html"],
   theme: {
     screens: {
       sm: "480px",

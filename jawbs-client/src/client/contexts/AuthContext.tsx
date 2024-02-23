@@ -34,7 +34,7 @@ const AuthContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const [currentUser, setCurrentUser] = useState(
-    "449be799-c978-40e5-8df1-b59ff19338ac",
+    "c043750f-cf9f-4e9b-ab95-7da23fdb6acf",
   );
 
   const authValue = useMemo(() => {

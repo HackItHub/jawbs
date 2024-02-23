@@ -14,10 +14,10 @@ module.exports = (env) => {
       },
       devServer: {
         port: 3000,
-        host: "0.0.0.0",
         proxy: {
           "/": `http://api:3001`,
         },
+        historyApiFallback: true,
         hot: true,
       },
       watchOptions: {

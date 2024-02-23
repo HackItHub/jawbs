@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ESNext",
     "module": "esnext",
     "moduleResolution": "node",
     "allowUnreachableCode": false,
     "allowSyntheticDefaultImports": true,
+    "types": ["vite/client"],
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
@@ -12,6 +13,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "alwaysStrict": true,
+    "resolveJsonModule": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
@@ -24,10 +26,11 @@
     "checkJs": true,
     "isolatedModules": true,
     "rootDir": "./",
+    "baseUrl": ".",
     "paths": {
-      "react-dom/client": ["./node_modules/react/react-dom-client"]
+      "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/**/*", "jest-setup.ts", "index.d.ts"],
+  "include": ["src/**/**/*", "jest-setup.ts", "index.d.ts", "vite.config.ts"],
   "exclude": ["node_modules"]
 }

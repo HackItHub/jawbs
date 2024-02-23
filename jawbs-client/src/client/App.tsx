@@ -1,10 +1,10 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./assets/styles/styles.css";
 import "./assets/styles/scrollbar.css";
 import "./assets/styles/react-spring.css";
 import { BallBackground } from "./utils";
-import { ResumeFields, Portfolio } from "./pages";
+import { ResumeFields, Portfolio, ErrorPage } from "./pages";
 import {
   ThemeContextProvider,
   AuthContextProvider,
@@ -13,30 +13,29 @@ import {
 import { MainContainer } from "./components/layout";
 
 const App: React.FC = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Portfolio />,
-      children: [
-        {
-          path: "/resume-fields",
-          element: (
-            <div className='background'>
-              <BallBackground />
-              <ResumeFields />
-            </div>
-          ),
-        },
-      ],
-    },
-  ]);
-
   return (
     <ThemeContextProvider>
       <MainContainer>
         <AuthContextProvider>
           <UserInfoContextProvider>
-            <RouterProvider router={router} />
+            <BrowserRouter>
+              <Routes>
+                <Route
+                  path='/'
+                  element={<Portfolio />}
+                  errorElement={<ErrorPage />}
+                />
+                <Route
+                  path='/resume-fields'
+                  element={
+                    <div className='background'>
+                      <BallBackground />
+                      <ResumeFields />
+                    </div>
+                  }
+                />
+              </Routes>
+            </BrowserRouter>
           </UserInfoContextProvider>
         </AuthContextProvider>
       </MainContainer>
