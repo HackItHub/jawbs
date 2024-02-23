@@ -1,3 +1,6 @@
+@import url("./fonts/nunito.css");
+@import url("./fonts/roboto.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -19,9 +22,6 @@
     @apply text-lg;
   }
 }
-
-@import url("./fonts/nunito.css");
-@import url("./fonts/roboto.css");
 
 .root {
   position: relative;
