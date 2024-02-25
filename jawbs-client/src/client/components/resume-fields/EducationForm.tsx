@@ -126,6 +126,7 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
           onKeyDown={(e) => handleRemoveEducationKeyDown(e, index)}
           role='button'
           tabIndex={0}
+          aria-labelledby='Remove education'
         >
           <FaTrashCan style={removeEducationStyle} />
         </div>

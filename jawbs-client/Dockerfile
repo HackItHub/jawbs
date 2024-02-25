@@ -1,8 +1,10 @@
-FROM node:18 as development
+FROM node as development
 
 RUN apt-get update && apt-get install -y rsync
 
 WORKDIR /usr/src/cache
+
+RUN npm cache clean --force
 
 COPY package.json ./
 
