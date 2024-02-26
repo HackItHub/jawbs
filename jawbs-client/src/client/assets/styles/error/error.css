@@ -1,0 +1,7 @@
+.error-message {
+  @apply py-2 px-4 text-red text-base flex justify-center items-center;
+}
+
+.error-icon {
+  @apply text-lg pr-2;
+}

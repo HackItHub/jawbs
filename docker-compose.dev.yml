@@ -3,9 +3,9 @@ version: '3.8'
 services:
   api:
     build:
-      context: ./flash-resume-server
+      context: ./jawbs-server
       target: development
-    container_name: flash-resume-server-dev
+    container_name: jawbs-server-dev
     ports:
       - '${PORT}:3001'
       - '${DEBUG}:9229'
@@ -16,17 +16,17 @@ services:
       CHOKIDAR_USEPOLLING: true
       WATCHPACK_POLLING: true
     volumes:
-      - ./flash-resume-server:/usr/src/app
+      - ./jawbs-server:/usr/src/app
     depends_on:
       - postgres
     stdin_open: true
     tty: true
     restart: always
     networks:
-      - mynetwork
+      - jawbs
   prisma-studio:
     build:
-      context: ./flash-resume-server # Assuming this is where your Prisma schema is
+      context: ./jawbs-server # Assuming this is where your Prisma schema is
       target: prisma-studio
     container_name: prisma-studio-dev
     ports:
@@ -41,20 +41,20 @@ services:
       - api
       - postgres
     networks:
-      - mynetwork
+      - jawbs
     volumes:
-      - ./flash-resume-server:/usr/src/app
+      - ./jawbs-server:/usr/src/app
   client:
     build:
-      context: ./flash-resume-client
+      context: ./jawbs-client
       target: development
-    container_name: flash-resume-client-dev
+    container_name: jawbs-client-dev
     ports:
       - '3000:3000'
     stdin_open: true
     tty: true
     volumes:
-      - ./flash-resume-client:/usr/src/app
+      - ./jawbs-client:/usr/src/app
     environment:
       - WATCHPACK_POLLING=true
       - NODE_ENV=development
@@ -63,7 +63,7 @@ services:
       - postgres
       - api
     networks:
-      - mynetwork
+      - jawbs
   postgres:
     image: postgres:15
     container_name: postgres
@@ -76,19 +76,19 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     networks:
-      - mynetwork
-  postgres-test:
-    image: postgres:latest
-    ports:
-      - '${POSTGRES_TESTING_PORT}:5433'
-    environment:
-      POSTGRES_USER: testuser
-      POSTGRES_PASSWORD: testpassword
-      POSTGRES_DB: testdb
-    networks:
-      - mynetwork
+      - jawbs
+  # postgres-test:
+  #   image: postgres:latest
+  #   ports:
+  #     - '${POSTGRES_TESTING_PORT}:5433'
+  #   environment:
+  #     POSTGRES_USER: testuser
+  #     POSTGRES_PASSWORD: testpassword
+  #     POSTGRES_DB: testdb
+  #   networks:
+  #     - jawbs
 networks:
-  mynetwork:
+  jawbs:
     driver: bridge
 
 volumes:

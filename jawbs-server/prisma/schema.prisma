@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String       @id @default(uuid())
+  email      String       @unique
+  createdAt  DateTime     @default(now())
+  person     Person?
+  address    Address?
+  education  Education?
+  experience Experience[]
+}
+
+model Person {
+  id         String  @id @default(uuid())
+  firstName  String
+  lastName   String
+  middleName String?
+  phone      String?
+  summary    String?
+  userId     String  @unique
+  user       User    @relation(fields: [userId], references: [id])
+}
+
+model Address {
+  id           String  @id @default(uuid())
+  country      String?
+  state        String?
+  city         String?
+  addressLine1 String?
+  addressLine2 String?
+  zipCode      Int?
+  userId       String? @unique
+  user         User?   @relation(fields: [userId], references: [id])
+  schoolId     String? @unique
+  school       School? @relation(fields: [schoolId], references: [id])
+  experienceId String? @unique
+  experience  Experience? @relation(fields: [experienceId], references: [id])
+}
+
+model Education {
+  id             String   @id @default(uuid())
+  educationLevel String
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id])
+  schools        School[]
+}
+
+model Experience {
+  id               String   @id @default(uuid())
+  experience             String?
+  title            String?
+  responsibilities String[]
+  startYear        Int?
+  endYear          Int?
+  startMonth       String?
+  endMonth         String?
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  address         Address?
+}
+
+model School {
+  id          String    @id @default(uuid())
+  name        String
+  diploma     String
+  startYear   Int?
+  endYear     Int?
+  startMonth  String?
+  endMonth    String?
+  educationId String
+  education   Education @relation(fields: [educationId], references: [id])
+  address     Address?
+}

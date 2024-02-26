@@ -1,0 +1,25 @@
+import React from "react";
+
+type Props = {
+  children: React.ReactNode;
+  color?: string;
+  size?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+};
+
+const Heading: React.FC<Props> = ({ children, color, size }) => {
+  const HeadingSize = size || "h3";
+  return (
+    <div>
+      <HeadingSize className={`${color} m-0 font-heading`}>
+        {children}
+      </HeadingSize>
+    </div>
+  );
+};
+
+Heading.defaultProps = {
+  size: "h3",
+  color: "text-black",
+};
+
+export default Heading;
