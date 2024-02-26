@@ -13,7 +13,7 @@
     "dev:client": "cd jawbs-client && npm run dev",
     "dev:server": "cd jawbs-server && npm run dev",
     "dev": "npm-run-all -p dev:server dev:client",
-    "setup": "npm-run-all -s setup:client setup:server",
+    "setup": "npm-run-all -s setup:client setup:server docker:dev:build",
     "setup:client": "cd jawbs-client && npm i",
     "setup:server": "cd jawbs-server && npm i",
     "docker:dev": "docker compose -f docker-compose.dev.yml up",
