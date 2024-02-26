@@ -1,8 +1,8 @@
 import Address from "./Address";
 
 interface School {
-  name?: string;
-  diploma?: string;
+  name: string;
+  diploma: string;
   startYear?: number;
   endYear?: number;
   startMonth?: string;

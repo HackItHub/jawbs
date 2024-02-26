@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "build": "rimraf ./dist && tsc",
     "dev": "tsx watch -r dotenv/config index.ts",
-    "dev:build": "npm-run-all -s build dev",
+    "dev:build": "npm-run-all -s reset build dev",
     "start": "npm run build && node dist/index.js",
     "migrate": "npx prisma migrate dev --name init",
     "reset": "npx prisma migrate reset",
