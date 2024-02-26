@@ -105,7 +105,7 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
     e.preventDefault();
     const completeEducation: Education = {
       educationLevel,
-      school: education,
+      schools: education,
       userId: currentUser,
     };
     try {

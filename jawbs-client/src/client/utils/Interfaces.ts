@@ -10,7 +10,7 @@ export interface Address {
 export interface Education {
   educationLevel: string;
   create?: School[];
-  school: School[];
+  schools: School[];
   id?: string;
   userId?: string;
 }

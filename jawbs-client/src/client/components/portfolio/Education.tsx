@@ -9,9 +9,10 @@ const EducationPortfolio: React.FC = () => {
     <div>
       <Section>
         <Heading>Education</Heading>
-        {education?.school.length &&
-          education.school.map((edu) => (
+        {education?.schools &&
+          education.schools.map((edu) => (
             <SubSection key={edu.id}>
+              test
               <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-1'>
                   <Heading size='h4'>{edu.name},</Heading>
