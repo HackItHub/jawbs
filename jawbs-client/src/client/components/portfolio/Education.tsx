@@ -12,7 +12,6 @@ const EducationPortfolio: React.FC = () => {
         {education?.schools &&
           education.schools.map((edu) => (
             <SubSection key={edu.id}>
-              test
               <div className='flex items-center justify-between'>
                 <div className='flex items-center gap-1'>
                   <Heading size='h4'>{edu.name},</Heading>
