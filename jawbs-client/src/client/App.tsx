@@ -4,7 +4,7 @@ import "./assets/styles/styles.css";
 import "./assets/styles/scrollbar.css";
 import "./assets/styles/react-spring.css";
 import { BallBackground } from "./utils";
-import { ResumeFields, Portfolio, ErrorPage } from "./pages";
+import { ResumeFieldsPage, PortfolioPage, ErrorPage } from "./pages";
 import {
   ThemeContextProvider,
   AuthContextProvider,
@@ -22,7 +22,7 @@ const App: React.FC = () => {
               <Routes>
                 <Route
                   path='/'
-                  element={<Portfolio />}
+                  element={<PortfolioPage />}
                   errorElement={<ErrorPage />}
                 />
                 <Route
@@ -30,7 +30,7 @@ const App: React.FC = () => {
                   element={
                     <div className='background'>
                       <BallBackground />
-                      <ResumeFields />
+                      <ResumeFieldsPage />
                     </div>
                   }
                 />

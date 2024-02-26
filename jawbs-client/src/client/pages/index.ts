@@ -1,5 +1,5 @@
-import ResumeFields from "./ResumeFields";
-import Portfolio from "./Portfolio";
+import ResumeFieldsPage from "./ResumeFieldsPage";
+import PortfolioPage from "./PortfolioPage";
 import ErrorPage from "./ErrorPage";
 
-export { ResumeFields, Portfolio, ErrorPage };
+export { ResumeFieldsPage, PortfolioPage, ErrorPage };

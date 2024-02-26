@@ -8,7 +8,7 @@ import ExperiencePortfolio from "../components/portfolio/Experience";
 import EducationPortfolio from "../components/portfolio/Education";
 import Header from "../components/header/Header";
 
-const Portfolio: React.FC = () => {
+const PortfolioPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -59,4 +59,4 @@ const Portfolio: React.FC = () => {
   );
 };
 
-export default Portfolio;
+export default PortfolioPage;

@@ -8,7 +8,7 @@ import {
   AddressForm,
 } from "../components/resume-fields";
 
-const ResumeFields: React.FC = () => {
+const ResumeFieldsPage: React.FC = () => {
   const [formIndex, setFormIndex] = useState(0);
   const handleFormChange = () => {
     setFormIndex((formIndex + 1) % 4);
@@ -42,4 +42,4 @@ const ResumeFields: React.FC = () => {
   );
 };
 
-export default ResumeFields;
+export default ResumeFieldsPage;
