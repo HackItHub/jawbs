@@ -105,7 +105,7 @@ const ExperienceForm: React.FC<Props> = ({ handleFormChange }) => {
       userId: currentUser,
     };
     try {
-      await axios.post("/experience", experienceFormData, {
+      await axios.post("/api/experience", experienceFormData, {
         headers: {
           "Content-Type": "application/json",
         },

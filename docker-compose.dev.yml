@@ -23,7 +23,7 @@ services:
     tty: true
     restart: always
     networks:
-      - mynetwork
+      - jawbs
   prisma-studio:
     build:
       context: ./jawbs-server # Assuming this is where your Prisma schema is
@@ -41,7 +41,7 @@ services:
       - api
       - postgres
     networks:
-      - mynetwork
+      - jawbs
     volumes:
       - ./jawbs-server:/usr/src/app
   client:
@@ -63,7 +63,7 @@ services:
       - postgres
       - api
     networks:
-      - mynetwork
+      - jawbs
   postgres:
     image: postgres:15
     container_name: postgres
@@ -76,19 +76,19 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     networks:
-      - mynetwork
-  postgres-test:
-    image: postgres:latest
-    ports:
-      - '${POSTGRES_TESTING_PORT}:5433'
-    environment:
-      POSTGRES_USER: testuser
-      POSTGRES_PASSWORD: testpassword
-      POSTGRES_DB: testdb
-    networks:
-      - mynetwork
+      - jawbs
+  # postgres-test:
+  #   image: postgres:latest
+  #   ports:
+  #     - '${POSTGRES_TESTING_PORT}:5433'
+  #   environment:
+  #     POSTGRES_USER: testuser
+  #     POSTGRES_PASSWORD: testpassword
+  #     POSTGRES_DB: testdb
+  #   networks:
+  #     - jawbs
 networks:
-  mynetwork:
+  jawbs:
     driver: bridge
 
 volumes:

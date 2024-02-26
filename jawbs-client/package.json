@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --env=jsdom",
     "build": "vite build",
-    "start": "vite --host --port 3000",
+    "start": "npm exec vite dev",
     "dev": "npm-run-all -s build start",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."

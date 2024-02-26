@@ -11,6 +11,7 @@ import Header from "../components/header/Header";
 const Portfolio: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
   const { userInfo, setUserInfo } = useUserInfoContext();
   const { currentUser } = useAuthContext();
 
@@ -19,13 +20,16 @@ const Portfolio: React.FC = () => {
       try {
         setHasError(false);
         setIsLoading(true);
-        const response = await axios.get(`/user/portfolio/${currentUser}`);
+        const response = await axios.get(`/api/user/portfolio/${currentUser}`);
+        console.log(response);
         setIsLoading(false);
         setUserInfo(response.data);
+        setHasLoaded(true);
       } catch (err) {
         console.error(err);
         setIsLoading(false);
         setHasError(true);
+        setHasLoaded(false);
       }
     }
   };
@@ -42,9 +46,13 @@ const Portfolio: React.FC = () => {
       )}
       {!hasError && !isLoading && (
         <LayoutContainer>
-          <PersonalInfoPortfolio />
-          <ExperiencePortfolio />
-          <EducationPortfolio />
+          {hasLoaded && (
+            <>
+              <PersonalInfoPortfolio />
+              <ExperiencePortfolio />
+              <EducationPortfolio />
+            </>
+          )}
         </LayoutContainer>
       )}
     </>

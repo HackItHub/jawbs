@@ -60,7 +60,7 @@ const PersonForm: React.FC<Props> = ({ handleFormChange }) => {
     }
 
     try {
-      const response = await axios.post("/users", person);
+      const response = await axios.post("/api/users", person);
       // eslint-disable-next-line
       setCurrentUser(response.data);
 

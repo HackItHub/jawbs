@@ -109,7 +109,7 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
       userId: currentUser,
     };
     try {
-      await axios.post("/education", completeEducation);
+      await axios.post("/api/education", completeEducation);
       handleFormChange();
     } catch (err) {
       // eslint-disable-next-line

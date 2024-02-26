@@ -11,7 +11,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (_, res) => {
+app.get("/api", (_, res) => {
   res.status(200).json("Hello World!");
 });
 
@@ -20,7 +20,7 @@ app.use(address);
 app.use(education);
 app.use(experience);
 
-app.listen(PORT || 3001, () => {
+app.listen(3001, () => {
   // eslint-disable-next-line no-console
   console.log(`Server running on PORT: ${PORT}`);
 });

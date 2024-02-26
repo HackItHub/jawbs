@@ -13,7 +13,7 @@ model User {
   createdAt  DateTime     @default(now())
   person     Person?
   address    Address?
-  education  Education[]
+  education  Education?
   experience Experience[]
 }
 
@@ -47,7 +47,7 @@ model Address {
 model Education {
   id             String   @id @default(uuid())
   educationLevel String
-  userId         String
+  userId         String   @unique
   user           User     @relation(fields: [userId], references: [id])
   schools        School[]
 }
