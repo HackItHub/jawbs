@@ -6,6 +6,7 @@ import {
   education,
   experience,
 } from "./server/routes/index.js";
+import errorMiddleware from "./server/middlewares/GlobalErrorMiddleware.js";
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use(users);
 app.use(address);
 app.use(education);
 app.use(experience);
+
+app.use(errorMiddleware);
 
 app.listen(3001, () => {
   // eslint-disable-next-line no-console

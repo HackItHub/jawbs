@@ -1,12 +1,12 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import prisma from "../libs/prisma.js";
 
-const create = async (req: Request, res: Response) => {
+const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const newAddress = await prisma.address.create({ data: req.body });
     res.status(201).json(newAddress);
   } catch (err) {
-    res.status(400).json({ message: `${err}` });
+    next({ statusCode: 400, message: "Invalid credentials" });
   } finally {
     await prisma.$disconnect();
   }
