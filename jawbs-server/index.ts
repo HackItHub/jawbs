@@ -6,7 +6,7 @@ import {
   education,
   experience,
 } from "./server/routes/index.js";
-import errorMiddleware from "./server/middlewares/GlobalErrorMiddleware.js";
+import errorMiddleware from "./server/middlewares/error-middlware.js";
 
 const app = express();
 
