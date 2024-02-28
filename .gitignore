@@ -4,3 +4,4 @@ node_modules*
 __snapshots__
 jawbs-server/prisma/migrations
 .DS_Store
+private.pem
