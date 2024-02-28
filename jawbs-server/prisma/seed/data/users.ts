@@ -10,6 +10,7 @@ interface Person {
 
 interface User {
   email: string;
+  password: string;
   person: { create: Person };
   address: { create: Address };
   experience: { create: Experience };
@@ -27,6 +28,14 @@ const EMAILS = [
   "user3@example.com",
   "user4@example.com",
   "user5@example.com",
+];
+
+const PASSWORDS = [
+  "pasword123",
+  "password321",
+  "pastword231",
+  "patsword984",
+  "patotie382",
 ];
 
 const PERSONS = [
@@ -303,6 +312,7 @@ const USERS: User[] = [];
 EMAILS.forEach((email, i) => {
   USERS.push({
     email,
+    password: PASSWORDS[i],
     person: { create: PERSONS[i] },
     address: { create: ADDRESSES[i] },
     experience: { create: EXPERIENCES[i] },

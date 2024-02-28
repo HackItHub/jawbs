@@ -1,33 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import prisma from "../libs/prisma.js";
 import { ClientError } from "../middlewares";
-
-const create = async (req: Request, res: Response, next: NextFunction) => {
-  const { firstName, lastName, email, phone, summary } = req.body;
-  if (!firstName || !lastName || !email || !phone) {
-    throw new ClientError(400, "Improper format, please submit again");
-  }
-  try {
-    const newUser = await prisma.user.create({
-      data: {
-        email,
-        person: {
-          create: {
-            firstName,
-            lastName,
-            phone,
-            summary,
-          },
-        },
-      },
-    });
-    res.status(201).json(newUser.id);
-  } catch (err) {
-    next(err);
-  } finally {
-    await prisma.$disconnect();
-  }
-};
+import prisma from "../libs/prisma.js";
 
 const read = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
@@ -159,7 +132,6 @@ const destroy = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default {
-  create,
   read,
   readPortfolio,
   readAll,

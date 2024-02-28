@@ -1,0 +1,46 @@
+import { NextFunction, Request, Response } from "express";
+import argon2 from "argon2";
+import { ClientError } from "../middlewares";
+import Auth from "../interfaces/Auth";
+import prisma from "../libs/prisma";
+
+const signUp = async (req: Request, res: Response, next: NextFunction) => {
+  const { email, password } = req.body as Partial<Auth>;
+  if (!email || !password || password.length < 6) {
+    throw new ClientError(400, "invalid login");
+  }
+
+  try {
+    const hash = await argon2.hash(password);
+    const newUser = await prisma.user.create({
+      data: {
+        email,
+        password: hash,
+      },
+    });
+    res.status(201).json(newUser.id);
+  } catch (err) {
+    next(err);
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+const signIn = async (req: Request, __: Response, next: NextFunction) => {
+  const { email, password } = req.body as Partial<Auth>;
+  if (!email || !password || password.length < 6) {
+    throw new ClientError(400, "invalid login");
+  }
+
+  try {
+    const user = prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      throw new ClientError(404, "user doesn't exist");
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { signIn, signUp };

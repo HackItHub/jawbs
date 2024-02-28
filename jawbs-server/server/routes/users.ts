@@ -3,7 +3,7 @@ import controller from "../controllers/users.js";
 
 const users = Router();
 
-users.route("/api/users").post(controller.create).get(controller.readAll);
+users.route("/api/users").get(controller.readAll);
 users
   .route("/api/users/:id")
   .get(controller.read)
