@@ -29,9 +29,6 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const signIn = async (req: Request, res: Response, next: NextFunction) => {
-  if (!privateKey) {
-    throw new ClientError(500, "something went wrong");
-  }
   const { email, password } = req.body as Partial<Auth>;
 
   if (!email || !password || password.length < 6) {
@@ -51,7 +48,6 @@ const signIn = async (req: Request, res: Response, next: NextFunction) => {
     if (!user) {
       throw new ClientError(404, "invalid credentials");
     }
-
     if (!(await argon2.verify(user?.password, password))) {
       throw new ClientError(401, "invalid credentials");
     }
