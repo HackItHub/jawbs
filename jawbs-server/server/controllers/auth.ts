@@ -1,3 +1,4 @@
+import fs from "fs";
 import { NextFunction, Request, Response } from "express";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
@@ -56,12 +57,14 @@ const signIn = async (req: Request, res: Response, next: NextFunction) => {
       throw new ClientError(401, "invalid credentials");
     }
 
+    const key = fs.readFileSync("private.pem", "utf8");
+
     const payload = { email, user: user.id };
-    const token = jwt.sign(payload, privateKey, { algorithm: "RS256" }, (err) => {
-      if (err) {
-        throw new ClientError(500, "something went wrong");
-      }
-    });
+    const token = jwt.sign(payload, key, { algorithm: "RS256" });
+
+    if (!token) {
+      throw new ClientError(500, "something went wrong");
+    }
 
     res.status(200).json({ token, user: payload });
   } catch (err) {
