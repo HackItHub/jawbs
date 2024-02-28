@@ -24,6 +24,7 @@ services:
     restart: always
     networks:
       - jawbs
+    command: npm run dev
   prisma-studio:
     build:
       context: ./jawbs-server

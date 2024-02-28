@@ -6,7 +6,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
     const newAddress = await prisma.address.create({ data: req.body });
     res.status(201).json(newAddress);
   } catch (err) {
-    next({ statusCode: 400, message: "Invalid credentials" });
+    next(err);
   } finally {
     await prisma.$disconnect();
   }

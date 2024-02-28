@@ -5,6 +5,7 @@ import {
   address,
   education,
   experience,
+  auth,
 } from "./server/routes/index.js";
 import errorMiddleware from "./server/middlewares/error-middlware.js";
 
@@ -20,6 +21,7 @@ app.use(users);
 app.use(address);
 app.use(education);
 app.use(experience);
+app.use(auth);
 
 app.use(errorMiddleware);
 

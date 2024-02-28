@@ -21,7 +21,6 @@ const PortfolioPage: React.FC = () => {
         setHasError(false);
         setIsLoading(true);
         const response = await axios.get(`/api/user/portfolio/${currentUser}`);
-        console.log(response);
         setIsLoading(false);
         setUserInfo(response.data);
         setHasLoaded(true);
