@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { ClientError } from "../middlewares";
-import { Auth, User } from "../types";
+import { Auth } from "../types";
 import prisma from "../libs/prisma";
 
 const signUp = async (req: Request, res: Response, next: NextFunction) => {
