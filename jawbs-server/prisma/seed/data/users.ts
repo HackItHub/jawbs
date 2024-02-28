@@ -1,5 +1,4 @@
-import argon2 from "argon2";
-import { Experience, Address, School } from "../../../server/interfaces";
+import { Experience, Address, School } from "../../../server/types";
 
 interface Person {
   firstName: string;

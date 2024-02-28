@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../libs/prisma.js";
-import { School } from "../interfaces/index.js";
+import { School } from "../types/index.js";
 
 const create = async (req: Request, res: Response) => {
   const { userId, educationLevel, schools } = req.body;

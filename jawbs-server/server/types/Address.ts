@@ -1,4 +1,4 @@
-interface Address {
+type Address = {
   create?: {
     addressLine1?: string;
     addressLine2?: string;
@@ -13,6 +13,6 @@ interface Address {
   city?: string;
   country?: string;
   state?: string;
-}
+};
 
 export default Address;

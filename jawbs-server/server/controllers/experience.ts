@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../libs/prisma.js";
-import { Address } from "../interfaces/index.js";
+import { Address } from "../types/index.js";
 
 const create = async (req: Request, res: Response) => {
   const { experiences, userId }: any = req.body;
