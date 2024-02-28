@@ -26,11 +26,7 @@ const read = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const readPortfolio = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+const readPortfolio = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
 
   if (!id) {

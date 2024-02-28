@@ -30,13 +30,7 @@ const EMAILS = [
   "user5@example.com",
 ];
 
-const PASSWORDS = [
-  "pasword123",
-  "password321",
-  "pastword231",
-  "patsword984",
-  "patotie382",
-];
+const PASSWORDS = ["pasword123", "password321", "pastword231", "patsword984", "patotie382"];
 
 const PERSONS = [
   {

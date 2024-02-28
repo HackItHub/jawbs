@@ -2,7 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { ClientError } from "../middlewares";
-import { Auth } from "../types";
+import { Auth, User } from "../types";
+import { privateKey } from "../utils/environmental";
 import prisma from "../libs/prisma";
 
 const signUp = async (req: Request, res: Response, next: NextFunction) => {
@@ -28,15 +29,17 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const signIn = async (req: Request, res: Response, next: NextFunction) => {
+  if (!privateKey) {
+    throw new ClientError(500, "something went wrong");
+  }
   const { email, password } = req.body as Partial<Auth>;
-  // eslint-disable-next-line
-  console.log(email, password);
+
   if (!email || !password || password.length < 6) {
     throw new ClientError(400, "invalid login");
   }
 
   try {
-    const user = await prisma.user.findUnique({
+    const user: User | null = await prisma.user.findUnique({
       where: { email },
       select: {
         email: true,
@@ -50,10 +53,17 @@ const signIn = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     if (!(await argon2.verify(user?.password, password))) {
-      throw new ClientError(400, "invalid credentials");
+      throw new ClientError(401, "invalid credentials");
     }
 
-    res.status(200).json(user);
+    const payload = { email, user: user.id };
+    const token = jwt.sign(payload, privateKey, { algorithm: "RS256" }, (err) => {
+      if (err) {
+        throw new ClientError(500, "something went wrong");
+      }
+    });
+
+    res.status(200).json({ token, user: payload });
   } catch (err) {
     next(err);
   } finally {
