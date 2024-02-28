@@ -26,7 +26,7 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const signIn = async (req: Request, __: Response, next: NextFunction) => {
+const signIn = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body as Partial<Auth>;
   // eslint-disable-next-line
   console.log(email, password);
@@ -35,7 +35,7 @@ const signIn = async (req: Request, __: Response, next: NextFunction) => {
   }
 
   try {
-    const user = prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email },
       select: {
         password: true,
@@ -49,6 +49,7 @@ const signIn = async (req: Request, __: Response, next: NextFunction) => {
     if (!user) {
       throw new ClientError(404, "user doesn't exist");
     }
+    res.status(200).json(user);
   } catch (err) {
     next(err);
   } finally {

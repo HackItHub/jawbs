@@ -1,3 +1,4 @@
+import argon2 from "argon2";
 import { Experience, Address, School } from "../../../server/interfaces";
 
 interface Person {
