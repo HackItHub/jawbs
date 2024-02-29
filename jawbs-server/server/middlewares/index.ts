@@ -1,4 +1,4 @@
-import ClientError from "./client-error.js";
 import errorMiddleware from "./error-middlware.js";
+import verifyToken from "./verify-token.js";
 
-export { errorMiddleware, ClientError };
+export { errorMiddleware, verifyToken };
