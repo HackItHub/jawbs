@@ -23,7 +23,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 
   jwt.verify(token, privateKey, (err, decoded) => {
     if (err) {
-      throw new ClientError(403, "not verified");
+      throw new ClientError(403, "invalid token");
     }
 
     req.user = decoded as User;

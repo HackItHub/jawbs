@@ -2,6 +2,7 @@ import express from "express";
 import { PORT, privateKey } from "./server/utils/environmental.js";
 import { users, address, education, experience, auth } from "./server/routes/index.js";
 import errorMiddleware from "./server/middlewares/error-middlware.js";
+import verifyToken from "./server/middlewares/verify-token.js";
 
 const main = () => {
   if (!privateKey) throw new Error("SECRET_TOKEN not found in .env");
@@ -13,11 +14,12 @@ const main = () => {
     res.status(200).json("Hello World!");
   });
 
+  app.use(auth);
+  app.use(verifyToken);
   app.use(users);
   app.use(address);
   app.use(education);
   app.use(experience);
-  app.use(auth);
 
   app.use(errorMiddleware);
 
