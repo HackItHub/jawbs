@@ -59,7 +59,7 @@ const signIn = async (req: Request, res: Response, next: NextFunction) => {
       throw new ClientError(500, "something went wrong");
     }
 
-    res.status(200).json({ token, user: payload });
+    res.status(200).json({ token });
   } catch (err) {
     next(err);
   } finally {
