@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import prisma from "../libs/prisma.js";
 import { School } from "../types/index.js";
 import ClientError from "../libs/client-error.js";
 
-const create = async (req: Request, res: Response) => {
+const create = async (req: Request, res: Response, next: NextFunction) => {
   const { userId, educationLevel, schools } = req.body;
 
   const schoolList: any = [];
@@ -52,13 +52,13 @@ const create = async (req: Request, res: Response) => {
 
     res.status(201).json(educationCreated);
   } catch (err) {
-    res.status(400).json({ message: err });
+    next(err);
   } finally {
     await prisma.$disconnect();
   }
 };
 
-const read = async (req: Request, res: Response) => {
+const read = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userId = req.user ? req.user.id : undefined;
     if (!userId) {
@@ -74,13 +74,13 @@ const read = async (req: Request, res: Response) => {
     }
     res.status(200).json(education);
   } catch (err) {
-    throw new ClientError(400, "something went wrong");
+    next(err);
   } finally {
     await prisma.$disconnect();
   }
 };
 
-const update = async (req: Request, res: Response) => {
+const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.user ? req.user.id : undefined;
     if (!id) {
@@ -94,13 +94,13 @@ const update = async (req: Request, res: Response) => {
 
     res.status(200).json(updatedUser);
   } catch (err) {
-    throw new ClientError(400, "something went wrong");
+    next(err);
   } finally {
     await prisma.$disconnect();
   }
 };
 
-const destroy = async (req: Request, res: Response) => {
+const destroy = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userId = req.user ? req.user.id : undefined;
     if (!userId) {
@@ -111,7 +111,7 @@ const destroy = async (req: Request, res: Response) => {
     });
     res.status(200).json(deleteEducation);
   } catch (err) {
-    throw new ClientError(400, "something went wrong");
+    next(err);
   } finally {
     await prisma.$disconnect();
   }

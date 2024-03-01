@@ -3,7 +3,7 @@ import { ClientError } from "../libs";
 import prisma from "../libs/prisma.js";
 
 const read = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
+  const id = req.user ? req.user.id : undefined;
   if (!id) {
     throw new ClientError(400, "Id is needed");
   }
