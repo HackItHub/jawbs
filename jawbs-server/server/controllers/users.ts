@@ -27,10 +27,10 @@ const read = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const readPortfolio = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
+  const id = req.user ? req.user.id : undefined;
 
   if (!id) {
-    throw new ClientError(400, "Improper format");
+    throw new ClientError(400, "improper format");
   }
 
   try {
@@ -83,10 +83,10 @@ const readAll = async (__: Request, res: Response, next: NextFunction) => {
 };
 
 const update = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
+  const id = req.user ? req.user.id : undefined;
 
   if (!id) {
-    throw new ClientError(400, "Improper format");
+    throw new ClientError(400, "improper format");
   }
   try {
     const updates = await req.body;
@@ -96,7 +96,7 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
     });
 
     if (!updatedUser) {
-      throw new ClientError(404, "User not found");
+      throw new ClientError(404, "user not found");
     }
 
     res.status(200).json(updatedUser);
@@ -108,16 +108,17 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const destroy = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
+  const id = req.user ? req.user.id : undefined;
+
   if (!id) {
-    throw new ClientError(400, "Improper format");
+    throw new ClientError(400, "improper format");
   }
   try {
     const deletedUser = await prisma.user.delete({
       where: { id },
     });
     if (!deletedUser) {
-      throw new ClientError(404, "User not found");
+      throw new ClientError(404, "user not found");
     }
     res.status(200).json(deletedUser);
   } catch (err) {
