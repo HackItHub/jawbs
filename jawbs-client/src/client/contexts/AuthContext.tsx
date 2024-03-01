@@ -1,10 +1,13 @@
+import axios from "axios";
 import React, {
   createContext,
   useContext,
   useState,
   SetStateAction,
   useMemo,
+  useEffect,
 } from "react";
+import Cookies from "universal-cookie";
 
 type SetCurrentUserType = React.Dispatch<SetStateAction<string>>;
 
@@ -33,9 +36,34 @@ const useAuthContext = (): AuthContextType => {
 const AuthContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [currentUser, setCurrentUser] = useState(
-    "acc4f061-1a0f-4d24-b98b-9f5e6a724efb",
-  );
+  const [currentUser, setCurrentUser] = useState("");
+
+  const getUser = async (token: string) => {
+    try {
+      const user = await axios.get("/api/user", {
+        headers: {
+          Authorization: token,
+        },
+      });
+      setCurrentUser(user.data.id);
+    } catch (err) {
+      // eslint-disable-next-line
+      console.error("something went wrong");
+    }
+  };
+
+  const getToken = () => {
+    const cookies = new Cookies(null, { path: "/" });
+    const token = cookies.get("token");
+
+    if (!token) {
+      return;
+    }
+
+    getUser(token);
+  };
+
+  useEffect(getToken, []);
 
   const authValue = useMemo(() => {
     return { currentUser, setCurrentUser };
