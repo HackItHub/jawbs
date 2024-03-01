@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
-import { ClientError } from "../middlewares";
+import { ClientError } from "../libs";
 import { Auth, User } from "../types";
 import { privateKey } from "../utils/environmental";
 import prisma from "../libs/prisma";
