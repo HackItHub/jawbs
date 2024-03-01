@@ -38,20 +38,6 @@ const AuthContextProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [currentUser, setCurrentUser] = useState("");
 
-  const getUser = async (token: string) => {
-    try {
-      const user = await axios.get("/api/user", {
-        headers: {
-          Authorization: token,
-        },
-      });
-      setCurrentUser(user.data.id);
-    } catch (err) {
-      // eslint-disable-next-line
-      console.error("something went wrong");
-    }
-  };
-
   const getToken = () => {
     const cookies = new Cookies(null, { path: "/" });
     const token = cookies.get("token");
@@ -60,7 +46,7 @@ const AuthContextProvider: React.FC<React.PropsWithChildren> = ({
       return;
     }
 
-    getUser(token);
+    setCurrentUser(token);
   };
 
   useEffect(getToken, []);

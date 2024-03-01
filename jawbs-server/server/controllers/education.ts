@@ -91,6 +91,7 @@ const update = async (req: Request, res: Response) => {
       where: { id },
       data: { ...updates },
     });
+
     res.status(200).json(updatedUser);
   } catch (err) {
     throw new ClientError(400, "something went wrong");
