@@ -1,19 +1,17 @@
 import { Request, Response } from "express";
 import prisma from "../libs/prisma.js";
 import { School } from "../types/index.js";
+import ClientError from "../libs/client-error.js";
 
 const create = async (req: Request, res: Response) => {
   const { userId, educationLevel, schools } = req.body;
 
   const schoolList: any = [];
 
-  // Creates new education to retrieve the education ID
   try {
     const newEducation = await prisma.education.create({
       data: { userId, educationLevel },
     });
-
-    // Creates school list to fit prisma's demand for nesting writes
     if (schools.length) {
       schools.forEach((school: School) => {
         schoolList.push({
@@ -62,15 +60,21 @@ const create = async (req: Request, res: Response) => {
 
 const read = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const userId = req.user ? req.user.id : undefined;
+    if (!userId) {
+      throw new ClientError(400, "Invalid Credentials");
+    }
     const education = await prisma.education.findUnique({
       where: {
-        id,
+        userId,
       },
     });
+    if (!education) {
+      throw new ClientError(404, "doesn't exist");
+    }
     res.status(200).json(education);
   } catch (err) {
-    res.status(400).json({ message: err });
+    throw new ClientError(400, "something went wrong");
   } finally {
     await prisma.$disconnect();
   }
@@ -78,7 +82,10 @@ const read = async (req: Request, res: Response) => {
 
 const update = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = req.user ? req.user.id : undefined;
+    if (!id) {
+      throw new ClientError(400, "Invalid Credentials");
+    }
     const updates = await req.body;
     const updatedUser = await prisma.user.update({
       where: { id },
@@ -86,7 +93,7 @@ const update = async (req: Request, res: Response) => {
     });
     res.status(200).json(updatedUser);
   } catch (err) {
-    res.status(400).json({ message: err });
+    throw new ClientError(400, "something went wrong");
   } finally {
     await prisma.$disconnect();
   }
@@ -94,13 +101,16 @@ const update = async (req: Request, res: Response) => {
 
 const destroy = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const deletedUser = await prisma.education.delete({
-      where: { id },
+    const userId = req.user ? req.user.id : undefined;
+    if (!userId) {
+      throw new ClientError(400, "Invalid Credentials");
+    }
+    const deleteEducation = await prisma.education.delete({
+      where: { userId },
     });
-    res.status(200).json(deletedUser);
+    res.status(200).json(deleteEducation);
   } catch (err) {
-    res.status(400).json({ message: err });
+    throw new ClientError(400, "something went wrong");
   } finally {
     await prisma.$disconnect();
   }
