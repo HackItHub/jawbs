@@ -4,7 +4,13 @@ import { School } from "../types/index.js";
 import ClientError from "../libs/client-error.js";
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
-  const { userId, educationLevel, schools } = req.body;
+  const userId = req.user ? req.user.id : undefined;
+
+  if (!userId) {
+    throw new ClientError(400, "invalid credentials");
+  }
+
+  const { educationLevel, schools } = req.body;
 
   const schoolList: any = [];
 
@@ -44,13 +50,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
       });
     }
 
-    const educationCreated = {
-      educationLevel,
-      userId,
-      schools,
-    };
-
-    res.status(201).json(educationCreated);
+    res.status(201).json("education created");
   } catch (err) {
     next(err);
   } finally {
