@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, {
   createContext,
   useContext,
@@ -9,16 +8,16 @@ import React, {
 } from "react";
 import Cookies from "universal-cookie";
 
-type SetCurrentUserType = React.Dispatch<SetStateAction<string>>;
+type SetTokenType = React.Dispatch<SetStateAction<string>>;
 
 interface AuthContextType {
-  currentUser: string;
-  setCurrentUser: SetCurrentUserType;
+  token: string;
+  setToken: SetTokenType;
 }
 
 const AuthContext = createContext<AuthContextType>({
-  currentUser: "",
-  setCurrentUser: () => {},
+  token: "",
+  setToken: () => {},
 });
 
 const useAuthContext = (): AuthContextType => {
@@ -36,24 +35,24 @@ const useAuthContext = (): AuthContextType => {
 const AuthContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [currentUser, setCurrentUser] = useState("");
+  const [token, setToken] = useState("");
 
   const getToken = () => {
     const cookies = new Cookies(null, { path: "/" });
-    const token = cookies.get("token");
+    const userToken = cookies.get("token");
 
-    if (!token) {
+    if (!userToken) {
       return;
     }
 
-    setCurrentUser(token);
+    setToken(token);
   };
 
   useEffect(getToken, []);
 
   const authValue = useMemo(() => {
-    return { currentUser, setCurrentUser };
-  }, [currentUser, setCurrentUser]);
+    return { token, setToken };
+  }, [token, setToken]);
 
   return (
     <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>

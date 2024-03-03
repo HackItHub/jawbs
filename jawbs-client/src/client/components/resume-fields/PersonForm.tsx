@@ -26,7 +26,7 @@ type Props = {
 };
 
 const PersonForm: React.FC<Props> = ({ handleFormChange }) => {
-  const { setCurrentUser } = useAuthContext();
+  const { setToken } = useAuthContext();
   const [person, setPerson] = useState<Partial<Personal>>({});
 
   const [errors, setErrors] = useState<Partial<FormErrors>>({});
@@ -62,7 +62,7 @@ const PersonForm: React.FC<Props> = ({ handleFormChange }) => {
     try {
       const response = await axios.post("/api/users", person);
       // eslint-disable-next-line
-      setCurrentUser(response.data);
+      setToken(response.data);
 
       handleFormChange();
     } catch (err) {

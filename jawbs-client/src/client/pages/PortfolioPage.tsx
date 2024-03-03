@@ -13,14 +13,18 @@ const PortfolioPage: React.FC = () => {
   const [hasError, setHasError] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
   const { userInfo, setUserInfo } = useUserInfoContext();
-  const { currentUser } = useAuthContext();
+  const { token } = useAuthContext();
 
   const getPortfolio = async () => {
     if (!Object.keys(userInfo).length) {
       try {
         setHasError(false);
         setIsLoading(true);
-        const response = await axios.get(`/api/user/portfolio/${currentUser}`);
+        const response = await axios.get(`/api/user/portfolio`, {
+          headers: {
+            Authorization: token,
+          },
+        });
         setIsLoading(false);
         setUserInfo(response.data);
         setHasLoaded(true);
