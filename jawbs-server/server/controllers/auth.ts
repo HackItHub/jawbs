@@ -52,7 +52,7 @@ const signIn = async (req: Request, res: Response, next: NextFunction) => {
       throw new ClientError(401, "invalid credentials");
     }
 
-    const payload = { email, user: user.id };
+    const payload = { email, id: user.id };
     const token = jwt.sign(payload, privateKey, { algorithm: "RS256" });
 
     if (!token) {

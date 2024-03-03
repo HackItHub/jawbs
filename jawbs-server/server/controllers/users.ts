@@ -5,7 +5,7 @@ import prisma from "../libs/prisma.js";
 const read = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.user ? req.user.id : undefined;
   if (!id) {
-    throw new ClientError(400, "Id is needed");
+    throw new ClientError(400, "id is needed");
   }
 
   try {
@@ -16,7 +16,7 @@ const read = async (req: Request, res: Response, next: NextFunction) => {
     });
 
     if (!user) {
-      throw new ClientError(404, "User not found");
+      throw new ClientError(404, "user not found");
     }
     res.status(200).json(user);
   } catch (err) {

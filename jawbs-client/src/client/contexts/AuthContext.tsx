@@ -35,7 +35,9 @@ const useAuthContext = (): AuthContextType => {
 const AuthContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(
+    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwidXNlciI6ImE3ZjNjYzJjLTJiNzItNDFhZi1hZTRiLTA2ZTNlMTAwN2YyNyIsImlhdCI6MTcwOTQ4OTYwMn0.U6U8xWnxIso3Z21N4XSRzpmAs6knwF0uxwnLLZz5YgCxjDhcXCCqHmhwtOax1hD5Cqx0eco-kkqYZsVitlXs6MLhFo8-B0rnIwG8RxNDTrR1sOYhDKOr2UEO-kxPcsAfucNkwBGZiOC5p-UvpE5gWLNVo2VbF8PlyG44V4r5vINYk-dgOXdmJleKHQCMIzoVCHe23Afy0kjXFanRcjz5Nd6-45SySCBm6kbXjnx_AbZlGABQ-VdamO-P1peKihMucKSRw6TvTgHg9bSrys91anAe1uRpZmydQKWT96u-mn7qchFOdqfgUUcQ85QfRZp8iSPUIR_qg8dQeijh4STZ8g",
+  );
 
   const getToken = () => {
     const cookies = new Cookies(null, { path: "/" });
@@ -48,7 +50,7 @@ const AuthContextProvider: React.FC<React.PropsWithChildren> = ({
     setToken(token);
   };
 
-  useEffect(getToken, []);
+  useEffect(getToken);
 
   const authValue = useMemo(() => {
     return { token, setToken };
