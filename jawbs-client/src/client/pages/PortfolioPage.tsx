@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthContext, useUserInfoContext } from "../contexts";
@@ -20,7 +19,7 @@ const PortfolioPage: React.FC = () => {
       try {
         setHasError(false);
         setIsLoading(true);
-        const response = await axios.get(`/api/user/portfolio`, {
+        const response = await axios.get("/api/user/portfolio", {
           headers: {
             Authorization: token,
           },
@@ -29,6 +28,7 @@ const PortfolioPage: React.FC = () => {
         setUserInfo(response.data);
         setHasLoaded(true);
       } catch (err) {
+        // eslint-disable-next-line
         console.error(err);
         setIsLoading(false);
         setHasError(true);
@@ -39,7 +39,7 @@ const PortfolioPage: React.FC = () => {
 
   useEffect(() => {
     getPortfolio();
-  }, []);
+  });
   return (
     <>
       <Header />

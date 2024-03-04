@@ -12,7 +12,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
     const person = await prisma.person.create({
       data: { firstName, lastName, phone, summary, userId },
     });
-    res.status(201).json("person added");
+    res.status(201).json(person);
   } catch (err) {
     next(err);
   } finally {

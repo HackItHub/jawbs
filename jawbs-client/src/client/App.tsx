@@ -11,6 +11,7 @@ import {
   UserInfoContextProvider,
 } from "./contexts";
 import { MainContainer } from "./components/layout";
+import { SignIn, SignUp } from "./components/auth";
 
 const App: React.FC = () => {
   const router = createBrowserRouter([
@@ -25,6 +26,26 @@ const App: React.FC = () => {
           <BallBackground />
           <ResumeFieldsPage />
         </div>
+      ),
+    },
+    {
+      path: "/sign-in",
+      element: (
+        <div className='background'>
+          <BallBackground />
+          <SignIn />
+        </div>
+      ),
+    },
+    {
+      path: "/sign-up",
+      element: (
+        <>
+          <div className='background'>
+            <BallBackground />
+          </div>
+          <SignUp />
+        </>
       ),
     },
   ]);

@@ -9,6 +9,8 @@ const errorMiddleware = (
   next: NextFunction,
 ): void => {
   if (err instanceof ClientError) {
+    // eslint-disable-next-line
+    console.log("reaches");
     res.status(err.status).json({ error: err.message });
   } else {
     // eslint-disable-next-line

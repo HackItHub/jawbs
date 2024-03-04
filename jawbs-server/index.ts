@@ -14,13 +14,13 @@ const main = () => {
     res.status(200).json("Hello World!");
   });
 
-  app.use(errorMiddleware);
   app.use(auth);
   app.use(verifyToken);
   app.use(users);
   app.use(address);
   app.use(education);
   app.use(experience);
+  app.use(errorMiddleware);
 
   app.listen(PORT || 3001, () => {
     // eslint-disable-next-line no-console
