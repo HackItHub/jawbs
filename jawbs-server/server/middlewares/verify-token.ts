@@ -27,9 +27,9 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     }
 
     req.user = decoded as User;
-
-    next();
   });
+
+  next();
 };
 
 export default verifyToken;

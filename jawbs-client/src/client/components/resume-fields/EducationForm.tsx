@@ -10,7 +10,7 @@ import {
   range,
 } from "../../utils/Constants";
 import { useAuthContext } from "../../contexts";
-import { Education, School } from "../../utils/Interfaces";
+import { Education, School } from "../../utils/Types";
 
 type Props = {
   handleFormChange: () => void;

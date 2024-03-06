@@ -57,6 +57,7 @@ const readPortfolio = async (req: Request, res: Response, next: NextFunction) =>
         },
       },
     });
+
     if (!user) {
       throw new ClientError(404, "User not found");
     }

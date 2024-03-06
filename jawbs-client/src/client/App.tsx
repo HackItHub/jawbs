@@ -4,7 +4,7 @@ import "./assets/styles/styles.css";
 import "./assets/styles/scrollbar.css";
 import "./assets/styles/react-spring.css";
 import { BallBackground } from "./utils";
-import { ResumeFieldsPage, PortfolioPage, ErrorPage } from "./pages";
+import { ResumeFieldsPage, PortfolioPage } from "./pages";
 import {
   ThemeContextProvider,
   AuthContextProvider,

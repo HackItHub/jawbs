@@ -48,7 +48,7 @@ const signIn = async (req: Request, res: Response, next: NextFunction) => {
     if (!user) {
       throw new ClientError(404, "invalid credentials");
     }
-    if (!(await argon2.verify(user?.password, password))) {
+    if (!(await argon2.verify(user.password, password))) {
       throw new ClientError(401, "invalid credentials");
     }
 

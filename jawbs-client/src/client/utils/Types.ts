@@ -1,4 +1,4 @@
-export interface Address {
+export type Address = {
   id?: string;
   addressLine1?: string;
   addressLine2?: string;
@@ -6,16 +6,16 @@ export interface Address {
   city?: string;
   state?: string;
   country?: string;
-}
-export interface Education {
+};
+export type Education = {
   educationLevel: string;
   create?: School[];
   schools: School[];
   id?: string;
   userId?: string;
-}
+};
 
-export interface School {
+export type School = {
   id?: string;
   name: string;
   diploma?: string;
@@ -24,9 +24,9 @@ export interface School {
   startMonth: string;
   endMonth?: string;
   address: Address | null;
-}
+};
 
-export interface Experience {
+export type Experience = {
   id?: string;
   experience: string;
   title: string;
@@ -35,21 +35,30 @@ export interface Experience {
   endMonth?: string;
   startYear: number;
   endYear?: number;
-}
+};
 
-export interface Person {
+export type Person = {
   firstName: string;
   lastName: string;
   middleName: string;
   phone: string;
   summary: string;
-}
+};
 
-export interface User {
+export type User = {
   id: string;
   email: string;
   education: Education;
   address: Address;
   experience: Experience[];
   person: Person;
-}
+};
+
+export type UserInfoType = {
+  id?: string;
+  email?: string;
+  experience?: Experience[];
+  education?: Education;
+  address?: Address;
+  person?: Person;
+};
