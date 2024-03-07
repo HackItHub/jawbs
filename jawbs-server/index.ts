@@ -20,6 +20,7 @@ const main = () => {
   app.use(address);
   app.use(education);
   app.use(experience);
+
   app.use(errorMiddleware);
 
   app.listen(PORT || 3001, () => {

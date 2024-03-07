@@ -63,7 +63,7 @@ const readPortfolio = async (req: Request, res: Response, next: NextFunction) =>
     }
     res.status(200).json(user);
   } catch (err) {
-    next();
+    next(err);
   } finally {
     await prisma.$disconnect();
   }

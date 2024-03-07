@@ -15,21 +15,23 @@ declare module "express" {
 }
 
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.headers.authorization;
+  try {
+    const token = req.headers.authorization;
 
-  if (!token) {
-    throw new ClientError(401, "no token");
-  }
-
-  jwt.verify(token, privateKey, (err, decoded) => {
-    if (err) {
-      throw new ClientError(403, "invalid token");
+    if (!token) {
+      throw new ClientError(401, "no token");
     }
 
-    req.user = decoded as User;
-  });
+    jwt.verify(token, privateKey, (err, decoded) => {
+      if (err) {
+        throw new ClientError(403, "invalid token");
+      }
 
-  next();
+      req.user = decoded as User;
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 export default verifyToken;
