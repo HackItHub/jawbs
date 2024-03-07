@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext, useUserInfoContext } from "../contexts";
 import { Loading, ErrorMessage, LayoutContainer } from "../components/layout";
 import PersonalInfoPortfolio from "../components/portfolio/PersonalInfo";
@@ -11,6 +12,7 @@ const PortfolioPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const navigate = useNavigate();
   const { userInfo, setUserInfo } = useUserInfoContext();
   const { token } = useAuthContext();
 
@@ -33,7 +35,10 @@ const PortfolioPage: React.FC = () => {
         setIsLoading(false);
         setHasError(true);
         setHasLoaded(false);
+        navigate("/sign-in");
       }
+    } else {
+      setHasLoaded(true);
     }
   };
 
