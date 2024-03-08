@@ -28,6 +28,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
       }
 
       req.user = decoded as User;
+      next();
     });
   } catch (err) {
     next(err);

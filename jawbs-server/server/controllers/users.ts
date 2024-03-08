@@ -61,6 +61,7 @@ const readPortfolio = async (req: Request, res: Response, next: NextFunction) =>
     if (!user) {
       throw new ClientError(404, "User not found");
     }
+
     res.status(200).json(user);
   } catch (err) {
     next(err);

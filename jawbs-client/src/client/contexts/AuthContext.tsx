@@ -41,13 +41,13 @@ const AuthContextProvider: React.FC<React.PropsWithChildren> = ({
 
   const getToken = () => {
     const cookies = new Cookies(null, { path: "/" });
-    const userToken = cookies.get("token");
+    const userToken = cookies.get("userToken");
 
     if (!userToken) {
       return;
     }
 
-    setToken(token);
+    setToken(userToken);
   };
 
   useEffect(getToken);

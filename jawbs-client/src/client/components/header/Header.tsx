@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 import jawbsLogo from "../../assets/images/logos/jawbs-logo-original-copy.png";
 import { useAuthContext, useUserInfoContext } from "../../contexts";
 
@@ -7,10 +8,12 @@ const Header: React.FC = () => {
   const { token, setToken } = useAuthContext();
   const { setUserInfo } = useUserInfoContext();
   const navigate = useNavigate();
+  const cookies = new Cookies(null, { path: "/" });
 
   const signOut = () => {
     setToken("");
     setUserInfo({});
+    cookies.remove(token);
     navigate("/sign-in");
   };
 

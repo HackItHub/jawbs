@@ -18,9 +18,9 @@ const PortfolioPage: React.FC = () => {
 
   const getPortfolio = async () => {
     if (!Object.keys(userInfo).length) {
+      setIsLoading(true);
       try {
         setHasError(false);
-        setIsLoading(true);
         const response = await axios.get("/api/user/portfolio", {
           headers: {
             Authorization: token,
@@ -29,9 +29,8 @@ const PortfolioPage: React.FC = () => {
         setIsLoading(false);
         setUserInfo(response.data);
         setHasLoaded(true);
+        setHasError(false);
       } catch (err) {
-        // eslint-disable-next-line
-        console.error(err);
         setIsLoading(false);
         setHasError(true);
         setHasLoaded(false);
@@ -39,6 +38,8 @@ const PortfolioPage: React.FC = () => {
       }
     } else {
       setHasLoaded(true);
+      setIsLoading(false);
+      setHasError(false);
     }
   };
 
