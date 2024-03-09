@@ -4,14 +4,18 @@ import "./assets/styles/styles.css";
 import "./assets/styles/scrollbar.css";
 import "./assets/styles/react-spring.css";
 import { BallBackground } from "./utils";
-import { ResumeFieldsPage, PortfolioPage } from "./pages";
+import {
+  ResumeFieldsPage,
+  PortfolioPage,
+  SignInPage,
+  SignUpPage,
+} from "./pages";
 import {
   ThemeContextProvider,
   AuthContextProvider,
   UserInfoContextProvider,
 } from "./contexts";
 import { MainContainer } from "./components/layout";
-import { SignIn, SignUp } from "./components/auth";
 
 const App: React.FC = () => {
   const router = createBrowserRouter([
@@ -30,23 +34,11 @@ const App: React.FC = () => {
     },
     {
       path: "/sign-in",
-      element: (
-        <div className='background'>
-          <BallBackground />
-          <SignIn />
-        </div>
-      ),
+      element: <SignInPage />,
     },
     {
       path: "/sign-up",
-      element: (
-        <>
-          <div className='background'>
-            <BallBackground />
-          </div>
-          <SignUp />
-        </>
-      ),
+      element: <SignUpPage />,
     },
   ]);
 
