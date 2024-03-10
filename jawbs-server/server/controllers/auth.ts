@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { Prisma } from "@prisma/client";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { ClientError } from "../libs";
@@ -22,7 +23,18 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
     });
     res.status(201).json(newUser);
   } catch (err) {
-    next(err);
+    if (err instanceof ClientError) {
+      next(err);
+      return;
+    }
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      if (err.code === "P2002") {
+        const clientErr = new ClientError(409, "email already exists");
+        next(clientErr);
+      }
+    } else {
+      next(err);
+    }
   } finally {
     await prisma.$disconnect();
   }
