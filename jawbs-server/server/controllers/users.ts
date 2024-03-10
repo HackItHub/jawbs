@@ -4,11 +4,11 @@ import prisma from "../libs/prisma.js";
 
 const read = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.user ? req.user.id : undefined;
-  if (!id) {
-    throw new ClientError(400, "id is needed");
-  }
 
   try {
+    if (!id) {
+      throw new ClientError(400, "id is needed");
+    }
     const user = await prisma.user.findFirst({
       where: {
         id,
@@ -29,11 +29,10 @@ const read = async (req: Request, res: Response, next: NextFunction) => {
 const readPortfolio = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.user ? req.user.id : undefined;
 
-  if (!id) {
-    throw new ClientError(400, "improper format");
-  }
-
   try {
+    if (!id) {
+      throw new ClientError(400, "improper format");
+    }
     const user = await prisma.user.findFirst({
       where: {
         id,

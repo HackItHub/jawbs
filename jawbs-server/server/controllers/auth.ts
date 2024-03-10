@@ -9,11 +9,11 @@ import prisma from "../libs/prisma";
 
 const signUp = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body as Partial<Auth>;
-  if (!email || !password || password.length < 6) {
-    throw new ClientError(400, "invalid login");
-  }
-
   try {
+    if (!email || !password || password.length < 6) {
+      throw new ClientError(400, "invalid login");
+    }
+
     const hash = await argon2.hash(password);
     const newUser = await prisma.user.create({
       data: {
@@ -23,18 +23,15 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
     });
     res.status(201).json(newUser);
   } catch (err) {
-    if (err instanceof ClientError) {
-      next(err);
-      return;
-    }
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
+      // The .code property can be accessed in a type-safe manner
       if (err.code === "P2002") {
-        const clientErr = new ClientError(409, "email already exists");
-        next(clientErr);
+        const clientError = new ClientError(409, "user already exists");
+        next(clientError);
+        return;
       }
-    } else {
-      next(err);
     }
+    next(err);
   } finally {
     await prisma.$disconnect();
   }
@@ -43,11 +40,10 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
 const signIn = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body as Partial<Auth>;
 
-  if (!email || !password || password.length < 6) {
-    throw new ClientError(400, "invalid login");
-  }
-
   try {
+    if (!email || !password || password.length < 6) {
+      throw new ClientError(400, "invalid login");
+    }
     const user: User | null = await prisma.user.findUnique({
       where: { email },
       select: {

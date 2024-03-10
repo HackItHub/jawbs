@@ -5,14 +5,12 @@ import ClientError from "../libs/client-error.js";
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   const userId = req.user ? req.user.id : undefined;
-
-  if (!userId) {
-    throw new ClientError(400, "invalid credentials");
-  }
-
   const { experiences }: any = req.body;
 
   try {
+    if (!userId) {
+      throw new ClientError(400, "invalid credentials");
+    }
     for (const experience of experiences) {
       const { address } = experience;
       let hasAddress = false;
@@ -62,11 +60,10 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 const read = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.user ? req.user.id : undefined;
 
-  if (!id) {
-    throw new ClientError(400, "invalid credentials");
-  }
-
   try {
+    if (!id) {
+      throw new ClientError(400, "invalid credentials");
+    }
     const experience = await prisma.experience.findUnique({
       where: {
         id,
@@ -82,11 +79,11 @@ const read = async (req: Request, res: Response, next: NextFunction) => {
 
 const update = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.user ? req.user.id : undefined;
-  if (!id) {
-    throw new ClientError(400, "invalid credentials");
-  }
 
   try {
+    if (!id) {
+      throw new ClientError(400, "invalid credentials");
+    }
     const updates = await req.body;
     const updatedUser = await prisma.user.update({
       where: { id },
@@ -103,11 +100,10 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
 const destroy = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.user ? req.user.id : undefined;
 
-  if (!id) {
-    throw new ClientError(400, "invalid credentials");
-  }
-
   try {
+    if (!id) {
+      throw new ClientError(400, "invalid credentials");
+    }
     const deletedUser = await prisma.experience.delete({
       where: { id },
     });

@@ -37,10 +37,10 @@ const SignIn: React.FC = () => {
         password,
       };
       axios.post("/api/auth/sign-up", formData);
-      navigate("/sign-in");
+      // navigate("/sign-in");
     } catch (err) {
       // eslint-disable-next-line
-      console.log(err.statusCode);
+      console.log(err.code);
     }
   };
 

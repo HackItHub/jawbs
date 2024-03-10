@@ -6,15 +6,15 @@ import ClientError from "../libs/client-error.js";
 const create = async (req: Request, res: Response, next: NextFunction) => {
   const userId = req.user ? req.user.id : undefined;
 
-  if (!userId) {
-    throw new ClientError(400, "invalid credentials");
-  }
-
   const { educationLevel, schools } = req.body;
 
   const schoolList: any = [];
 
   try {
+    if (!userId) {
+      throw new ClientError(400, "invalid credentials");
+    }
+
     const newEducation = await prisma.education.create({
       data: { userId, educationLevel },
     });
@@ -59,8 +59,8 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const read = async (req: Request, res: Response, next: NextFunction) => {
+  const userId = req.user ? req.user.id : undefined;
   try {
-    const userId = req.user ? req.user.id : undefined;
     if (!userId) {
       throw new ClientError(400, "Invalid Credentials");
     }
@@ -101,8 +101,8 @@ const update = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const destroy = async (req: Request, res: Response, next: NextFunction) => {
+  const userId = req.user ? req.user.id : undefined;
   try {
-    const userId = req.user ? req.user.id : undefined;
     if (!userId) {
       throw new ClientError(400, "Invalid Credentials");
     }

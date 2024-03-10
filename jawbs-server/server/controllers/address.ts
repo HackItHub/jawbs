@@ -4,14 +4,12 @@ import ClientError from "../libs/client-error.js";
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   const userId = req.user ? req.user.id : undefined;
-
-  if (!userId) {
-    throw new ClientError(400, "invalid credentials");
-  }
-
   const address = { ...req.body, userId };
 
   try {
+    if (!userId) {
+      throw new ClientError(400, "invalid credentials");
+    }
     const newAddress = await prisma.address.create({ data: address });
     res.status(201).json(newAddress);
   } catch (err) {
@@ -24,11 +22,10 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 const read = async (req: Request, res: Response, next: NextFunction) => {
   const userId = req.user ? req.user.id : undefined;
 
-  if (!userId) {
-    throw new ClientError(400, "invalid credentials");
-  }
-
   try {
+    if (!userId) {
+      throw new ClientError(400, "invalid credentials");
+    }
     const address = await prisma.address.findUnique({
       where: {
         userId,
@@ -49,11 +46,10 @@ const read = async (req: Request, res: Response, next: NextFunction) => {
 const update = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.user ? req.user.id : undefined;
 
-  if (!id) {
-    throw new ClientError(400, "invalid credentials");
-  }
-
   try {
+    if (!id) {
+      throw new ClientError(400, "invalid credentials");
+    }
     const updates = req.body;
     const updatedUser = await prisma.address.update({
       where: { id },
