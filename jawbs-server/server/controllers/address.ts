@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import prisma from "../libs/prisma.js";
-import ClientError from "../libs/ClientError.js";
+import ClientError from "../libs/classes/ClientError.js";
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   const userId = req.user ? req.user.id : undefined;

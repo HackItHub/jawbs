@@ -1,5 +1,5 @@
 import prisma from "./prisma";
-import ClientError from "./ClientError";
-import generateVerificationCode from "./generate-verification-code";
+import ClientError from "./classes/ClientError";
+import Mailer from "./classes/Mailer";
 
-export { prisma, ClientError, generateVerificationCode };
+export { prisma, ClientError, Mailer };

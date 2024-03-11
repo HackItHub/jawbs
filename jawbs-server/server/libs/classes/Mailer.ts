@@ -1,6 +1,6 @@
 import nodemailer, { Transporter } from "nodemailer";
-import { MailType } from "../types";
-import { generateVerificationCode } from ".";
+import { MailType } from "../../types";
+import generateVerificationCode from "../../utils/generate-verification-code";
 
 class Mailer {
   private transporter: Transporter;
