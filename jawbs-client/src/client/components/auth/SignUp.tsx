@@ -28,19 +28,59 @@ const SignIn: React.FC = () => {
   const [formError, setFormError] = useState<FormErrors>({});
   const navigate = useNavigate();
 
+  const handlePasswordCheck = () => {
+    const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]+$/;
+    if (password !== verifyPassword) {
+      setFormError({
+        ...formError,
+        password: "Both passwords much match",
+        verifyPassword: "Both passwords must match",
+      });
+      return false;
+    }
+    if (password.length <= 5) {
+      setFormError({
+        ...formError,
+        password: "Password must be 6 characters long",
+        verifyPassword: "Password must be 6 characters long",
+      });
+      return false;
+    }
+
+    if (!regex.test(password)) {
+      setFormError({
+        ...formError,
+        password:
+          "Password must have at least 1 alphabet character, 1 special character, and 1 number",
+        verifyPassword:
+          "Password must have at least 1 alphabet character, 1 special character, and 1 number",
+      });
+      return false;
+    }
+
+    setFormError({});
+    return true;
+  };
+
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormError({});
-    try {
-      const formData: Partial<Credentials> = {
-        email,
-        password,
-      };
-      axios.post("/api/auth/sign-up", formData);
-      // navigate("/sign-in");
-    } catch (err) {
-      // eslint-disable-next-line
-      console.log(err.code);
+
+    if (handlePasswordCheck()) {
+      try {
+        const formData: Partial<Credentials> = {
+          email,
+          password,
+        };
+        await axios.post("/api/auth/sign-up", formData);
+      } catch (err) {
+        if (err.response.status === 409) {
+          setFormError({
+            ...formError,
+            email: "Email already exists, please choose another one",
+          });
+        }
+      }
     }
   };
 
