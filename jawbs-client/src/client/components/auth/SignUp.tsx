@@ -73,6 +73,7 @@ const SignIn: React.FC = () => {
           password,
         };
         await axios.post("/api/auth/sign-up", formData);
+        navigate("/sign-in");
       } catch (err) {
         if (err.response.status === 409) {
           setFormError({

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ClientError } from "../libs";
+import { ClientError } from "../libs/classes";
 import prisma from "../libs/prisma.js";
 
 const read = async (req: Request, res: Response, next: NextFunction) => {

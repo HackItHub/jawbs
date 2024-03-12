@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import { ClientError } from "../libs";
+import { ClientError } from "../libs/classes";
 import { privateKey } from "../utils/environmental";
 
 type User = {

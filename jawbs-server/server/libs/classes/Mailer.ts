@@ -1,14 +1,30 @@
-import nodemailer, { Transporter } from "nodemailer";
+import nodemailer from "nodemailer";
 import { MailType } from "../../types";
+import ClientError from "./ClientError";
 import generateVerificationCode from "../../utils/generate-verification-code";
 
 class Mailer {
-  private transporter: Transporter;
+  private transporter;
 
-  constructor(config: nodemailer.TransportOptions) {
+  // Set up config for multiple accounts if needed
+  constructor(config: any) {
     this.transporter = nodemailer.createTransport(config);
   }
 
+  async createLocalConnection() {
+    const account = await nodemailer.createTestAccount();
+    this.transporter = nodemailer.createTransport({
+      host: account.smtp.host,
+      port: account.smtp.port,
+      secure: account.smtp.secure,
+      auth: {
+        user: account.user,
+        pass: account.pass,
+      },
+    });
+  }
+
+  // Create basic functions for receiving mail
   // Mail should have a uniqueId that isn't in the database sent to the user
   // It should check the database if that email exists if it does then send the email, if it doesn't then keep trying for another unique verification code while loops
   // Send mail to user
@@ -16,11 +32,15 @@ class Mailer {
   async sendMail(mailOptions: MailType) {
     try {
       const subject = `${mailOptions.subject} #${generateVerificationCode(8)}`;
-      await this.transporter.sendMail({ ...mailOptions, subject });
+      const mail = await this.transporter.sendMail({ ...mailOptions, subject });
+      return mail;
     } catch (err) {
-      // eslint-disable-next-line
-      console.log(err);
+      if (err) {
+        const clientError = new ClientError(500, "Something went wrong");
+        return clientError;
+      }
     }
+    return "success";
   }
 }
 

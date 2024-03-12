@@ -9,7 +9,10 @@ services:
     ports:
       - '${PORT}:3001'
       - '${DEBUG}:9229'
+      - '${EMAIL_PORT}:452'
+    env_file: ./.env
     environment:
+      EMAIL_HOST: ${EMAIL_HOST}
       PORT: ${PORT}
       DATABASE_URL: ${DATABASE_URL}
       NODE_ENV: development

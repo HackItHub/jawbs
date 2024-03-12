@@ -1,5 +1,4 @@
 import prisma from "./prisma";
-import ClientError from "./classes/ClientError";
-import Mailer from "./classes/Mailer";
+import mailer from "./mailer";
 
-export { prisma, ClientError, Mailer };
+export { prisma, mailer };

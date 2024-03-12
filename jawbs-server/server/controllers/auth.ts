@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Prisma } from "@prisma/client";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
-import { ClientError } from "../libs";
+import { ClientError } from "../libs/classes";
 import { Auth, User } from "../types";
 import { privateKey } from "../utils/environmental";
 import prisma from "../libs/prisma";

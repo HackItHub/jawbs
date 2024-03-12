@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import ClientError from "../libs/classes/ClientError.js";
+import { ClientError } from "../libs/classes";
 
 const errorMiddleware = (
   err: unknown,

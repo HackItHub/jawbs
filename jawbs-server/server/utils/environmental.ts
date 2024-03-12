@@ -13,6 +13,8 @@ const {
   PORT,
   EMAIL_USERNAME,
   EMAIL_PASSWORD,
+  EMAIL_HOST,
+  EMAIL_PORT,
 } = process.env;
 
 export {
@@ -26,5 +28,7 @@ export {
   PORT,
   EMAIL_USERNAME,
   EMAIL_PASSWORD,
+  EMAIL_HOST,
+  EMAIL_PORT,
   privateKey,
 };
