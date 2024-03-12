@@ -61,4 +61,5 @@ export type UserInfoType = {
   education?: Education;
   address?: Address;
   person?: Person;
+  isActivated?: boolean;
 };
