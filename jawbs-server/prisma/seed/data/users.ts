@@ -15,6 +15,7 @@ interface User {
   address: { create: Address };
   experience: { create: Experience };
   education: { create: Education };
+  isActivated: boolean;
 }
 
 interface Education {
@@ -311,6 +312,7 @@ EMAILS.forEach((email, i) => {
     address: { create: ADDRESSES[i] },
     experience: { create: EXPERIENCES[i] },
     education: { create: EDUCATION[i] },
+    isActivated: false,
   });
 });
 

@@ -12,10 +12,12 @@ model User {
   email      String       @unique
   password String
   createdAt  DateTime     @default(now())
+  isActivated Boolean @default(false)
   person     Person?
   address    Address?
   education  Education?
   experience Experience[]
+  verificationCode VerificationCode?
 }
 
 model Person {
@@ -78,4 +80,10 @@ model School {
   educationId String
   education   Education @relation(fields: [educationId], references: [id])
   address     Address?
+}
+
+model VerificationCode {
+  id String @id @default(uuid())
+  userId String @unique
+  user User @relation(fields: [userId], references: [id])
 }
