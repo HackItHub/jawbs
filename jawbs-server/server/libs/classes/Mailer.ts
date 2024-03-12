@@ -38,12 +38,9 @@ class Mailer {
       const mail = await this.transporter.sendMail({ ...mailOptions, subject, from: this.email });
       return mail;
     } catch (err) {
-      if (err) {
-        const clientError = new ClientError(500, "Something went wrong");
-        return clientError;
-      }
+      const clientError = new ClientError(500, "Something went wrong");
+      return clientError;
     }
-    return "success";
   }
 }
 
