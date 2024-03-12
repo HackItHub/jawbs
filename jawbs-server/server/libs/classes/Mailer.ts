@@ -6,9 +6,12 @@ import generateVerificationCode from "../../utils/generate-verification-code";
 class Mailer {
   private transporter;
 
+  private email;
+
   // Set up config for multiple accounts if needed
   constructor(config: any) {
     this.transporter = nodemailer.createTransport(config);
+    this.email = config.auth.user;
   }
 
   async createLocalConnection() {
@@ -32,7 +35,7 @@ class Mailer {
   async sendMail(mailOptions: MailType) {
     try {
       const subject = `${mailOptions.subject} #${generateVerificationCode(8)}`;
-      const mail = await this.transporter.sendMail({ ...mailOptions, subject });
+      const mail = await this.transporter.sendMail({ ...mailOptions, subject, from: this.email });
       return mail;
     } catch (err) {
       if (err) {

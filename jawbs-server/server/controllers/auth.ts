@@ -6,6 +6,7 @@ import { ClientError } from "../libs/classes";
 import { Auth, User } from "../types";
 import { privateKey } from "../utils/environmental";
 import prisma from "../libs/prisma";
+import { mailer } from "../libs";
 
 const signUp = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body as Partial<Auth>;
@@ -21,6 +22,7 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
         password: hash,
       },
     });
+
     res.status(201).json(newUser);
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
