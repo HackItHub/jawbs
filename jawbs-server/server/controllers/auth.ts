@@ -3,10 +3,10 @@ import { Prisma } from "@prisma/client";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { ClientError } from "../libs/classes";
-import { Auth, User } from "../types";
+import { Auth, User, VerificationType } from "../types";
 import { privateKey } from "../utils/environmental";
 import prisma from "../libs/prisma";
-import { mailer } from "../libs";
+import verificationEmail from "../libs/email-threads/verification-email";
 
 const signUp = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body as Partial<Auth>;
@@ -16,10 +16,30 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     const hash = await argon2.hash(password);
+    const verification: VerificationType | ClientError = await verificationEmail(email);
+
+    if (verification instanceof ClientError) {
+      throw verification;
+    }
+
+    const { oneTimeVerificationToken, oneTimeDeleteToken } = verification;
+
+    if (!oneTimeVerificationToken || !oneTimeDeleteToken) {
+      throw new ClientError(500, "something went wrong");
+    }
+
     const newUser = await prisma.user.create({
       data: {
         email,
         password: hash,
+      },
+    });
+
+    await prisma.verificationCode.create({
+      data: {
+        userId: newUser.id,
+        oneTimeVerificationToken,
+        oneTimeDeleteToken,
       },
     });
 
@@ -33,6 +53,7 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
         return;
       }
     }
+
     next(err);
   } finally {
     await prisma.$disconnect();

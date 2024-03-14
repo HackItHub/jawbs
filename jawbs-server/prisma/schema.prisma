@@ -84,6 +84,9 @@ model School {
 
 model VerificationCode {
   id String @id @default(uuid())
+  oneTimeVerificationToken String
+  oneTimeDeleteToken String
   userId String @unique
+  createdAt DateTime @default(now())
   user User @relation(fields: [userId], references: [id])
 }
