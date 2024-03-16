@@ -19,7 +19,7 @@ const SignIn: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState("");
-  const { setToken } = useAuthContext();
+  const { setUserAuth } = useAuthContext();
   const navigate = useNavigate();
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -30,8 +30,11 @@ const SignIn: React.FC = () => {
         email,
         password,
       };
-      const token = await axios.post("/api/auth/sign-in", formData);
-      setToken(token.data.token);
+      const user = await axios.post("/api/auth/sign-in", formData);
+      setUserAuth({
+        token: user.data.token,
+        isActivated: user.data.isActivated,
+      });
       navigate("/");
     } catch {
       setFormError("Invalid credentials, please try again");

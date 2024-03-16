@@ -5,15 +5,17 @@ import jawbsLogo from "../../assets/images/logos/jawbs-logo-original-copy.png";
 import { useAuthContext, useUserInfoContext } from "../../contexts";
 
 const Header: React.FC = () => {
-  const { token, setToken } = useAuthContext();
+  const { userAuth, setUserAuth } = useAuthContext();
   const { setUserInfo } = useUserInfoContext();
   const navigate = useNavigate();
   const cookies = new Cookies(null, { path: "/" });
 
   const signOut = () => {
-    setToken("");
+    if (userAuth.token) {
+      cookies.remove(userAuth.token);
+    }
+    setUserAuth({});
     setUserInfo({});
-    cookies.remove(token);
     navigate("/sign-in");
   };
 
@@ -27,7 +29,7 @@ const Header: React.FC = () => {
             alt='Jawbs Logo: Shark in a Suit'
           />
         </NavLink>
-        {token && (
+        {userAuth.token && (
           <div>
             <button
               type='button'
