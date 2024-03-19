@@ -6,6 +6,7 @@ import {
   Section,
   SubSection,
   DisplayText,
+  Heading,
 } from "../components/layout";
 
 const VerificationPage: React.FC = () => {
@@ -23,10 +24,13 @@ const VerificationPage: React.FC = () => {
       {!params && (
         <LayoutContainer>
           <Section>
-            <DisplayText>
-              Hello thank you for signing up, please verify your account with
-              the email we have sent.
-            </DisplayText>
+            <SubSection>
+              <Heading>Hello! Welcome to Jawbs!</Heading>
+              <DisplayText>
+                Hello thank you for signing up, please verify your account with
+                the email we have sent.
+              </DisplayText>
+            </SubSection>
           </Section>
         </LayoutContainer>
       )}
