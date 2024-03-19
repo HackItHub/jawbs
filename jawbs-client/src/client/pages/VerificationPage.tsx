@@ -12,11 +12,12 @@ import {
 const VerificationPage: React.FC = () => {
   const { params } = useParams();
   const [isVerified, setIsVerified] = useState(false);
+  // console.log(params);
 
   // if (params) {
   //   useEffect(() => {
-  //     axios.post("/api/auth/verify")
-  //   })
+  //     axios.post("/api/auth/verify");
+  //   });
   // }
 
   return (

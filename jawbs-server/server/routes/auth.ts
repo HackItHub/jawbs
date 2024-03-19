@@ -5,6 +5,6 @@ const auth = Router();
 
 auth.route("/api/auth/sign-in").post(controller.signIn);
 auth.route("/api/auth/sign-up").post(controller.signUp);
-auth.route("/api/auth/verify").post(controller.verification);
+auth.route("/api/auth/verification").post(controller.verification);
 
 export default auth;

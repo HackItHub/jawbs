@@ -7,8 +7,8 @@ import { HOST } from "../../utils/environmental";
 const verificationEmail = async (applicantEmail: string) => {
   const oneTimeVerificationToken = generateVerificationCode(132);
   const oneTimeDeleteToken = generateVerificationCode(132);
-  const verificationLink = `http://${HOST}/api/auth/verify?code=${oneTimeVerificationToken}`;
-  const deleteAccountLink = `http://${HOST}/api/auth/delete?code=${oneTimeDeleteToken}`;
+  const verificationLink = `http://${HOST}/verification?oneTimeVerificationCode=${oneTimeVerificationToken}`;
+  const deleteAccountLink = `http://${HOST}/verification?oneTimeDeleteToken=${oneTimeDeleteToken}`;
   const html = `<h1>Hello ${applicantEmail}</h1>
   <div>
     <h2>Let's get started!</h2>
@@ -27,7 +27,7 @@ const verificationEmail = async (applicantEmail: string) => {
   };
 
   try {
-    const mail = await mailer.sendMail(verificationEmailDetails);
+    await mailer.sendMail(verificationEmailDetails);
     return { oneTimeVerificationToken, oneTimeDeleteToken };
   } catch (err) {
     const error = new ClientError(500, "Something went wrong");
