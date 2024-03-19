@@ -9,6 +9,7 @@ import {
   PortfolioPage,
   SignInPage,
   SignUpPage,
+  VerificationPage,
 } from "./pages";
 import {
   ThemeContextProvider,
@@ -39,6 +40,10 @@ const App: React.FC = () => {
     {
       path: "/sign-up",
       element: <SignUpPage />,
+    },
+    {
+      path: "/verification",
+      element: <VerificationPage />,
     },
   ]);
 
