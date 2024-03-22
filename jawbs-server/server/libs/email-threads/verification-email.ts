@@ -2,13 +2,17 @@ import mailer from "../mailer";
 import { ClientError } from "../classes";
 import { MailType } from "../../types";
 import generateVerificationCode from "../../utils/generate-verification-code";
-import { HOST } from "../../utils/environmental";
+import { HOST, HOST_PORT } from "../../utils/environmental";
 
 const verificationEmail = async (applicantEmail: string) => {
   const oneTimeVerificationToken = generateVerificationCode(132);
   const oneTimeDeleteToken = generateVerificationCode(132);
-  const verificationLink = `http://${HOST}/verification?oneTimeVerificationCode=${oneTimeVerificationToken}`;
-  const deleteAccountLink = `http://${HOST}/verification?oneTimeDeleteToken=${oneTimeDeleteToken}`;
+  const verificationLink = `http://${HOST}${
+    HOST_PORT ? `:${HOST_PORT}` : ""
+  }/verification?oneTimeVerificationToken=${oneTimeVerificationToken}`;
+  const deleteAccountLink = `http://${HOST}${
+    HOST_PORT ? `:${HOST_PORT}` : ""
+  }/verification?oneTimeDeleteToken=${oneTimeDeleteToken}`;
   const html = `<h1>Hello ${applicantEmail}</h1>
   <div>
     <h2>Let's get started!</h2>

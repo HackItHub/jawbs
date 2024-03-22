@@ -55,7 +55,7 @@ const AuthContextProvider: React.FC<React.PropsWithChildren> = ({
     setUserAuth({ ...userAuth, token });
   };
 
-  useEffect(getToken);
+  useEffect(getToken, []);
 
   const authValue = useMemo(() => {
     return { userAuth, setUserAuth };

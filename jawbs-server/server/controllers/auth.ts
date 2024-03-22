@@ -113,7 +113,7 @@ const signIn = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const verification = async (req: Request, res: Response, next: NextFunction) => {
-  const { oneTimeVerificationToken, oneTimeDeleteToken } = req.params;
+  const { oneTimeVerificationToken, oneTimeDeleteToken } = req.query;
 
   try {
     // If both values are provided throw an error for improper formatting
@@ -123,12 +123,12 @@ const verification = async (req: Request, res: Response, next: NextFunction) => 
 
     // If neither of the parameters exist throw an improper formatting
     if (!oneTimeVerificationToken && !oneTimeDeleteToken) {
-      throw new ClientError(400, "missing verification code");
+      throw new ClientError(400, "missing verification token");
     }
 
     // If the one time verification token exist search for the token, finds the user, activates the account
     // and deleting presiding verification row
-    if (oneTimeVerificationToken) {
+    if (typeof oneTimeVerificationToken === "string") {
       const verificationCode = await prisma.verificationCode.findFirst({
         where: {
           oneTimeVerificationToken,
@@ -163,10 +163,11 @@ const verification = async (req: Request, res: Response, next: NextFunction) => 
       });
 
       res.status(200).json({ isActivated: user.isActivated });
+      return;
     }
 
     // Deletes the account and removes the verification code
-    if (oneTimeDeleteToken) {
+    if (typeof oneTimeDeleteToken === "string") {
       const verificationCode = await prisma.verificationCode.findFirst({
         where: {
           oneTimeDeleteToken,
@@ -175,13 +176,19 @@ const verification = async (req: Request, res: Response, next: NextFunction) => 
 
       // Throws 404 if verification isn't found
       if (!verificationCode) {
-        throw new ClientError(404, "verification code no longer exists and answer has been logged");
+        throw new ClientError(
+          404,
+          "verification code no longer exists and verification has been logged",
+        );
       }
 
       // Deletes the verification code and the user
       await prisma.user.delete({ where: { id: verificationCode.userId } });
       await prisma.verificationCode.delete({ where: { id: verificationCode.id } });
+      res.status(200).json("user has been deleted");
+      return;
     }
+    throw new ClientError(500, "something went wrong");
   } catch (err) {
     next(err);
   } finally {
