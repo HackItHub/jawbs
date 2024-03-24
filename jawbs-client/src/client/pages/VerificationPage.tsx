@@ -10,13 +10,19 @@ import {
   Loading,
 } from "../components/layout";
 
+type VerificationResponse = {
+  verified?: boolean;
+  deleted?: boolean;
+};
+
 const VerificationPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const [isVerified, setIsVerified] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [redirectTimer, setRedirectTimer] = useState(5);
-  const [alreadyRun, setAlreadyRun] = useState(false);
+  const [verificationResponse, setVerificationResponse] =
+    useState<VerificationResponse>({});
   const navigate = useNavigate();
 
   const startRedirectTimer = () => {
@@ -34,10 +40,15 @@ const VerificationPage: React.FC = () => {
     try {
       setIsLoading(true);
       setHasError(false);
-      await axios.post(`/api/auth/verification?${key}=${value}`);
+      const response: VerificationResponse = await axios.post(
+        `/api/auth/verification?${key}=${value}`,
+      );
+      setVerificationResponse(response);
       setIsLoading(false);
       setIsVerified(true);
-      startRedirectTimer();
+      if (key !== "oneTimeDeleteToken") {
+        startRedirectTimer();
+      }
     } catch (err) {
       setIsLoading(false);
       setHasError(true);
@@ -45,65 +56,83 @@ const VerificationPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!alreadyRun) {
-      setAlreadyRun(true);
-      if (searchParams.size === 1) {
-        for (const [key, value] of searchParams.entries()) {
-          userVerification(key, value);
-        }
+    if (searchParams.size === 1) {
+      for (const [key, value] of searchParams.entries()) {
+        userVerification(key, value);
       }
     }
   }, []);
 
   useEffect(() => {
-    startRedirectTimer();
+    let timer;
+    if (isVerified && redirectTimer > 0) {
+      timer = setInterval(() => {
+        setRedirectTimer(redirectTimer - 1);
+      }, 1000);
+    }
+
+    if (redirectTimer <= 0) {
+      clearInterval(timer);
+      navigate("/sign-in");
+    }
   }, [redirectTimer]);
 
   return (
     <LayoutContainer>
       <Section>
         <SubSection>
-          {!searchParams.size && (
-            <>
-              <Heading>Welcome to Jawbs!</Heading>
+          <>
+            <Heading>Welcome to Jawbs!</Heading>
+            {!searchParams.size && (
               <DisplayText>
                 Thank you for signing up, please verify your account with the
-                email we have sent.
+                email we have sent. You will be redirected to the sign in page{" "}
+                {redirectTimer}
               </DisplayText>
-            </>
-          )}
+            )}
+          </>
           {isLoading && <Loading />}
-          {hasError && !isVerified && !isLoading && (
-            <>
-              <Heading>Welcome to Jawbs!</Heading>
-              <DisplayText>
-                Something went wrong{" "}
-                <button
-                  onClick={() => userVerification}
-                  className='border-none bg-transparent'
-                  type='button'
-                >
-                  try again?
-                </button>
-              </DisplayText>
-            </>
+          {hasError && !Object.keys(verificationResponse) && !isLoading && (
+            <DisplayText>
+              Something went wrong{" "}
+              <button
+                onClick={() => userVerification}
+                className='border-none bg-transparent'
+                type='button'
+              >
+                Try again
+              </button>
+            </DisplayText>
           )}
-          {isVerified && (
+          {verificationResponse.verified && (
             <>
-              <Heading>Welcome to Jawbs!</Heading>
               <DisplayText>
                 Your account has successfully been verified, please proceed with
                 filling out your details
               </DisplayText>
+              <DisplayText>
+                You will be redirected to the sign in page: {redirectTimer}
+              </DisplayText>
+              <Heading size='h4'>OR</Heading>
+              <DisplayText>
+                Redirect immediately:{" "}
+                <Link to='/sign-in' className='pt-2 underline border-0 bg-none'>
+                  Sign in
+                </Link>
+              </DisplayText>
+            </>
+          )}
+          {verificationResponse.deleted && (
+            <>
+              <DisplayText>The associated account has been deleted</DisplayText>
               <DisplayText>
                 You will be redirected to the sign in page {redirectTimer}
               </DisplayText>
               <Heading size='h4'>OR</Heading>
               <DisplayText>
                 Redirect immediately:{" "}
-                <Link to='/sign-in' className='pt-2 underline border-0 bg-none'>
-                  {" "}
-                  Sign in
+                <Link to='/sign-up' className='pt-2 underline border-0 bg-none'>
+                  Sign up
                 </Link>
               </DisplayText>
             </>

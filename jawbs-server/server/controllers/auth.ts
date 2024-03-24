@@ -19,6 +19,15 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
 
     // Hashes the password and sends an email to the user for verification
     const hash = await argon2.hash(password);
+
+    // Creates user
+    const newUser = await prisma.user.create({
+      data: {
+        email,
+        password: hash,
+      },
+    });
+
     const verification: VerificationType | ClientError = await verificationEmail(email);
 
     // The verification will either create a verify/delete token successfully or return a ClientError
@@ -32,14 +41,6 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
     if (!oneTimeVerificationToken || !oneTimeDeleteToken) {
       throw new ClientError(500, "something went wrong");
     }
-
-    // Creates user
-    const newUser = await prisma.user.create({
-      data: {
-        email,
-        password: hash,
-      },
-    });
 
     // Creates verification row
     await prisma.verificationCode.create({
@@ -162,7 +163,7 @@ const verification = async (req: Request, res: Response, next: NextFunction) => 
         },
       });
 
-      res.status(200).json({ isActivated: user.isActivated });
+      res.status(200).json({ verified: true });
       return;
     }
 
@@ -183,9 +184,8 @@ const verification = async (req: Request, res: Response, next: NextFunction) => 
       }
 
       // Deletes the verification code and the user
-      await prisma.user.delete({ where: { id: verificationCode.userId } });
-      await prisma.verificationCode.delete({ where: { id: verificationCode.id } });
-      res.status(200).json("user has been deleted");
+      const user = await prisma.user.delete({ where: { id: verificationCode.userId } });
+      res.status(200).json({ deleted: true });
       return;
     }
     throw new ClientError(500, "something went wrong");
