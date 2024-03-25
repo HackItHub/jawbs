@@ -29,7 +29,7 @@ type Props = {
 };
 
 const AddressForm: React.FC<Props> = ({ handleFormChange }) => {
-  const { token } = useAuthContext();
+  const { token } = useAuthContext().userAuth;
 
   const [addressForm, setAddressForm] = useState<AddressFormType>({});
   const [errors, setErrors] = useState<Partial<AddressFormErrors>>({});

@@ -21,9 +21,7 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType>({
-  userAuth: {
-    token: "",
-  },
+  userAuth: {},
   setUserAuth: () => {},
 });
 

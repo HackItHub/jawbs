@@ -26,10 +26,9 @@ type Props = {
 };
 
 const PersonForm: React.FC<Props> = ({ handleFormChange }) => {
-  const { setToken } = useAuthContext();
   const [person, setPerson] = useState<Partial<Personal>>({});
-
   const [errors, setErrors] = useState<Partial<FormErrors>>({});
+  const { token } = useAuthContext().userAuth;
 
   const handleChange = (name: string, value) => {
     setErrors({ ...errors, [name]: "" });
@@ -60,9 +59,14 @@ const PersonForm: React.FC<Props> = ({ handleFormChange }) => {
     }
 
     try {
-      const response = await axios.post("/api/users", person);
+      if (token) {
+        await axios.post("/api/person", person, {
+          headers: {
+            Authorization: token,
+          },
+        });
+      }
       // eslint-disable-next-line
-      setToken(response.data);
 
       handleFormChange();
     } catch (err) {
