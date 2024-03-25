@@ -10,7 +10,7 @@ import {
   range,
 } from "../../utils/Constants";
 import { useAuthContext } from "../../contexts";
-import { Education, School } from "../../utils/Interfaces";
+import { Education, School } from "../../utils/Types";
 
 type Props = {
   handleFormChange: () => void;
@@ -35,7 +35,7 @@ const removeEducationStyle = {
 const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
   const [education, setEducation] = useState<School[]>([]);
   const [educationLevel, setEducationLevel] = useState<string>("");
-  const { currentUser } = useAuthContext();
+  const { token } = useAuthContext();
 
   const handleEducationLevel = (value: string) => {
     setEducationLevel(value);
@@ -106,10 +106,14 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
     const completeEducation: Education = {
       educationLevel,
       schools: education,
-      userId: currentUser,
     };
     try {
-      await axios.post("/api/education", completeEducation);
+      await axios.post("/api/education", {
+        headers: {
+          Authorization: token,
+        },
+        data: completeEducation,
+      });
       handleFormChange();
     } catch (err) {
       // eslint-disable-next-line

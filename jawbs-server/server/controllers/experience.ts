@@ -1,15 +1,16 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import prisma from "../libs/prisma.js";
-import { Address } from "../interfaces/index.js";
+import { Address } from "../types/index.js";
+import ClientError from "../libs/classes/ClientError.js";
 
-const create = async (req: Request, res: Response) => {
-  const { experiences, userId }: any = req.body;
-  const experienceList = [];
-  if (!userId) {
-    res.status(400).json("Needs an authorized user");
-    return;
-  }
+const create = async (req: Request, res: Response, next: NextFunction) => {
+  const userId = req.user ? req.user.id : undefined;
+  const { experiences }: any = req.body;
+
   try {
+    if (!userId) {
+      throw new ClientError(400, "invalid credentials");
+    }
     for (const experience of experiences) {
       const { address } = experience;
       let hasAddress = false;
@@ -37,31 +38,32 @@ const create = async (req: Request, res: Response) => {
         userId,
         address: createAddress,
       };
+
       if (!hasAddress) {
         delete experienceFormData.address;
       }
 
       // eslint-disable-next-line
-      const newExperiences = prisma.experience.create({
+      await prisma.experience.create({
         data: experienceFormData,
       });
-      experienceList.push(newExperiences);
     }
 
-    res.status(201).json({
-      data: experienceList,
-      message: "Created experiences",
-    });
+    res.status(201).json({ message: "created experiences" });
   } catch (err) {
-    res.status(400).json({ message: err });
+    next(err);
   } finally {
     prisma.$disconnect();
   }
 };
 
-const read = async (req: Request, res: Response) => {
+const read = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.user ? req.user.id : undefined;
+
   try {
-    const { id } = req.params;
+    if (!id) {
+      throw new ClientError(400, "invalid credentials");
+    }
     const experience = await prisma.experience.findUnique({
       where: {
         id,
@@ -69,15 +71,19 @@ const read = async (req: Request, res: Response) => {
     });
     res.status(200).json(experience);
   } catch (err) {
-    res.status(400).json({ message: err });
+    next(err);
   } finally {
     await prisma.$disconnect();
   }
 };
 
-const update = async (req: Request, res: Response) => {
+const update = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.user ? req.user.id : undefined;
+
   try {
-    const { id } = req.params;
+    if (!id) {
+      throw new ClientError(400, "invalid credentials");
+    }
     const updates = await req.body;
     const updatedUser = await prisma.user.update({
       where: { id },
@@ -85,21 +91,25 @@ const update = async (req: Request, res: Response) => {
     });
     res.status(200).json(updatedUser);
   } catch (err) {
-    res.status(400).json({ message: err });
+    next(err);
   } finally {
     await prisma.$disconnect();
   }
 };
 
-const destroy = async (req: Request, res: Response) => {
+const destroy = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.user ? req.user.id : undefined;
+
   try {
-    const { id } = req.params;
+    if (!id) {
+      throw new ClientError(400, "invalid credentials");
+    }
     const deletedUser = await prisma.experience.delete({
       where: { id },
     });
     res.status(200).json(deletedUser);
   } catch (err) {
-    res.status(400).json({ message: err });
+    next(err);
   } finally {
     await prisma.$disconnect();
   }

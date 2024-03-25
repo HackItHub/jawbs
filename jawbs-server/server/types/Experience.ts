@@ -1,6 +1,6 @@
 import Address from "./Address";
 
-interface Experience {
+type Experience = {
   id?: string;
   userId?: string;
   experience: string;
@@ -20,6 +20,6 @@ interface Experience {
     startMonth: string;
     endMonth: string;
   };
-}
+};
 
 export default Experience;

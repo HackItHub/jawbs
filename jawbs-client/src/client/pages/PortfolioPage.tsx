@@ -1,6 +1,6 @@
-/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext, useUserInfoContext } from "../contexts";
 import { Loading, ErrorMessage, LayoutContainer } from "../components/layout";
 import PersonalInfoPortfolio from "../components/portfolio/PersonalInfo";
@@ -12,31 +12,45 @@ const PortfolioPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [hasLoaded, setHasLoaded] = useState(false);
+  const navigate = useNavigate();
   const { userInfo, setUserInfo } = useUserInfoContext();
-  const { currentUser } = useAuthContext();
+  const { userAuth } = useAuthContext();
 
   const getPortfolio = async () => {
+    if (!userAuth.token) {
+      navigate("/sign-in");
+      return;
+    }
+
     if (!Object.keys(userInfo).length) {
+      setIsLoading(true);
       try {
         setHasError(false);
-        setIsLoading(true);
-        const response = await axios.get(`/api/user/portfolio/${currentUser}`);
-        console.log(response);
+        const response = await axios.get("/api/user/portfolio", {
+          headers: {
+            Authorization: userAuth.token,
+          },
+        });
         setIsLoading(false);
         setUserInfo(response.data);
         setHasLoaded(true);
+        setHasError(false);
       } catch (err) {
-        console.error(err);
         setIsLoading(false);
         setHasError(true);
         setHasLoaded(false);
+        navigate("/sign-in");
       }
+    } else {
+      setHasLoaded(true);
+      setIsLoading(false);
+      setHasError(false);
     }
   };
 
   useEffect(() => {
     getPortfolio();
-  }, []);
+  });
   return (
     <>
       <Header />

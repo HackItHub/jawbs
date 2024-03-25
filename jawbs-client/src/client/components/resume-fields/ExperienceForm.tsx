@@ -35,7 +35,7 @@ type Props = {
 };
 
 const ExperienceForm: React.FC<Props> = ({ handleFormChange }) => {
-  const { currentUser } = useAuthContext();
+  const { token } = useAuthContext();
   const [experience, setExperience] = useState<ExperienceEntries[]>([
     {
       experience: "",
@@ -102,11 +102,11 @@ const ExperienceForm: React.FC<Props> = ({ handleFormChange }) => {
     e.preventDefault();
     const experienceFormData = {
       experiences: [...experience],
-      userId: currentUser,
     };
     try {
       await axios.post("/api/experience", experienceFormData, {
         headers: {
+          Authorization: token,
           "Content-Type": "application/json",
         },
       });

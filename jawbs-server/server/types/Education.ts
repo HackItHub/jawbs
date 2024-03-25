@@ -1,10 +1,10 @@
 import School from "./School";
 
-interface Education {
+type Education = {
   userId: string;
   educationLevel: string;
   create?: School[];
   school?: School[];
-}
+};
 
 export default Education;

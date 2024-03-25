@@ -24,6 +24,7 @@ module.exports = {
   },
   plugins: ["import", "react", "@typescript-eslint", "prettier"],
   rules: {
+    "no-restricted-syntax": ["error", "Literal[value=/\\b__\\b/i]"],
     "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
     "react/function-component-definition": [
       2,

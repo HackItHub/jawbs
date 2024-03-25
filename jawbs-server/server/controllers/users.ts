@@ -1,53 +1,38 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
+import { ClientError } from "../libs/classes";
 import prisma from "../libs/prisma.js";
 
-const create = async (req: Request, res: Response) => {
-  const { firstName, lastName, email, phone, summary } = req.body;
-  if (!firstName || !lastName || !email || !phone) {
-    res.status(400).json("Improper format");
-    return;
-  }
-  try {
-    const newUser = await prisma.user.create({
-      data: {
-        email,
-        person: {
-          create: {
-            firstName,
-            lastName,
-            phone,
-            summary,
-          },
-        },
-      },
-    });
-    res.status(201).json(newUser.id);
-  } catch (err) {
-    res.status(400).json({ message: err });
-  } finally {
-    await prisma.$disconnect();
-  }
-};
+const read = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.user ? req.user.id : undefined;
 
-const read = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    if (!id) {
+      throw new ClientError(400, "id is needed");
+    }
     const user = await prisma.user.findFirst({
       where: {
         id,
       },
     });
+
+    if (!user) {
+      throw new ClientError(404, "user not found");
+    }
     res.status(200).json(user);
   } catch (err) {
-    res.status(400).json({ message: err });
+    next(err);
   } finally {
     await prisma.$disconnect();
   }
 };
 
-const readPortfolio = async (req: Request, res: Response) => {
+const readPortfolio = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.user ? req.user.id : undefined;
+
   try {
-    const { id } = req.params;
+    if (!id) {
+      throw new ClientError(400, "improper format");
+    }
     const user = await prisma.user.findFirst({
       where: {
         id,
@@ -71,61 +56,80 @@ const readPortfolio = async (req: Request, res: Response) => {
         },
       },
     });
+
     if (!user) {
-      res.status(404).json("User not found");
-      return;
+      throw new ClientError(404, "User not found");
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+const readAll = async (__: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = await prisma.user.findMany();
+    if (!user) {
+      throw new ClientError(404, "No users found");
     }
     res.status(200).json(user);
   } catch (err) {
-    res.status(400).json({ message: err });
+    next(err);
   } finally {
     await prisma.$disconnect();
   }
 };
 
-const readAll = async (__: Request, res: Response) => {
-  try {
-    const user = await prisma.user.findMany();
-    res.status(200).json(user);
-  } catch (err) {
-    res.status(400).json({ message: err });
-  } finally {
-    await prisma.$disconnect();
-  }
-};
+const update = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.user ? req.user.id : undefined;
 
-const update = async (req: Request, res: Response) => {
+  if (!id) {
+    throw new ClientError(400, "improper format");
+  }
   try {
-    const { id } = req.params;
     const updates = await req.body;
     const updatedUser = await prisma.user.update({
       where: { id },
       data: { ...updates },
     });
+
+    if (!updatedUser) {
+      throw new ClientError(404, "user not found");
+    }
+
     res.status(200).json(updatedUser);
   } catch (err) {
-    res.status(400).json({ message: err });
+    next(err);
   } finally {
     await prisma.$disconnect();
   }
 };
 
-const destroy = async (req: Request, res: Response) => {
+const destroy = async (req: Request, res: Response, next: NextFunction) => {
+  const id = req.user ? req.user.id : undefined;
+
+  if (!id) {
+    throw new ClientError(400, "improper format");
+  }
   try {
-    const { id } = req.params;
     const deletedUser = await prisma.user.delete({
       where: { id },
     });
+    if (!deletedUser) {
+      throw new ClientError(404, "user not found");
+    }
     res.status(200).json(deletedUser);
   } catch (err) {
-    res.status(400).json({ message: err });
+    next(err);
   } finally {
     await prisma.$disconnect();
   }
 };
 
 export default {
-  create,
   read,
   readPortfolio,
   readAll,

@@ -4,18 +4,27 @@ import React, {
   useState,
   SetStateAction,
   useMemo,
+  useEffect,
 } from "react";
+import Cookies from "universal-cookie";
 
-type SetCurrentUserType = React.Dispatch<SetStateAction<string>>;
+type UserAuth = {
+  token?: string;
+  isActivated?: boolean;
+};
+
+type SetUserAuthType = React.Dispatch<SetStateAction<UserAuth>>;
 
 interface AuthContextType {
-  currentUser: string;
-  setCurrentUser: SetCurrentUserType;
+  userAuth: UserAuth;
+  setUserAuth: SetUserAuthType;
 }
 
 const AuthContext = createContext<AuthContextType>({
-  currentUser: "",
-  setCurrentUser: () => {},
+  userAuth: {
+    token: "",
+  },
+  setUserAuth: () => {},
 });
 
 const useAuthContext = (): AuthContextType => {
@@ -33,13 +42,24 @@ const useAuthContext = (): AuthContextType => {
 const AuthContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [currentUser, setCurrentUser] = useState(
-    "11596749-d956-4c53-aedd-8823ed2d1372",
-  );
+  const [userAuth, setUserAuth] = useState({});
+
+  const getToken = () => {
+    const cookies = new Cookies(null, { path: "/" });
+    const token = cookies.get("userToken");
+
+    if (!userAuth) {
+      return;
+    }
+
+    setUserAuth({ ...userAuth, token });
+  };
+
+  useEffect(getToken, []);
 
   const authValue = useMemo(() => {
-    return { currentUser, setCurrentUser };
-  }, [currentUser, setCurrentUser]);
+    return { userAuth, setUserAuth };
+  }, [userAuth, setUserAuth]);
 
   return (
     <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>

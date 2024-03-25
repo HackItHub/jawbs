@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import argon2 from "argon2";
 import { USERS } from "./data/index.js";
 
 const prisma = new PrismaClient();
@@ -7,7 +8,8 @@ async function main() {
   try {
     // eslint-disable-next-line
     for (const user of USERS) {
-      await prisma.user.create({ data: user });
+      const password = await argon2.hash(user.password);
+      await prisma.user.create({ data: { ...user, password } });
     }
   } catch (err) {
     // eslint-disable-next-line

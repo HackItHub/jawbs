@@ -10,11 +10,14 @@ datasource db {
 model User {
   id         String       @id @default(uuid())
   email      String       @unique
+  password String
   createdAt  DateTime     @default(now())
+  isActivated Boolean @default(false)
   person     Person?
   address    Address?
   education  Education?
   experience Experience[]
+  verificationCode VerificationCode?
 }
 
 model Person {
@@ -37,7 +40,7 @@ model Address {
   addressLine2 String?
   zipCode      Int?
   userId       String? @unique
-  user         User?   @relation(fields: [userId], references: [id])
+  user         User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   schoolId     String? @unique
   school       School? @relation(fields: [schoolId], references: [id])
   experienceId String? @unique
@@ -48,7 +51,7 @@ model Education {
   id             String   @id @default(uuid())
   educationLevel String
   userId         String   @unique
-  user           User     @relation(fields: [userId], references: [id])
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   schools        School[]
 }
 
@@ -62,7 +65,7 @@ model Experience {
   startMonth       String?
   endMonth         String?
   userId           String
-  user             User     @relation(fields: [userId], references: [id])
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   address         Address?
 }
 
@@ -75,6 +78,15 @@ model School {
   startMonth  String?
   endMonth    String?
   educationId String
-  education   Education @relation(fields: [educationId], references: [id])
+  education   Education @relation(fields: [educationId], references: [id], onDelete: Cascade)
   address     Address?
+}
+
+model VerificationCode {
+  id String @id @default(uuid())
+  oneTimeVerificationToken String
+  oneTimeDeleteToken String
+  userId String @unique
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

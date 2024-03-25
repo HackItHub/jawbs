@@ -1,4 +1,4 @@
-import { Experience, Address, School } from "../../../server/interfaces";
+import { Experience, Address, School } from "../../../server/types";
 
 interface Person {
   firstName: string;
@@ -10,10 +10,12 @@ interface Person {
 
 interface User {
   email: string;
+  password: string;
   person: { create: Person };
   address: { create: Address };
   experience: { create: Experience };
   education: { create: Education };
+  isActivated: boolean;
 }
 
 interface Education {
@@ -28,6 +30,8 @@ const EMAILS = [
   "user4@example.com",
   "user5@example.com",
 ];
+
+const PASSWORDS = ["pasword123", "password321", "pastword231", "patsword984", "patotie382"];
 
 const PERSONS = [
   {
@@ -303,10 +307,12 @@ const USERS: User[] = [];
 EMAILS.forEach((email, i) => {
   USERS.push({
     email,
+    password: PASSWORDS[i],
     person: { create: PERSONS[i] },
     address: { create: ADDRESSES[i] },
     experience: { create: EXPERIENCES[i] },
     education: { create: EDUCATION[i] },
+    isActivated: false,
   });
 });
 

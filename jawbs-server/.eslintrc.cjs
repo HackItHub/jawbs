@@ -17,8 +17,10 @@ module.exports = {
     sourceType: "module",
     project: "./tsconfig.json",
   },
+
   plugins: ["@typescript-eslint", "prettier"],
   rules: {
+    "no-restricted-syntax": ["error", "Literal[value=/\\b__\\b/i]"],
     quotes: [
       "error",
       "double",

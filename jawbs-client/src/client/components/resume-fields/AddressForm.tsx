@@ -29,11 +29,9 @@ type Props = {
 };
 
 const AddressForm: React.FC<Props> = ({ handleFormChange }) => {
-  const { currentUser } = useAuthContext();
+  const { token } = useAuthContext();
 
-  const [addressForm, setAddressForm] = useState<AddressFormType>({
-    userId: currentUser,
-  });
+  const [addressForm, setAddressForm] = useState<AddressFormType>({});
   const [errors, setErrors] = useState<Partial<AddressFormErrors>>({});
 
   const handleChange = (name: string, value: any) => {
@@ -73,7 +71,10 @@ const AddressForm: React.FC<Props> = ({ handleFormChange }) => {
       return;
     }
     try {
-      await axios.post("/api/address", addressForm);
+      await axios.post("/api/address", {
+        headers: { Authorization: token },
+        data: addressForm,
+      });
       handleFormChange();
     } catch (error) {
       // eslint-disable-next-line

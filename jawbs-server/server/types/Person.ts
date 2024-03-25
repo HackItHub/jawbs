@@ -1,4 +1,4 @@
-interface Person {
+type Person = {
   firstName?: string;
   lastName?: string;
   middleName?: string;
@@ -11,6 +11,6 @@ interface Person {
     phone?: string;
     summary?: string;
   };
-}
+};
 
 export default Person;
