@@ -10,7 +10,7 @@ import { UserInfoType } from "../utils/Types";
 type SetCurrentUserType = React.Dispatch<SetStateAction<UserInfoType>>;
 
 interface UserInfoContextType {
-  userInfo: UserInfoType | object;
+  userInfo: UserInfoType;
   setUserInfo: SetCurrentUserType;
 }
 
