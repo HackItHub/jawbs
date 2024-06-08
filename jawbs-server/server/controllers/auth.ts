@@ -184,7 +184,7 @@ const verification = async (req: Request, res: Response, next: NextFunction) => 
       }
 
       // Deletes the verification code and the user
-      const user = await prisma.user.delete({ where: { id: verificationCode.userId } });
+      await prisma.user.delete({ where: { id: verificationCode.userId } });
       res.status(200).json({ deleted: true });
       return;
     }

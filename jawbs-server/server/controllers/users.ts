@@ -61,7 +61,9 @@ const readPortfolio = async (req: Request, res: Response, next: NextFunction) =>
       throw new ClientError(404, "User not found");
     }
 
-    res.status(200).json(user);
+    const { password, ...userInfo } = user;
+
+    res.status(200).json(userInfo);
   } catch (err) {
     next(err);
   } finally {
