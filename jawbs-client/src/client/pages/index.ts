@@ -4,6 +4,7 @@ import ErrorPage from "./ErrorPage";
 import SignInPage from "./SignInPage";
 import SignUpPage from "./SignUpPage";
 import VerificationPage from "./VerificationPage";
+import LandingPage from "./LandingPage";
 
 export {
   ResumeFieldsPage,
@@ -12,4 +13,5 @@ export {
   SignInPage,
   SignUpPage,
   VerificationPage,
+  LandingPage,
 };

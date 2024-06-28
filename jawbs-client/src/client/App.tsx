@@ -10,6 +10,7 @@ import {
   SignInPage,
   SignUpPage,
   VerificationPage,
+  LandingPage,
 } from "./pages";
 import {
   ThemeContextProvider,
@@ -22,6 +23,10 @@ const App: React.FC = () => {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <LandingPage />,
+    },
+    {
+      path: "/portfolio",
       element: <PortfolioPage />,
     },
     {
