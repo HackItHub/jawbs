@@ -7,6 +7,8 @@ import { Heading, DisplayText, Section, SubSection } from "../layout";
 const PersonalInfoPortfolio: React.FC = () => {
   const { userInfo: portfolio } = useUserInfoContext();
 
+  const handleAddPersonalInfo = () => {};
+
   return (
     <div>
       <div className='flex justify-center'>

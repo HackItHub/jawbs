@@ -9,6 +9,7 @@ import Heading from "./Heading";
 import DisplayText from "./DisplayText";
 import Section from "./Section";
 import SubSection from "./SubSection";
+import Modal from "./Modal";
 
 export {
   SubSection,
@@ -22,4 +23,5 @@ export {
   MainContainer,
   LayoutContainer,
   ErrorMessage,
+  Modal,
 };
