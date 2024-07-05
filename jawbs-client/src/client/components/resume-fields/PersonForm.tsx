@@ -23,7 +23,7 @@ interface FormErrors {
 
 type Props = {
   handleFormChange: () => void;
-  className?: string;
+  className: string | "";
 };
 
 const PersonForm: React.FC<Props> = ({ handleFormChange, className }) => {
@@ -73,7 +73,7 @@ const PersonForm: React.FC<Props> = ({ handleFormChange, className }) => {
   };
 
   return (
-    <TransparentContainer>
+    <TransparentContainer className={className}>
       <h3 className='form-title'>Personal Information</h3>
       <form action='submit' onSubmit={handleSubmit}>
         <FormFieldText
@@ -145,8 +145,5 @@ const PersonForm: React.FC<Props> = ({ handleFormChange, className }) => {
   );
 };
 
-PersonForm.defaultProps = {
-  className: "",
-};
 
 export default PersonForm;

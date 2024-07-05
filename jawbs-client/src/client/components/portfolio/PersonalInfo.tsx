@@ -59,6 +59,7 @@ const PersonalInfoPortfolio: React.FC = () => {
               handleFormChange={() => {
                 setIsModalOpen(!isModalOpen);
               }}
+              className='bg-white'
             />
           </Modal>
         )}
