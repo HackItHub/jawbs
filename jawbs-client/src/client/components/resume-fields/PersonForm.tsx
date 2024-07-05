@@ -23,9 +23,10 @@ interface FormErrors {
 
 type Props = {
   handleFormChange: () => void;
+  className?: string;
 };
 
-const PersonForm: React.FC<Props> = ({ handleFormChange }) => {
+const PersonForm: React.FC<Props> = ({ handleFormChange, className }) => {
   const { setToken } = useAuthContext();
   const [person, setPerson] = useState<Partial<Personal>>({});
 
@@ -142,6 +143,10 @@ const PersonForm: React.FC<Props> = ({ handleFormChange }) => {
       </form>
     </TransparentContainer>
   );
+};
+
+PersonForm.defaultProps = {
+  className: "",
 };
 
 export default PersonForm;
