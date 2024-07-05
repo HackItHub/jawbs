@@ -1,5 +1,6 @@
 import React from "react";
 import { FaEnvelope, FaPhone, FaLocationDot } from "react-icons/fa6";
+import { IoMdAddCircle } from "react-icons/io";
 import { useUserInfoContext } from "../../contexts";
 import { Heading, DisplayText, Section, SubSection } from "../layout";
 
@@ -37,6 +38,14 @@ const PersonalInfoPortfolio: React.FC = () => {
               </DisplayText>
             </div>
           )}
+        </div>
+        <div className='border-2 rounded-md border-solid shadow-md border-text-placeholder border-opacity-30 w-full px-4 py-2 mb-2 mt-2'>
+          <button type='button' className='w-full py-4'>
+            <div className='text-text-placeholder flex justify-center items-center gap-2'>
+              Add Personal Information
+              <IoMdAddCircle />
+            </div>
+          </button>
         </div>
       </Section>
       {portfolio.person?.summary && (
