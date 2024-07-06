@@ -50,7 +50,8 @@ const PortfolioPage: React.FC = () => {
 
   useEffect(() => {
     getPortfolio();
-  });
+  }, []);
+
   return (
     <>
       <Header />
