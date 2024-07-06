@@ -145,5 +145,4 @@ const PersonForm: React.FC<Props> = ({ handleFormChange, className }) => {
   );
 };
 
-
 export default PersonForm;

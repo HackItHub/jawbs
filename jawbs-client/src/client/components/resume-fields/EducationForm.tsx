@@ -14,6 +14,7 @@ import { Education, School } from "../../utils/Types";
 
 type Props = {
   handleFormChange: () => void;
+  className: string | "";
 };
 
 const EDUCATION_LEVEL = [
@@ -32,7 +33,7 @@ const removeEducationStyle = {
   height: "20px",
 };
 
-const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
+const EducationForm: React.FC<Props> = ({ handleFormChange, className }) => {
   const [education, setEducation] = useState<School[]>([]);
   const [educationLevel, setEducationLevel] = useState<string>("");
   const { token } = useAuthContext();
@@ -270,7 +271,7 @@ const EducationForm: React.FC<Props> = ({ handleFormChange }) => {
   };
 
   return (
-    <TransparentContainer>
+    <TransparentContainer className={className}>
       <h3 className='form-title'>Education</h3>
       <form action='submit' onSubmit={handleSubmit}>
         <DropDownMenu
