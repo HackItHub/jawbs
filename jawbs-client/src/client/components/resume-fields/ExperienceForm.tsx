@@ -32,9 +32,10 @@ interface ExperienceEntries {
 
 type Props = {
   handleFormChange: () => void;
+  className: string | "";
 };
 
-const ExperienceForm: React.FC<Props> = ({ handleFormChange }) => {
+const ExperienceForm: React.FC<Props> = ({ handleFormChange, className }) => {
   const { token } = useAuthContext();
   const [experience, setExperience] = useState<ExperienceEntries[]>([
     {
@@ -275,7 +276,7 @@ const ExperienceForm: React.FC<Props> = ({ handleFormChange }) => {
   };
 
   return (
-    <TransparentContainer>
+    <TransparentContainer className={className}>
       <h3 className='form-title'>Experience</h3>
       <form action='submit' onSubmit={handleSubmit}>
         {experience.map(addEntry)}
