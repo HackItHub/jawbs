@@ -23,9 +23,10 @@ interface FormErrors {
 
 type Props = {
   handleFormChange: () => void;
+  className: string | "";
 };
 
-const PersonForm: React.FC<Props> = ({ handleFormChange }) => {
+const PersonForm: React.FC<Props> = ({ handleFormChange, className }) => {
   const { setToken } = useAuthContext();
   const [person, setPerson] = useState<Partial<Personal>>({});
 
@@ -72,7 +73,7 @@ const PersonForm: React.FC<Props> = ({ handleFormChange }) => {
   };
 
   return (
-    <TransparentContainer>
+    <TransparentContainer className={className}>
       <h3 className='form-title'>Personal Information</h3>
       <form action='submit' onSubmit={handleSubmit}>
         <FormFieldText
