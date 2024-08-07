@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PhoneInputWithCountrySelect from "react-phone-number-input";
 import { E164Number } from "libphonenumber-js/types.cjs";
 import { FaCircleExclamation } from "react-icons/fa6";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { WARNING_STYLE } from "../../utils/Constants";
 
 /* eslint-disable */
@@ -51,24 +52,39 @@ const FormFieldText: React.FC<Props> = ({
     onChange(dataId, inputValue);
   };
 
+  const [inputType, setInputType] = useState(type);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+    setInputType(inputType === 'password' ? 'text' : 'password');
+  };
+
   return (
     <div className='mb-2'>
       {(type === "password" || !type) && (
-        <label htmlFor={id} className='form-input-container'>
-          <div className='label-text'>{label}</div>
-          <input
-            id={id}
-            onChange={handleInput}
-            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
-              errorMessage ? " border-red border-2 border-solid " : " ring-1 "
-            } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
-            placeholder={placeholder}
-            aria-required={isRequired}
-            required={isRequired}
-            type={type}
-            value={value}
-            autoComplete={autoComplete}
-          />
+        <label htmlFor={id} className='form-input-container block w-full'>
+          <div className='label-text mb-1'>{label}</div>
+          <div className="relative w-full">
+            <input
+              id={id}
+              onChange={handleInput}
+              className={`block w-full rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${errorMessage ? 'border-red-500 border-2 border-solid' : 'ring-1'
+                } ring-inset ring-gray-300 hover:bg-gray-50 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:shadow-lg`}
+              placeholder={placeholder}
+              aria-required={isRequired}
+              required={isRequired}
+              type={inputType}
+              value={value}
+              autoComplete={autoComplete}
+            />
+            <span
+              onClick={togglePasswordVisibility}
+              className='absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-gray-600'
+            >
+              {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+            </span>
+          </div>
         </label>
       )}
       {type === "email" && (
@@ -77,9 +93,8 @@ const FormFieldText: React.FC<Props> = ({
           <input
             id={id}
             onChange={handleInput}
-            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
-              errorMessage ? " border-red border-2 border-solid " : " ring-1 "
-            } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
+            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${errorMessage ? " border-red border-2 border-solid " : " ring-1 "
+              } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
             placeholder={placeholder}
             aria-required={isRequired}
             required={isRequired}
@@ -95,9 +110,8 @@ const FormFieldText: React.FC<Props> = ({
           <input
             id={id}
             onChange={handleInput}
-            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
-              errorMessage ? " border-red border-2 border-solid " : " ring-1 "
-            } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
+            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${errorMessage ? " border-red border-2 border-solid " : " ring-1 "
+              } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
             placeholder={placeholder}
             aria-required={isRequired}
             required={isRequired}
@@ -113,9 +127,8 @@ const FormFieldText: React.FC<Props> = ({
           <textarea
             id={id}
             onChange={handleTextAreaInput}
-            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
-              errorMessage ? " border-red border-2 border-solid " : " ring-1 "
-            } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
+            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${errorMessage ? " border-red border-2 border-solid " : " ring-1 "
+              } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
             placeholder={placeholder}
             aria-required={isRequired}
             required={isRequired}
@@ -129,9 +142,8 @@ const FormFieldText: React.FC<Props> = ({
           <PhoneInputWithCountrySelect
             id={id}
             onChange={handlePhoneInput}
-            className={`rounded-md bg-white  text-sm font-semibold text-gray-900 shadow-sm ${
-              errorMessage ? " border-red border-2 border-solid " : " ring-1 "
-            } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
+            className={`rounded-md bg-white  text-sm font-semibold text-gray-900 shadow-sm ${errorMessage ? " border-red border-2 border-solid " : " ring-1 "
+              } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
             placeholder={placeholder}
             required={isRequired}
             value={value}
@@ -144,9 +156,8 @@ const FormFieldText: React.FC<Props> = ({
           <input
             id={id}
             onChange={handleInput}
-            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
-              errorMessage ? " border-red border-2 border-solid " : " ring-1 "
-            } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
+            className={`rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${errorMessage ? " border-red border-2 border-solid " : " ring-1 "
+              } ring-inset ring-gray-300 hover:bg-gray-50 text-input`}
             placeholder={placeholder}
             aria-required={isRequired}
             required={isRequired}
