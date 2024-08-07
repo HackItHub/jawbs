@@ -64,29 +64,28 @@ const FormFieldText: React.FC<Props> = ({
     <div className='mb-2'>
       {(type === "password" || !type) && (
         <label htmlFor={id} className='form-input-container block w-full'>
-        <div className='label-text mb-1'>{label}</div>
-        <div className="relative w-full">
-          <input
-            id={id}
-            onChange={handleInput}
-            className={`block w-full rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${
-              errorMessage ? 'border-red border-2 border-solid' : 'ring-1'
-            } ring-inset ring-gray-300 hover:bg-gray-50 pr-10`}
-            placeholder={placeholder}
-            aria-required={isRequired}
-            required={isRequired}
-            type={inputType}
-            value={value}
-            autoComplete={autoComplete}
-          />
-          <span
-            onClick={togglePasswordVisibility}
-            className='absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-gray-600'
-          >
-            {isPasswordVisible ? <FaRegEye /> : <FaRegEyeSlash />}
-          </span>
-        </div>
-      </label>
+          <div className='label-text mb-1'>{label}</div>
+          <div className="relative w-full">
+            <input
+              id={id}
+              onChange={handleInput}
+              className={`block w-full rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ${errorMessage ? 'border-red-500 border-2 border-solid' : 'ring-1'
+                } ring-inset ring-gray-300 hover:bg-gray-50 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 focus:shadow-lg`}
+              placeholder={placeholder}
+              aria-required={isRequired}
+              required={isRequired}
+              type={inputType}
+              value={value}
+              autoComplete={autoComplete}
+            />
+            <span
+              onClick={togglePasswordVisibility}
+              className='absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-gray-600'
+            >
+              {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+            </span>
+          </div>
+        </label>
       )}
       {type === "email" && (
         <label htmlFor={id} className='form-input-container'>
