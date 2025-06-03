@@ -4,7 +4,7 @@
 
 Jawbs is an application to allow users to have an easier time to auto-complete fields in an application form.
 Time after time, applicants spend hours filling the same data inside the forms and although businesses have tried
-to make this easier for the applicant by adding resume readers, they don't always do a good enough job. Jawbs makes it easier by taking your information one time and auto-fill all the fields for the user. The only action needed is to confirm the data is correct and move to the next form.
+to make this easier for the applicant by adding resume readers, they don't always do a good enough job. Jawbs makes it easier by taking your information one time and auto-fill all the fields for the user. The only action needed is to confirm the data is correct and move to the next form. Testing
 
 ## Development
 
